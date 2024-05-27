@@ -1,0 +1,48 @@
+@startuml Overview of sequence calls
+!pragma teoz true
+skinparam style strictuml
+
+hide footbox
+title Overview for DICOMWeb Modality Worklist & MPPS
+
+participant "**Modality**" as SCU
+participant "**Modality Worklist provider**" as SCP
+participant "**Printer**" as Printer
+participant "**Image Manager**" as ImageManager
+
+activate SCU
+activate SCP
+activate Printer
+activate ImageManager
+
+SCU -> SCP: Query Worklist
+break Failure
+  SCU <-- SCP: : No Workitems | Connection Error
+end
+SCU <-- SCP: Workitems List: OK
+
+' Select the correct workitem from the list (calls himself again)'
+SCU -> SCU: Select Workitem
+
+' Start the acquisition of the images by creating a MPPS '
+SCU -> SCP: Start of Aqcuisition (Create MPPS)
+
+' Start the aqcuisition of the images '
+SCU -> SCU: Acquire Images
+
+' Complete the aqcuisition of the images '
+SCU -> SCP: Complete Aqcuisition (Finalize MPPS)
+
+' Print the images '
+SCU -> Printer: Print Acquired Images (optional)
+
+' Store the images to the Image Manager '
+SCU -> ImageManager: Store Acquired Images
+
+' Commit Aquired Images '
+SCU -> ImageManager: Commit Aquired Images
+
+deactivate Printer
+deactivate ImageManager
+deactivate SCP
+deactivate SCU
