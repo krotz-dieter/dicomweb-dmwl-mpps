@@ -1,7 +1,18 @@
 
 ## Content 
 Folder contains a description on how to do DMWL & MPPS with DICOMWeb.
-In addition there are different examples integrated. 
+In addition there are different examples integrated.
+
+In order to extend this repository the following software needs to be installed:
+- [Studio Code](https://code.visualstudio.com/)
+- [Extension PlantUML](https://marketplace.visualstudio.com/items?itemName=jebbs.plantuml)
+
+Every single diagram can be exported to folder diagrams by using the right mouse click and selecting *Export Workspace Diagrams*. 
+Before that the following settings on the *PlantUML Extension* must be done:
+- select in setting *Export Format* the entry *png*
+- unselect *Export Include Folder Heirarchy*
+- type in *Export Out Dir* the folder *diagrams* as main folder containg the diagrams
+- unselect *Export Sub Folder*
 
 ## Overview of main use case
 Main use case shows the interaction of an modality with a worklist provider, Printer and Image Manager. 
@@ -9,8 +20,15 @@ Main use case shows the interaction of an modality with a worklist provider, Pri
 ![Overview Diagram](diagrams/Overview.png)
 
 ## Examples for the single steps using DICOMWeb
-- [Query Worklist](10-Retrieve-Worklist.md) 
-- [Retrieve Workitem (optional)](11-Retrieve-Workitem.md)
+- **Query Worklist**
+
+![Query Worklist](diagrams/Query_Worklist.png)
+
+[Example: Query Worklist](10-Query-Worklist.md) 
+
+- **Retrieve Single Workitem** (optional)
+[Retrieve Workitem (optional)](11-Retrieve-Workitem.md)
+
 
 ## Definitions
 The **UPS Push SOP Class** allows SCU systems to:

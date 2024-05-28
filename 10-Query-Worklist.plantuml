@@ -1,0 +1,48 @@
+@startuml Query_Worklist
+!pragma teoz true
+skinparam style strictuml
+
+hide footbox
+title Query Workitems
+
+participant "**Modality**" as SCU
+participant "**Worklist Provider**" as SCP
+
+activate SCU
+activate SCP
+
+SCU -> SCU: __initialize__\nempty the local //Worklist//\ndetermine proper //match//, for instance with right AE title and date\nwhen using //includefields// and //fuzzymatching// set these to apprpriate values\nwhen using //offset// and //limit//, set //offset// to zero and set //limit// to a reasonable number
+loop until the //Worklist// has been sufficiently populated
+  SCU -> SCP: [PS3.18:11.9.1] Search Transaction Request( //match//[, //includefields//][, //fuzzymatching//][, //offset//][, //limit//][, //emptyvaluematching//][, //multiplevaluematching//] )
+  alt Completed
+    SCU <-- SCP: [PS3.18:11.9.3] Search Transaction Response: OK, //Workitems//<sub>[<color:#0000ff>__PS3.4:CC.2.5-3__]</sub>
+    alt when not having used //offset// and //limit//
+      SCU [#ffffff]-> SCU
+      note left: POST: the //Worklist// is sufficiently populated
+    else
+      SCU -> SCU: increase //offset// with //limit//
+      note left: POST: the //Worklist// may be sufficiently populated
+    end
+    note left: POST: the //Worklist// is sufficiently populated
+  else No Content
+    SCU <-- SCP: [PS3.18:11.9.3] Search Transaction Response: No Content
+    note left: POST: the //Worklist// is sufficiently populated
+  else Payload Too Large
+    SCU <-- SCP: [PS3.18:11.9.3] Search Transaction Response: Payload Too Large
+    note left: POST: the //Worklist// is not sufficiently populated
+    alt when not having used //offset// and //limit//
+      SCU -> SCU: set //offset// to zero and set //limit// to a reasonable number, and start using them
+    else
+      SCU -> SCU: reduce //limit//, e.g. by halving it
+    end
+  else Partial Content
+    SCU <-- SCP: [PS3.18:11.9.3] Search Transaction: Partial Content
+    note left: <color:#ff0000>Illegal status code
+  end
+  alt //Workitems// have been returned
+    SCU -> SCU: store //Workitems// in the local //Worklist//
+  end
+end
+break the //Worklist// is empty
+end
+...
