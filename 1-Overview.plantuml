@@ -1,4 +1,4 @@
-@startuml Overview of sequence calls
+@startuml Overview
 !pragma teoz true
 skinparam style strictuml
 
@@ -6,7 +6,7 @@ hide footbox
 title Overview for DICOMWeb Modality Worklist & MPPS
 
 participant "**Modality**" as SCU
-participant "**Modality Worklist provider**" as SCP
+participant "**Worklist Provider**" as SCP
 participant "**Printer**" as Printer
 participant "**Image Manager**" as ImageManager
 

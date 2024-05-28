@@ -4,6 +4,15 @@ Folder contains a list of:
 - plantuml files desdcribing the different use cases (starting with a overview)
 - http files containing examples for different calls
 
+## Overview of main use case
+Main use case shows the interaction of an modality with a worklist provider and a Printer and Image Manager. 
+
+![Overview Diagram](diagrams/Overview.png)
+
+## Examples for the single steps using DICOMWeb
+- [Retrieve Worklist](10-Retrieve-Worklist.md) 
+
+
 ## Definitions
 The **UPS Push SOP Class** allows SCU systems to:
 - create (push) a new worklist item (i.e., instance) onto a worklist
@@ -27,7 +36,6 @@ The **UPS Event SOP Class** allows SCU systems to:
 
 The **UPS Query SOP Class** allows SCU systems to:
 - query a worklist for matching items.
-
 
 ## Useful links
 #### Workflows in hospital
