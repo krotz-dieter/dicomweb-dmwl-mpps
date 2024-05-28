@@ -41,6 +41,8 @@ Main use case shows the interaction of an modality with a worklist provider, Pri
 - **Start Acquisition** the modality claimes the workitem and starts the acquisition
 [Start Acquisition](12-Start-Acquisition.md)
 
+- **Update Workitem** the modality updates the workitem with information for each produced series
+[Update Workitem](13-Update-MPPS.md)
 
 ## Definitions
 The **UPS Push SOP Class** allows SCU systems to:
