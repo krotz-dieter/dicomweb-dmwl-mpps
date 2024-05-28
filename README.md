@@ -36,13 +36,20 @@ Main use case shows the interaction of an modality with a worklist provider, Pri
 [Example: Query Worklist](10-Query-Worklist.md) 
 
 - **Retrieve Single Workitem** (optional, if not all information was delivered by query transaction)
+
 [Retrieve Workitem (optional)](11-Retrieve-Workitem.md)
 
 - **Start Acquisition** the modality claimes the workitem and starts the acquisition
+
 [Start Acquisition](12-Start-Acquisition.md)
 
 - **Update Workitem** the modality updates the workitem with information for each produced series
+
 [Update Workitem](13-Update-MPPS.md)
+
+- **Complete Acquisition** the modality completes the acquisition and completes the study
+
+[Complete Acquisition](14-Complete-Acquisition.md)
 
 ## Definitions
 The **UPS Push SOP Class** allows SCU systems to:
