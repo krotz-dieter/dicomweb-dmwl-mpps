@@ -1,17 +1,16 @@
 
 ## Content 
-Folder contains a list of:
-- plantuml files desdcribing the different use cases (starting with a overview)
-- http files containing examples for different calls
+Folder contains a description on how to do DMWL & MPPS with DICOMWeb.
+In addition there are different examples integrated. 
 
 ## Overview of main use case
-Main use case shows the interaction of an modality with a worklist provider and a Printer and Image Manager. 
+Main use case shows the interaction of an modality with a worklist provider, Printer and Image Manager. 
 
 ![Overview Diagram](diagrams/Overview.png)
 
 ## Examples for the single steps using DICOMWeb
-- [Retrieve Worklist](10-Retrieve-Worklist.md) 
-
+- [Query Worklist](10-Retrieve-Worklist.md) 
+- [Retrieve Workitem (optional)](11-Retrieve-Workitem.md)
 
 ## Definitions
 The **UPS Push SOP Class** allows SCU systems to:
@@ -59,7 +58,7 @@ https://dicom.nema.org/medical/dicom/current/output/html/part18.html#chapter_11
 https://www.dicomstandard.org/using/dicomweb/workflow-ups-rs
 
 #### Mapping DMWL to UPS
-IHE_RAD_Suppl_EBIW.pdf
+[IHE_RAD_Suppl_EBIW.pdf](https://eur04.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.ihe.net%2FuploadedFiles%2FDocuments%2FRadiology%2FIHE_RAD_Suppl_EBIW.pdf%23page%3D61&data=05%7C01%7Cdieter.krotz%40siemens-healthineers.com%7C1f152786c550400ada1a08db1fcac085%7C5dbf1add202a4b8d815bbf0fb024e033%7C0%7C0%7C638138728255656972%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=NrIebDyqLlLYrPjhjR8tAh5KyYjyS017IiLYe5%2FGfxM%3D&reserved=0)
 Table 4.130.4.1.2-1: Return and Matching Keys for Encounter Metadata
 
 #### DMWL & MPPS examples
