@@ -19,8 +19,17 @@ Main use case shows the interaction of an modality with a worklist provider, Pri
 
 ![Overview Diagram](diagrams/Overview.png)
 
+## Mapping the DMWL & MPPS commands to DICOMWeb Worklist Service transactions
+| DMWL & MPPS | Worklist Service |
+|-------------|----------|
+| DMWL C-FIND Request | GET {s}/workitems{?query*} + (optional) GET {s}/workitems/{instance}   |
+| MPPS N-CREATE | PUT {s}/workitems/{instance}/state + POST {s}/workitems/{instance}{?transaction}  |
+| MPPS N-SET | POST {s}/workitems/{instance}{?transaction}  |
+| MPPS N-GET | GET {s}/workitems/{instance} |
+| MPPS N-EVENT-REPORT | POST {s}/workitems/{instance}{?transaction} + PUT {s}/workitems/{instance}/state |
+
 ## Examples for the single steps using DICOMWeb
-- **Query Worklist**
+- **Query Worklist:** modality retrieves the 
 
 ![Query Worklist](diagrams/Query_Worklist.png)
 

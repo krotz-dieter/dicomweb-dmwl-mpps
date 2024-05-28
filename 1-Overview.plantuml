@@ -28,7 +28,7 @@ SCU -> SCU: Select Workitem
 SCU -> SCP: Start of Aqcuisition (Create MPPS)
 
 ' Start the aqcuisition of the images '
-SCU -> SCU: Acquire Images
+SCU -> SCU: Acquire Images (series by series)
 
 ' Complete the aqcuisition of the images '
 SCU -> SCP: Complete Aqcuisition (Finalize MPPS)

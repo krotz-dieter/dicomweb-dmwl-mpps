@@ -11,7 +11,7 @@ participant "**Worklist Provider**" as SCP
 activate SCU
 activate SCP
 
-SCU -> SCU: __initialize__\nempty the local //Worklist//\ndetermine proper //match//, for instance with right AE title and date\nwhen using //includefields// and //fuzzymatching// set these to apprpriate values\nwhen using //offset// and //limit//, set //offset// to zero and set //limit// to a reasonable number
+SCU -> SCU: __initialize__\nempty the local //Worklist//\ndetermine proper //match//, for instance with right AE title and date\nwhen using //includefields// and //fuzzymatching// set these to appropriate values\nwhen using //offset// and //limit//, set //offset// to zero and set //limit// to a reasonable number
 loop until the //Worklist// has been sufficiently populated
   SCU -> SCP: [PS3.18:11.9.1] Search Transaction Request( //match//[, //includefields//][, //fuzzymatching//][, //offset//][, //limit//][, //emptyvaluematching//][, //multiplevaluematching//] )
   alt Completed
