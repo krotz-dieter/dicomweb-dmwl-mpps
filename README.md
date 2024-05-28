@@ -29,14 +29,17 @@ Main use case shows the interaction of an modality with a worklist provider, Pri
 | MPPS N-EVENT-REPORT | POST {s}/workitems/{instance}{?transaction} + PUT {s}/workitems/{instance}/state |
 
 ## Examples for the single steps using DICOMWeb
-- **Query Worklist:** modality retrieves the 
+- **Query Worklist:** modality retrieves the worklist items (correlates to DMWL C-FIND Request)
 
 ![Query Worklist](diagrams/Query_Worklist.png)
 
 [Example: Query Worklist](10-Query-Worklist.md) 
 
-- **Retrieve Single Workitem** (optional)
+- **Retrieve Single Workitem** (optional, if not all information was delivered by query transaction)
 [Retrieve Workitem (optional)](11-Retrieve-Workitem.md)
+
+- **Start Acquisition** the modality claimes the workitem and starts the acquisition
+[Start Acquisition](12-Start-Acquisition.md)
 
 
 ## Definitions
