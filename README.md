@@ -6,7 +6,7 @@ In order to extend this repository the following software needs to be installed:
 - [Studio Code](https://code.visualstudio.com/)
 - [Extension PlantUML](https://marketplace.visualstudio.com/items?itemName=jebbs.plantuml)
 
-Every plantuml diagram can be exported to folder diagrams by using the right mouse click on a plantuml file and selecting *Export Workspace Diagrams*.
+Every plantuml diagram can be exported to folder 'diagrams' by using the right mouse click on a plantuml file and selecting *Export Workspace Diagrams*.
 However, to do so proper settings on the *PlantUML Extension* are required (press the cogwheel of the PlanUML extension to edit these):
 - select *Export Format* the entry *png*
 - unselect *Export Include Folder Hierarchy* (misspelled in the settings as 'Heirarchy' and 'heiracrchy')
