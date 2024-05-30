@@ -1,34 +1,40 @@
 ## Content 
-Folder contains a description on how to do DIMSE MWL & MPPS with DICOMWeb.
+This folder contains a description on how to do the equivalence of DIMSE [MWL](https://dicom.nema.org/medical/dicom/current/output/chtml/part04/sect_k.6.html) & [MPPS](https://dicom.nema.org/medical/dicom/current/output/chtml/part04/sect_F.7.2.html#sect_F.7.2.1) in a RESTful manner, based on the [DICOMWeb Worklist Service (UPS-RS)](https://dicom.nema.org/medical/dicom/current/output/chtml/part18/chapter_11.html).
 In addition there are different examples integrated.
 
 In order to extend this repository the following software needs to be installed:
 - [Studio Code](https://code.visualstudio.com/)
 - [Extension PlantUML](https://marketplace.visualstudio.com/items?itemName=jebbs.plantuml)
 
-Every single diagram can be exported to folder diagrams by using the right mouse click and selecting *Export Workspace Diagrams*. 
-Before that the following settings on the *PlantUML Extension* must be done:
-- select in setting *Export Format* the entry *png*
-- unselect *Export Include Folder Hierarchy*
+Every plantuml diagram can be exported to folder diagrams by using the right mouse click on a plantuml file and selecting *Export Workspace Diagrams*.
+However, to do so proper settings on the *PlantUML Extension* are required (press the cogwheel of the PlanUML extension to edit these):
+- select *Export Format* the entry *png*
+- unselect *Export Include Folder Hierarchy* (misspelled in the settings as 'Heirarchy' and 'heiracrchy')
 - type in *Export Out Dir* the folder *diagrams* as main folder containg the diagrams
 - unselect *Export Sub Folder*
 
 ## Overview of main use case
-Main use case shows the interaction of an modality with a worklist provider, Printer and Image Manager. 
+The main use case shows the interaction of an modality with a worklist provider, Printer and Image Manager. 
 
 ![Overview Diagram](diagrams/Overview.png)
 
-## Mapping the DIMSE MWL & MPPS commands to DICOMWeb Worklist Service transactions
-| DMWL & MPPS | Worklist Service |
-|-------------|----------|
-| DMWL C-FIND Request | GET {s}/workitems{?query*} + (optional) GET {s}/workitems/{instance}   |
-| MPPS N-CREATE | PUT {s}/workitems/{instance}/state + POST {s}/workitems/{instance}{?transaction}  |
-| MPPS N-SET | POST {s}/workitems/{instance}{?transaction}  |
-| MPPS N-GET | GET {s}/workitems/{instance} |
-| MPPS N-EVENT-REPORT | POST {s}/workitems/{instance}{?transaction} + PUT {s}/workitems/{instance}/state |
+## Mapping the DIMSE MWL & MPPS commands to DICOMWeb Worklist Service Transactions and Requests
+| MWL & MPPS | Worklist Service Transaction | Worklist Service Request |
+|-------------|--------|----------|
+| C-FIND<sub>MWL</sub> | Search [ & Retrieve Workitem ] | GET {s}/workitems{?query*} [ & GET {s}/workitems/{instance} ]  |
+| N-CREATE<sub>MPPS</sub> | Change Workitem State [ & Update Workitem ] | PUT {s}/workitems/{instance}/state [ & POST {s}/workitems/{instance}{?transaction} ] |
+| N-SET<sub>MPPS</sub> | Update Workitem | POST {s}/workitems/{instance}{?transaction}  |
+| N-GET<sub>MPPS</sub> | Retrieve Workitem | GET {s}/workitems/{instance} |
+| N-EVENT-REPORT<sub>MPPS</sub> | \<*websocket call*\> | POST {s}/workitems/{instance}{?transaction} + PUT {s}/workitems/{instance}/state |
+
+## Happy Flow
+
+An overview of the happy flow is given below, where the User Agent is typically an Acquisition Modality, while the Origin Server would be a RIS or the like:
+
+![Happy Flow](diagrams/Happy%20Flow.png)
 
 ## Examples for the single steps using DICOMWeb
-- **Query Worklist:** modality retrieves the worklist items (correlates to DMWL C-FIND Request)
+- **Query Worklist:** modality retrieves the worklist items (correlates to DIMSE MWL C-FIND)
 
 ![Query Worklist](diagrams/Query_Worklist.png)
 
