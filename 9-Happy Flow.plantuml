@@ -1,0 +1,42 @@
+@startuml Happy Flow
+!pragma teoz true
+skinparam style strictuml
+hide footbox
+
+participant "**User Agent**" as SCU
+participant "**Origin Server**" as SCP
+
+== Get applicable //Workitems// [≡ DIMSE MWL C-FIND] ==
+activate SCU
+SCU -> SCP: [PS3.18:11.9.1] **Search Transaction Request**( //match//[, //includefields//][, //fuzzymatching//][, //offset//][, //limit//][, //emptyvaluematching//][, //multiplevaluematching//] )
+note right: ≡ DIMSE UPS C-FIND
+activate SCP
+SCU <-- SCP: [PS3.18:11.9.3] **Search Transaction Response**: OK, //Workitems//
+' ...
+' SCU -> SCU: select //Workitem//
+...
+== Claim and Prepare //Workitem// [≡ DIMSE MPPS N-CREATE] ==
+SCU -> SCP: [PS3.18:11.7.1] **Change Workitem State <color #999999>Transaction</color> Request**( //Workitem//, TransactionUID, "IN PROGRESS" )
+note right: ≡ DIMSE UPS N-ACTION
+SCU <-- SCP: [PS3.18:11.7.3] **Change Workitem State <color #999999>Transaction</color> Response**: OK
+opt [PS3.4, F.7.2.1] set known attribute values
+  SCU -> SCP: [PS3.18:11.6.1] **Update Workitem Transaction Request**( //Workitem//, TransactionUID, //dataset// )
+  note right: ≡ DIMSE UPS N-SET
+  SCU <-- SCP: [PS3.18:11.6.3] **Update Workitem Transaction Response**: OK  
+end
+...
+== Report Progress on //Workitem// [≡ DIMSE MPPS N-SET] ==
+loop until done, typically once
+  SCU -> SCU: perform procedure step
+  SCU -> SCP: [PS3.18:11.6.1] **Update Workitem Transaction Request**( //Workitem//, TransactionUID, //dataset// )
+  note right: ≡ DIMSE UPS N-SET
+  SCU <-- SCP: [PS3.18:11.6.3] **Update Workitem Transaction Response**: OK
+end
+...
+== Change //Workitem// State<sub>Completed</sub> [≡ DIMSE MPPS N-SET<sub>Completed</sub>] ==
+SCU -> SCP: [PS3.18:11.7.1] **Change Workitem State <color #999999>Transaction</color> Request**( //Workitem//, TransactionUID, "COMPLETED" )
+note right: ≡ DIMSE UPS N-ACTION
+SCU <-- SCP: [PS3.18:11.7.3] **Change Workitem State <color #999999>Transaction</color> Response**: OK
+
+deactivate SCP
+deactivate SCU

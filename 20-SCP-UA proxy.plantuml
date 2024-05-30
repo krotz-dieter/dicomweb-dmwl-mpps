@@ -1,0 +1,97 @@
+@startuml SCP-UA Proxy
+!pragma teoz true
+skinparam style strictuml
+hide footbox
+
+participant "**SCU**" as SCU
+box SCP / User Agent proxy
+  participant "SCP" as SCP
+  participant "User Agent" as UA
+end box
+participant "**Origin Server**" as OS
+
+== Get Applicable //Workitems// ==
+activate SCU
+
+SCU -> SCP: A-ASSOCIATE-RQ( 1.2.840.1008.5.1.4.31 )
+activate SCP
+SCU <-- SCP: A-ASSOCIATE-AC
+SCU -> SCP: C-FIND-RQ( 1.2.840.10008.5.1.4.31, ... )
+SCP -> UA: perform Search request\nusing DIMSE parameters
+activate UA
+UA -> UA: convert DIMSE to\nDICOMweb parameters
+UA -> OS: HTTP GET /workitems?{&match*}...
+activate OS
+note left: look for applicable\n//Workitems//
+UA <-- OS: OK, //Workitems//
+loop i: 0..#//Workitems//
+  UA -> UA: convert //Workitem//<sub>i</sub>\nto DIMSE
+  SCP <-- UA: return //Workitem//<sub>i</sub>
+  SCU <-- SCP: C-FIND-RSP( Pending, //Workitem//<sub>i</sub> )
+end
+SCP <-- UA: ready
+SCU <-- SCP: C-FIND-RSP( Success )
+SCU -> SCP: A-RELEASE-RQ
+SCU <-- SCP: A-RELEASE-RSP
+...
+
+== Claim and Prepare //Workitem// ==
+SCU -> SCP: A-ASSOCIATE-RQ( 1.2.840.10008.3.1.2.3.3 )
+SCU <-- SCP: A-ASSOCIATE-AC
+SCU -> SCP: N-CREATE-RQ( 1.2.840.10008.3.1.2.3.3, ... )
+SCP -> UA: perform Change State\nrequest with DIMSE\nparameters
+UA -> UA: convert DIMSE\nto DICOMweb parameters
+UA -> OS: HTTP GET /workitems?{&match}...
+note left: look for applicable\n//Workitem// based on\nDIMSE parameters
+UA <-- OS: OK, //Workitem//
+UA -> OS: HTTP PUT /workitems///Workitem///state\nTransactionUID, "IN PROGRESS"
+note left: claim the\n//Workitem//
+UA <-- OS: OK
+UA -> OS: HTTP POST /workitems///Workitem//?TransactionUID\n//Payload//
+note left: prepare the\n//Workitem//
+UA <-- OS: OK
+SCP <-- UA: OK
+SCU <-- SCP: N-CREATE-RSP( ... )
+opt when not reusing the association
+  SCU -> SCP: A-RELEASE-RQ
+  SCU <-- SCP: A-RELEASE-RSP
+end
+...
+== Report Progress on //Workitem// ==
+loop until done, typically once
+  SCU -> SCU: perform procedure step
+  opt when not reusing the association
+    SCU -> SCP: A-ASSOCIATE-RQ( 1.2.840.10008.3.1.2.3.3 )
+    SCU <-- SCP: A-ASSOCIATE-AC
+  end
+  SCU -> SCP: N-SET-RQ( ... )
+  SCP -> UA: start
+  UA -> UA: convert DIMSE to\nDICOMweb
+  UA -> OS: HTTP POST /workitems///Workitem//?TransactionUID\n//Payload//
+  note left: update //Workitem//\nbased on DIMSE\nparameters
+  UA <-- OS: OK
+  SCP <-- UA: done
+  SCU <-- SCP: N-SET-RSP( ... )
+  opt when not reusing the association
+    SCU -> SCP: A-RELEASE-RQ
+    SCU <-- SCP: A-RELEASE-RSP
+  end
+end
+...
+== Change //Workitem// State<sub>Completed</sub> ==
+opt when not reusing the association
+  SCU -> SCP: A-ASSOCIATE-RQ( 1.2.840.10008.3.1.2.3.3 )
+  SCU <-- SCP: A-ASSOCIATE-AC
+end
+SCU -> SCP: N-SET-RQ( ... )
+SCP -> UA: start
+UA -> OS: HTTP PUT /workitems///Workitem//\nTransactionUID, "COMPLETED"
+UA <-- OS: OK
+deactivate OS
+SCP <-- UA: done
+deactivate UA
+SCU <-- SCP: N-SET-RSP( ... )
+SCU -> SCP: A-RELEASE-RQ
+SCU <-- SCP: A-RELEASE-RSP
+deactivate SCP
+deactivate SCU
