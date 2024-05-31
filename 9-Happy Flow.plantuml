@@ -6,36 +6,36 @@ hide footbox
 participant "**User Agent**" as SCU
 participant "**Origin Server**" as SCP
 
-== Get applicable //Workitems// [≡ DIMSE MWL C-FIND] ==
+== Get Applicable //Workitems// [≡ Query<sub>MWL</sub> = C-FIND<sub>MWL</sub>] ==
 activate SCU
 SCU -> SCP: [PS3.18:11.9.1] **Search Transaction Request**( //match//[, //includefields//][, //fuzzymatching//][, //offset//][, //limit//][, //emptyvaluematching//][, //multiplevaluematching//] )
-note right: ≡ DIMSE UPS C-FIND
+note right: ≡ Search<sub>UPS</sub>\n<U+003D> C-FIND<sub>UPS</sub>
 activate SCP
 SCU <-- SCP: [PS3.18:11.9.3] **Search Transaction Response**: OK, //Workitems//
 ' ...
 ' SCU -> SCU: select //Workitem//
 ...
-== Claim and Prepare //Workitem// [≡ DIMSE MPPS N-CREATE] ==
+== Claim and Prepare //Workitem// [≡ Create<sub>MPPS</sub> = N-CREATE<sub>MPPS</sub>] ==
 SCU -> SCP: [PS3.18:11.7.1] **Change Workitem State <color #999999>Transaction</color> Request**( //Workitem//, TransactionUID, "IN PROGRESS" )
-note right: ≡ DIMSE UPS N-ACTION
+note right: ≡ Change State<sub>UPS</sub>( In Progress )\n<U+003D> N-ACTION<sub>UPS</sub>( In Progress )
 SCU <-- SCP: [PS3.18:11.7.3] **Change Workitem State <color #999999>Transaction</color> Response**: OK
 opt [PS3.4, F.7.2.1] set known attribute values
   SCU -> SCP: [PS3.18:11.6.1] **Update Workitem Transaction Request**( //Workitem//, TransactionUID, //dataset// )
-  note right: ≡ DIMSE UPS N-SET
+  note right: ≡ Set Information<sub>UPS</sub>\n<U+003D> N-SET<sub>UPS</sub>
   SCU <-- SCP: [PS3.18:11.6.3] **Update Workitem Transaction Response**: OK  
 end
 ...
-== Report Progress on //Workitem// [≡ DIMSE MPPS N-SET] ==
+== Report Progress on //Workitem// [≡ Set Information<sub>MPPS</sub> = N-SET<sub>MPPS</sub>] ==
 loop until done, typically once
   SCU -> SCU: perform procedure step
   SCU -> SCP: [PS3.18:11.6.1] **Update Workitem Transaction Request**( //Workitem//, TransactionUID, //dataset// )
-  note right: ≡ DIMSE UPS N-SET
+  note right: ≡ Set Information<sub>UPS</sub>\n<U+003D> N-SET<sub>UPS</sub>
   SCU <-- SCP: [PS3.18:11.6.3] **Update Workitem Transaction Response**: OK
 end
 ...
-== Change //Workitem// State<sub>Completed</sub> [≡ DIMSE MPPS N-SET<sub>Completed</sub>] ==
+== Change //Workitem// State( Completed ) [≡ Set Information<sub>MPPS</sub>( Completed ) = N-SET<sub>MPPS</sub>( Completed )] ==
 SCU -> SCP: [PS3.18:11.7.1] **Change Workitem State <color #999999>Transaction</color> Request**( //Workitem//, TransactionUID, "COMPLETED" )
-note right: ≡ DIMSE UPS N-ACTION
+note right: ≡ Change State<sub>UPS</sub>( Completed )\n<U+003D> N-ACTION<sub>UPS</sub>( Completed )
 SCU <-- SCP: [PS3.18:11.7.3] **Change Workitem State <color #999999>Transaction</color> Response**: OK
 
 deactivate SCP

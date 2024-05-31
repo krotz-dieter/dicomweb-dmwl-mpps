@@ -39,8 +39,8 @@ SCU <-- SCP: A-RELEASE-RSP
 SCU -> SCP: A-ASSOCIATE-RQ( 1.2.840.10008.3.1.2.3.3 )
 SCU <-- SCP: A-ASSOCIATE-AC
 SCU -> SCP: N-CREATE-RQ( 1.2.840.10008.3.1.2.3.3, ... )
-SCP -> UA: perform Change State\nrequest with DIMSE\nparameters
-UA -> UA: convert DIMSE\nto DICOMweb parameters
+SCP -> UA: perform Change State\nrequest using DIMSE\nparameters
+UA -> UA: convert DIMSE to\nDICOMweb parameters\nand payload
 UA -> OS: HTTP GET /workitems?{&match}...
 note left: look for applicable\n//Workitem// based on\nDIMSE parameters
 UA <-- OS: OK, //Workitem//
@@ -51,7 +51,7 @@ UA -> OS: HTTP POST /workitems///Workitem//?TransactionUID\n//Payload//
 note left: prepare the\n//Workitem//
 UA <-- OS: OK
 SCP <-- UA: OK
-SCU <-- SCP: N-CREATE-RSP( ... )
+SCU <-- SCP: N-CREATE-RSP( Success,\nMPPSInstanceUID, ... )
 opt when not reusing the association
   SCU -> SCP: A-RELEASE-RQ
   SCU <-- SCP: A-RELEASE-RSP
@@ -64,14 +64,14 @@ loop until done, typically once
     SCU -> SCP: A-ASSOCIATE-RQ( 1.2.840.10008.3.1.2.3.3 )
     SCU <-- SCP: A-ASSOCIATE-AC
   end
-  SCU -> SCP: N-SET-RQ( ... )
-  SCP -> UA: start
-  UA -> UA: convert DIMSE to\nDICOMweb
+  SCU -> SCP: N-SET-RQ( MPPSInstanceUID, \n//ProcedureStepInformation// )
+  SCP -> UA: perform Update request\nusing DIMSE parameters
+  UA -> UA: convert DIMSE to\nDICOMweb parameters\nand payload
   UA -> OS: HTTP POST /workitems///Workitem//?TransactionUID\n//Payload//
   note left: update //Workitem//\nbased on DIMSE\nparameters
   UA <-- OS: OK
-  SCP <-- UA: done
-  SCU <-- SCP: N-SET-RSP( ... )
+  SCP <-- UA: OK
+  SCU <-- SCP: N-SET-RSP( Success )
   opt when not reusing the association
     SCU -> SCP: A-RELEASE-RQ
     SCU <-- SCP: A-RELEASE-RSP
