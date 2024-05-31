@@ -13,8 +13,8 @@ However, to do so proper settings on the *PlantUML Extension* are required (pres
 - type in *Export Out Dir* the folder *diagrams* as main folder containg the diagrams
 - unselect *Export Sub Folder*
 
-## Overview of main use case
-The main use case shows the interaction of an modality with a worklist provider, Printer and Image Manager. 
+## Use Cases
+One of the main use cases shows the interaction of an modality with a worklist provider, Printer and Image Manager. 
 
 ![Overview Diagram](diagrams/Overview.png)
 
@@ -25,7 +25,7 @@ The main use case shows the interaction of an modality with a worklist provider,
 | N-CREATE<sub>MPPS</sub> | Change Workitem State [ & Update Workitem ] | PUT {s}/workitems/{instance}/state [ & POST {s}/workitems/{instance}{?transaction} ] |
 | N-SET<sub>MPPS</sub> | Update Workitem | POST {s}/workitems/{instance}{?transaction}  |
 | N-GET<sub>MPPS</sub> | Retrieve Workitem | GET {s}/workitems/{instance} |
-| N-EVENT-REPORT<sub>MPPS</sub> | \<*websocket call*\> | POST {s}/workitems/{instance}{?transaction} + PUT {s}/workitems/{instance}/state |
+| N-EVENT-REPORT<sub>MPPS</sub> | Subscribe Transaction | POST {s}/workitems/{instance}/subscribers/{aetitle} |
 
 ## Happy Flow
 
