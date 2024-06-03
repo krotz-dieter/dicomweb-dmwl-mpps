@@ -1,0 +1,76 @@
+@startuml SCP-UA Proxy
+!pragma teoz true
+skinparam style strictuml
+hide footbox
+
+participant "User Agent" as UA
+box Origin Server / SCU proxy
+  participant "**Origin Server**" as OS
+  participant "**SCU**" as SCU
+end box
+participant "SCP" as SCP
+
+== Get Applicable //Workitems// ==
+activate UA
+UA -> OS: HTTP GET /workitems?{&match}...
+activate OS
+note left: look for applicable\n//Workitems//
+OS -> SCU: perform Query using\nDICOMweb parameters
+activate SCU
+SCU -> SCU: convert DICOMweb\nparameters to\nDIMSE
+SCU -> SCP: A-ASSOCIATE-RQ( 1.2.840.1008.5.1.4.31 )
+activate SCP
+SCU <-- SCP: A-ASSOCIATE-AC
+SCU ->SCU: empty //Workitems//
+SCU -> SCP: C-FIND-RQ( 1.2.840.10008.5.1.4.31, ... )
+loop until done
+  SCU <-- SCP: C-FIND-RSP( Pending, //Workitem// )
+  SCU -> SCU: add //Workitem// to //Workitems//
+end
+SCU <-- SCP: C-FIND-RSP( Success )
+SCU -> SCP: A-RELEASE-RQ
+SCU <-- SCP: A-RELEASE-RSP
+SCU -> SCU: convert //Workitems//\nto DICOMweb
+OS <-- SCU: OK, //Workitems//
+UA <-- OS: OK, //Workitems//
+...
+
+== Claim and Prepare //Workitem// ==
+UA -> OS: HTTP PUT /workitems///Workitem///state\nTransactionUID, "IN PROGRESS"
+note left: claim the\n//Workitem//
+OS -> OS: get applicable information\nof //Workitem//
+note right: or query MWL server?!
+OS -> SCU: create MPPS with\n//Workitem// information
+SCU -> SCU: convert DICOMweb\ninformation to\nDIMSE
+SCU -> SCP: A-ASSOCIATE-RQ( 1.2.840.10008.3.1.2.3.3 )
+SCU <-- SCP: A-ASSOCIATE-AC
+SCU -> SCP: N-CREATE-RQ( 1.2.840.10008.3.1.2.3.3, ... )
+SCU <-- SCP: N-CREATE-RSP( Success,\nMPPSInstanceUID, ... )
+opt when not reusing the association
+  SCU -> SCP: A-RELEASE-RQ
+  SCU <-- SCP: A-RELEASE-RSP
+end
+OS <-- SCU: OK
+UA <-- OS: OK
+
+UA -> OS: HTTP POST /workitems///Workitem//?TransactionUID\n//Payload//
+note left: prepare the\n//Workitem//
+OS -> SCU: set information using\nDICOMweb //Payload//
+SCU -> SCU: convert //Payload// to\nDIMSE parameters
+opt when not reusing the association
+  SCU -> SCP: A-ASSOCIATE-RQ( 1.2.840.10008.3.1.2.3.3 )
+  SCU <-- SCP: A-ASSOCIATE-AC
+end
+SCU -> SCP: N-SET-RQ( ... )
+SCU <-- SCP: N-SET-RSP( ... )
+opt when not reusing the association
+  SCU -> SCP: A-RELEASE-RQ
+  SCU <-- SCP: A-RELEASE-RSP
+end
+OS <-- SCU: OK
+UA <-- OS: OK
+...
+== Report Progress on //Workitem// ==
+...
+== Change //Workitem// State<sub>Completed</sub> ==
+...

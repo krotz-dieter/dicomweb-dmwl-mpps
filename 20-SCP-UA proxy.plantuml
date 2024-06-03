@@ -24,7 +24,7 @@ UA -> OS: HTTP GET /workitems?{&match*}...
 activate OS
 note left: look for applicable\n//Workitems//
 UA <-- OS: OK, //Workitems//
-loop i: 0..#//Workitems//
+loop i: 1..#//Workitems//
   UA -> UA: convert //Workitem//<sub>i</sub>\nto DIMSE
   SCP <-- UA: return //Workitem//<sub>i</sub>
   SCU <-- SCP: C-FIND-RSP( Pending, //Workitem//<sub>i</sub> )
@@ -83,14 +83,15 @@ opt when not reusing the association
   SCU -> SCP: A-ASSOCIATE-RQ( 1.2.840.10008.3.1.2.3.3 )
   SCU <-- SCP: A-ASSOCIATE-AC
 end
-SCU -> SCP: N-SET-RQ( ... )
-SCP -> UA: start
+SCU -> SCP: N-SET-RQ( MPPSInstanceUID, Completed )
+SCP -> UA: perform Change State\nrequest using DIMSE\nparameters
 UA -> OS: HTTP PUT /workitems///Workitem//\nTransactionUID, "COMPLETED"
+note left: mark //Workitem//\nas
 UA <-- OS: OK
 deactivate OS
-SCP <-- UA: done
+SCP <-- UA: OK
 deactivate UA
-SCU <-- SCP: N-SET-RSP( ... )
+SCU <-- SCP: N-SET-RSP( Success )
 SCU -> SCP: A-RELEASE-RQ
 SCU <-- SCP: A-RELEASE-RSP
 deactivate SCP

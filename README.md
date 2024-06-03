@@ -1,7 +1,10 @@
+# DICOMweb Modality Services
 ## Content 
-This folder contains a description on how to do the equivalence of DIMSE [MWL](https://dicom.nema.org/medical/dicom/current/output/chtml/part04/sect_k.6.html) & [MPPS](https://dicom.nema.org/medical/dicom/current/output/chtml/part04/sect_F.7.2.html#sect_F.7.2.1) in a RESTful manner, based on the [DICOMWeb Worklist Service (UPS-RS)](https://dicom.nema.org/medical/dicom/current/output/chtml/part18/chapter_11.html).
+This repository contains a description on how to do the equivalence of DIMSE [MWL](https://dicom.nema.org/medical/dicom/current/output/chtml/part04/sect_k.6.html) & [MPPS](https://dicom.nema.org/medical/dicom/current/output/chtml/part04/sect_F.7.2.html#sect_F.7.2.1) in a RESTful manner, based on the [DICOMWeb Worklist Service (UPS-RS)](https://dicom.nema.org/medical/dicom/current/output/chtml/part18/chapter_11.html). This equivalence is called DICOMweb Modality Services.
 In addition there are different examples integrated.
 
+## Prerequisites
+### Tools
 In order to extend this repository the following software needs to be installed:
 - [Studio Code](https://code.visualstudio.com/)
 - [Extension PlantUML](https://marketplace.visualstudio.com/items?itemName=jebbs.plantuml)
@@ -14,9 +17,13 @@ However, to do so proper settings on the *PlantUML Extension* are required (pres
 - unselect *Export Sub Folder*
 
 ## Use Cases
-One of the main use cases shows the interaction of an modality with a worklist provider, Printer and Image Manager. 
+The main use case of DICOMweb Modality Services shows the interaction of a Modality with a Worklist Provider, Printer and Image Manager. The scope of this repository is the interaction between several actors with the Worklist Provider.
 
 ![Overview Diagram](diagrams/Overview.png)
+
+Another use case in scope is about acquisition modalities in the context of encounter-based imaging, namely when there is no Workitem for the imaging performed. These modalities would need to create a Workitem themselves, in line with the [IHE EBIW integration profile]().
+
+Furthermore, there are also dashboard-like applications that want to show the progress of the Workitems, or applications that base there behavior on work being done by some other device or application. Both of these require notifications on the status of Workitems.
 
 ## Mapping the DIMSE MWL & MPPS commands to DICOMWeb Worklist Service Transactions and Requests
 | MWL & MPPS | Worklist Service Transaction | Worklist Service Request |
