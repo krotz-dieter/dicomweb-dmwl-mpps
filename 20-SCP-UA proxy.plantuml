@@ -17,20 +17,21 @@ SCU -> SCP: A-ASSOCIATE-RQ( 1.2.840.1008.5.1.4.31 )
 activate SCP
 SCU <-- SCP: A-ASSOCIATE-AC
 SCU -> SCP: C-FIND-RQ( 1.2.840.10008.5.1.4.31, ... )
+note left: [PS3.4, K.4.1]\n<color:red>Query
 SCP -> UA: perform Search request\nusing DIMSE parameters
 activate UA
 UA -> UA: convert DIMSE to\nDICOMweb parameters
 UA -> OS: HTTP GET /workitems?{&match*}...
 activate OS
-note left: look for applicable\n//Workitems//
-UA <-- OS: OK, //Workitems//
+note left: [PS3.18, 11.9]\nSearch
+UA <-- OS: 200 (OK), //Workitems//
 loop i: 1..#//Workitems//
   UA -> UA: convert //Workitem//<sub>i</sub>\nto DIMSE
   SCP <-- UA: return //Workitem//<sub>i</sub>
-  SCU <-- SCP: C-FIND-RSP( Pending, //Workitem//<sub>i</sub> )
+  SCU <-- SCP: C-FIND-RSP: FF00H (Pending), //Workitem//<sub>i</sub>
 end
 SCP <-- UA: ready
-SCU <-- SCP: C-FIND-RSP( Success )
+SCU <-- SCP: C-FIND-RSP: 0000H (Success)
 SCU -> SCP: A-RELEASE-RQ
 SCU <-- SCP: A-RELEASE-RSP
 ...
@@ -38,20 +39,21 @@ SCU <-- SCP: A-RELEASE-RSP
 == Claim and Prepare //Workitem// ==
 SCU -> SCP: A-ASSOCIATE-RQ( 1.2.840.10008.3.1.2.3.3 )
 SCU <-- SCP: A-ASSOCIATE-AC
-SCU -> SCP: N-CREATE-RQ( 1.2.840.10008.3.1.2.3.3, ... )
-SCP -> UA: perform Change State\nrequest using DIMSE\nparameters
+SCU -> SCP: N-CREATE-RQ( 1.2.840.10008.3.1.2.3.3,\nMPPSInstanceUID, ... )
+note left: [PS3.4, F.7.2.1]\nCreate
+SCP -> UA: perform Change State\nand Update requests\nusing DIMSE\nparameters
 UA -> UA: convert DIMSE to\nDICOMweb parameters\nand payload
 UA -> OS: HTTP GET /workitems?{&match}...
-note left: look for applicable\n//Workitem// based on\nDIMSE parameters
-UA <-- OS: OK, //Workitem//
+note left: <color:red>look for applicable\n<color:red>//Workitem// based on\n<color:red>DIMSE parameters
+UA <-- OS: 200 (OK), //Workitem//
 UA -> OS: HTTP PUT /workitems///Workitem///state\nTransactionUID, "IN PROGRESS"
-note left: claim the\n//Workitem//
-UA <-- OS: OK
+note left: [PS3.18, 11.7]\nChange Workitem\nState
+UA <-- OS: 200 (OK)
 UA -> OS: HTTP POST /workitems///Workitem//?TransactionUID\n//Payload//
-note left: prepare the\n//Workitem//
-UA <-- OS: OK
-SCP <-- UA: OK
-SCU <-- SCP: N-CREATE-RSP( Success,\nMPPSInstanceUID, ... )
+note left: [PS3.18, 11.6]\nUpdate Workitem
+UA <-- OS: 200 (OK)
+SCP <-- UA: ready
+SCU <-- SCP: N-CREATE-RSP: 0000H (Success)
 opt when not reusing the association
   SCU -> SCP: A-RELEASE-RQ
   SCU <-- SCP: A-RELEASE-RSP
@@ -65,13 +67,14 @@ loop until done, typically once
     SCU <-- SCP: A-ASSOCIATE-AC
   end
   SCU -> SCP: N-SET-RQ( MPPSInstanceUID, \n//ProcedureStepInformation// )
+  note left: [PS3.4, F.7.2.2]\nSet Information
   SCP -> UA: perform Update request\nusing DIMSE parameters
   UA -> UA: convert DIMSE to\nDICOMweb parameters\nand payload
   UA -> OS: HTTP POST /workitems///Workitem//?TransactionUID\n//Payload//
-  note left: update //Workitem//\nbased on DIMSE\nparameters
-  UA <-- OS: OK
-  SCP <-- UA: OK
-  SCU <-- SCP: N-SET-RSP( Success )
+  note left: [PS3.18, 11.6]\nUpdate Workitem
+  UA <-- OS: 200 (OK)
+  SCP <-- UA: ready
+  SCU <-- SCP: N-SET-RSP: 0000H (Success)
   opt when not reusing the association
     SCU -> SCP: A-RELEASE-RQ
     SCU <-- SCP: A-RELEASE-RSP
@@ -84,14 +87,15 @@ opt when not reusing the association
   SCU <-- SCP: A-ASSOCIATE-AC
 end
 SCU -> SCP: N-SET-RQ( MPPSInstanceUID, Completed )
+note left: [PS3.4, F.7.2.2]\nSet Information
 SCP -> UA: perform Change State\nrequest using DIMSE\nparameters
 UA -> OS: HTTP PUT /workitems///Workitem//\nTransactionUID, "COMPLETED"
-note left: mark //Workitem//\nas
-UA <-- OS: OK
+note left: [PS3.18, 11.7]\nChange Workitem\nState
+UA <-- OS: 200 (OK)
 deactivate OS
-SCP <-- UA: OK
+SCP <-- UA: ready
 deactivate UA
-SCU <-- SCP: N-SET-RSP( Success )
+SCU <-- SCP: N-SET-RSP: 0000H (Success)
 SCU -> SCP: A-RELEASE-RQ
 SCU <-- SCP: A-RELEASE-RSP
 deactivate SCP

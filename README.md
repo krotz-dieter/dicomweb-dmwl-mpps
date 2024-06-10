@@ -21,7 +21,7 @@ The main use case of DICOMweb Modality Services shows the interaction of a Modal
 
 ![Overview Diagram](diagrams/Overview.png)
 
-Another use case in scope is about acquisition modalities in the context of encounter-based imaging, namely when there is no Workitem for the imaging performed. These modalities would need to create a Workitem themselves, in line with the [IHE EBIW integration profile]().
+Another use case in scope is about acquisition modalities in the context of encounter-based imaging, namely when there is no Workitem for the imaging performed. These modalities would need to create a Workitem themselves, in line with the [IHE EBIW integration profile](https://wiki.ihe.net/index.php/Encounter-Based_Imaging_Workflow).
 
 Furthermore, there are also dashboard-like applications that want to show the progress of the Workitems, or applications that base there behavior on work being done by some other device or application. Both of these require notifications on the status of Workitems.
 
