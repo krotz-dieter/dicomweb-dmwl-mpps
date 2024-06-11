@@ -1,0 +1,35 @@
+@startuml SCP-UA Proxy
+!pragma teoz true
+skinparam style strictuml
+hide footbox
+
+participant "**SCU**" as SCU
+box SCP / User Agent proxy
+  participant "SCP" as SCP
+  participant "User Agent" as UA
+end box
+participant "**Origin Server**" as OS
+
+== Get Information ==
+activate SCU
+SCU -> SCP: A-ASSOCIATE-RQ( 1.2.840.1008.3.1.2.3.4 )
+activate SCP
+SCU <-- SCP: A-ASSOCIATE-AC
+SCU -> SCP: N-GET-RQ( MPPSInstanceUID,\nRequestedAttributes )
+note left: [PS3.4, F.7.8.2]\nGet Information
+SCP -> UA: perform Retrieve\nrequest using\nDIMSE parameters
+activate UA
+UA -> UA: convert DIMSE to\nDICOMweb parameters
+UA -> OS: GET /workitems/{workitem}
+activate OS
+note right: [PS3.18, 11.4]\nRetrieve Workitem
+UA <-- OS: 200 (OK), Workitem
+deactivate OS
+SCP <-- UA: ready, Workitem
+deactivate UA
+SCP -> SCP: convert Workitem to\nAttributeWithValues
+SCU <-- SCP: N-GET-RSP: 0000H (Success),\nAttributesWithValues
+SCU -> SCP: A-RELEASE-RQ
+SCU <-- SCP: A-RELEASE-RSP
+deactivate SCP
+deactivate SCU

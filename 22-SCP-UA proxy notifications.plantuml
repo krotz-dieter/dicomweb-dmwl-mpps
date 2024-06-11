@@ -1,0 +1,49 @@
+@startuml SCP-UA Proxy
+!pragma teoz true
+skinparam style strictuml
+hide footbox
+
+participant "**SCU**" as SCU
+box SCP / User Agent proxy
+  participant "SCP" as SCP
+  participant "User Agent" as UA
+end box
+participant "**Origin Server**" as OS
+
+== Subscribe ==
+activate SCU
+SCU -> SCP: A-ASSOCIATE-RQ( 1.2.840.10008.3.1.2.3.5 )
+activate SCP
+SCP -> SCP: store SCU's\nAE title
+note right: <color:red>AE title comes from association?!
+SCU <-- SCP: A-ASSOCIATE-AC
+SCU -> SCP: N-CREATE-RQ( 1.2.840.10008.3.1.2.3.5,\nSOPInstanceUID, ... )
+note left: [PS3.4, F.9.?]\n<color:red>DOES NOT EXIST\nIt is DCS-related!\nTo be done at\nconfiguration time?
+SCP -> UA: Subscribe to\nnotifications\nwith AE title &\nSOPInstanceUID
+activate UA
+opt when there is no notification connection yet
+  UA -> OS: GET \\n Host: host \\n Upgrade: "WebSocket" ...
+  activate OS
+  note left: [PS3.18, 8.10.4]\nOpen Notification\nConnection
+  UA <-- OS: 101 (Switching Protocols)
+end
+UA -> OS: POST /workitems/{SOPInstanceUID}/subscribers/{aetitle}
+note left: [PS3.18, 11.10]\nSubscribe
+UA <-- OS: 201 (Created)
+SCP <-- UA: done
+SCU <-- SCP: N-CREATE-RSP: Success
+SCU -> SCP: A-RELEASE-RQ
+SCU <-- SCP: A-RELEASE-RSP
+...
+== Get Notified ==
+OS <-]: changing\nSOPInstance
+UA //-- OS: //send event report over websocket//
+note right: [PS3.18, 8.10.5]\nSend Event Report
+SCP <- UA: notify SCU
+SCU <- SCP: A-ASSOCIATE-RQ( 1.2.840.10008.3.1.2.3.5 )
+SCU --> SCP: A-ASSOCIATE-AC
+SCU <- SCP: N-EVENT-REPORT-RQ( SOPInstanceUID, EventType )
+note left: [PS3.4, F.9]\nNotification
+SCU --> SCP: N-EVENT-REPORT-RSP: ...
+SCU <- SCP: A-RELEASE-RQ
+SCU --> SCP: A-RELEASE-RSP

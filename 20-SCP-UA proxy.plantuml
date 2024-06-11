@@ -44,7 +44,7 @@ note left: [PS3.4, F.7.2.1]\nCreate
 SCP -> UA: perform Change State\nand Update requests\nusing DIMSE\nparameters
 UA -> UA: convert DIMSE to\nDICOMweb parameters\nand payload
 UA -> OS: HTTP GET /workitems?{&match}...
-note left: <color:red>look for applicable\n<color:red>//Workitem// based on\n<color:red>DIMSE parameters
+note left: find the //Workitem// based on\n<color:red>Study Instance UID, \n<color:red>Accession Number</color>, and \n<color:red>Scheduled Procedure Step ID
 UA <-- OS: 200 (OK), //Workitem//
 UA -> OS: HTTP PUT /workitems///Workitem///state\nTransactionUID, "IN PROGRESS"
 note left: [PS3.18, 11.7]\nChange Workitem\nState
