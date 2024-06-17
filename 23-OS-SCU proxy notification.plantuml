@@ -9,27 +9,49 @@ box Origin Server / SCU proxy
   participant "**SCU**" as SCU
 end box
 participant "SCP" as SCP
+actor User
 
 == Subscribe ==
 activate UA
 opt when there is no notification connection yet
   UA -> OS: GET \\n Host: host \\n Upgrade: "WebSocket" ...
+  activate OS
   note left: [PS3.18, 8.10.4]\nOpen Notification\nConnection
   UA <-- OS: 101 (Switching Protocols)
 end
 UA -> OS: POST SP /workitems/{resource}/\nsubscribers/{aetitle}...
 note left: [PS3.18, 11.10]\nSubscribe
-activate OS
+OS --\\ User: //notify//( AE title )
+note left: by mail or chat or ...
+activate User
+SCP <- User: configure the listening SCUs
+activate SCP
+SCP --> User: OK
+deactivate SCP
+deactivate User
 UA <-- OS: 201 (Created)
+deactivate OS
+deactivate UA
 ...
 == Get Notified ==
-SCP <-]: update on\nworkitem
+SCP <-]: update on\n//Workitem// state
+activate SCP
+SCU <- SCP: A-ASSOCIATE-RQ( AE title,\n1.2.840.10008.3.1.2.3.5 )
+activate SCU
+SCU --> SCP: A-ASSOCIATE-AC
 SCU <- SCP: N-EVENT-REPORT-RQ(\nSOPInstanceUID, EventType )
+SCU -> SCU: convert EventType to report
 OS <- SCU: notify all\ninterested\nparties
+activate OS
 loop for all subscriptions on this SOP instance
-  UA //-- OS: //send event report over websocket//
+  UA //-- OS: [websocket<sub>AE Title</sub>] //send event report//(\nSOPInstanceUID, EventType )
   note right: [PS3.18, 8.10.5]\nSend Event Report
 end
 OS --> SCU: ready
-SCU --> SCP: N-EVENT-REPORT-RSP: ...
+deactivate OS
+SCU --> SCP: N-EVENT-REPORT-RSP: 0000H (Success)
+SCU <- SCP: A-RELEASE-RQ
+SCU --> SCP: A-RELEASE-RSP
+deactivate SCU
+deactivate SCP
 ...

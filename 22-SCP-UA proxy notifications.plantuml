@@ -3,6 +3,7 @@
 skinparam style strictuml
 hide footbox
 
+actor "**User**" as User
 participant "**SCU**" as SCU
 box SCP / User Agent proxy
   participant "SCP" as SCP
@@ -11,39 +12,52 @@ end box
 participant "**Origin Server**" as OS
 
 == Subscribe ==
-activate SCU
-SCU -> SCP: A-ASSOCIATE-RQ( 1.2.840.10008.3.1.2.3.5 )
+hnote across: Notifications are limited to state changes, as only that is available in DIMSE. Furthermore, PS3.4, section F.9 does not mention how the notifying SCP knows which SCUs\nwant to be notified. <color:red>It is assumed that MPPS notifications in DIMSE are configured by the User.</color> Text reflecting this assumption should be added to PS3.4, section F.9.
+activate User
+User -> SCP: configure the listening SCUs 
 activate SCP
-SCP -> SCP: store SCU's\nAE title
-note right: <color:red>AE title comes from association?!
-SCU <-- SCP: A-ASSOCIATE-AC
-SCU -> SCP: N-CREATE-RQ( 1.2.840.10008.3.1.2.3.5,\nSOPInstanceUID, ... )
-note left: [PS3.4, F.9.?]\n<color:red>DOES NOT EXIST\nIt is DCS-related!\nTo be done at\nconfiguration time?
-SCP -> UA: Subscribe to\nnotifications\nwith AE title &\nSOPInstanceUID
-activate UA
-opt when there is no notification connection yet
-  UA -> OS: GET \\n Host: host \\n Upgrade: "WebSocket" ...
-  activate OS
-  note left: [PS3.18, 8.10.4]\nOpen Notification\nConnection
-  UA <-- OS: 101 (Switching Protocols)
+loop for each listening SCU
+  SCP -> UA: subscribe to\nnotifications\nfor AE title
+  activate UA
+  opt when there is no notification connection for this AE title yet
+    UA -> OS: GET \\n Host: //host// \\n Upgrade: "WebSocket" ...
+    activate OS
+    note left: [PS3.18, 8.10.4]\nOpen Notification\nConnection
+    UA <-- OS: 101 (Switching Protocols)
+  end
+  UA -> OS: POST /workitems/1.2.840.10008.5.1.4.34.5/\nsubscribers/{aetitle}
+  note left: [PS3.18, 11.10]\nSubscribe<sub>//Worklist//</sub>
+  UA <-- OS: 201 (Created)
+  deactivate OS
+  SCP <-- UA: done
+  deactivate UA
 end
-UA -> OS: POST /workitems/{SOPInstanceUID}/subscribers/{aetitle}
-note left: [PS3.18, 11.10]\nSubscribe
-UA <-- OS: 201 (Created)
-SCP <-- UA: done
-SCU <-- SCP: N-CREATE-RSP: Success
-SCU -> SCP: A-RELEASE-RQ
-SCU <-- SCP: A-RELEASE-RSP
+User <-- SCP: OK
+deactivate SCP
+deactivate User
 ...
 == Get Notified ==
-OS <-]: changing\nSOPInstance
-UA //-- OS: //send event report over websocket//
-note right: [PS3.18, 8.10.5]\nSend Event Report
-SCP <- UA: notify SCU
-SCU <- SCP: A-ASSOCIATE-RQ( 1.2.840.10008.3.1.2.3.5 )
-SCU --> SCP: A-ASSOCIATE-AC
-SCU <- SCP: N-EVENT-REPORT-RQ( SOPInstanceUID, EventType )
-note left: [PS3.4, F.9]\nNotification
-SCU --> SCP: N-EVENT-REPORT-RSP: ...
-SCU <- SCP: A-RELEASE-RQ
-SCU --> SCP: A-RELEASE-RSP
+OS <-]: changing\n//Workitem// state
+activate OS
+loop for each listening SCU
+  UA //-- OS: [websocket<sub>AE title</sub>] //send event report//(\nSOPInstanceUID, report )
+  note right: [PS3.18, 8.10.5]\nSend Event Report
+  activate UA
+  UA -> UA: extract EventType from report
+  SCP <- UA: notify SCU( AE title,\nSOPInstanceUID,\nEventType )
+  activate SCP
+  SCU <- SCP: A-ASSOCIATE-RQ( AE title,\n1.2.840.10008.3.1.2.3.5 )
+  activate SCU
+  SCU --> SCP: A-ASSOCIATE-AC
+  SCU <- SCP: N-EVENT-REPORT-RQ( SOPInstanceUID, EventType )
+  note left: [PS3.4, F.9]\nNotification
+  SCU --> SCP: N-EVENT-REPORT-RSP: 0000H (Success)
+  SCU <- SCP: A-RELEASE-RQ
+  SCU --> SCP: A-RELEASE-RSP
+  deactivate SCU
+  SCP --> UA: done
+  deactivate SCP
+  deactivate UA
+end
+deactivate OS
+...
