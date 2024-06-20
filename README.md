@@ -29,10 +29,10 @@ Furthermore, there are also dashboard-like applications that want to show the pr
 | MWL & MPPS | Worklist Service Transaction | Worklist Service Request |
 |-------------|--------|----------|
 | C-FIND<sub>MWL</sub> | Search [ & Retrieve Workitem ] | GET {s}/workitems{?query*} [ & GET {s}/workitems/{instance} ]  |
-| N-CREATE<sub>MPPS</sub> | Change Workitem State [ & Update Workitem ] | PUT {s}/workitems/{instance}/state [ & POST {s}/workitems/{instance}{?transaction} ] |
-| N-SET<sub>MPPS</sub> | Update Workitem | POST {s}/workitems/{instance}{?transaction}  |
+| N-CREATE<sub>MPPS</sub> | Change Workitem State & Update Workitem | PUT {s}/workitems/{instance}/state & POST {s}/workitems/{instance}{?transaction} |
+| N-SET<sub>MPPS</sub> | Change Workitem State & Update Workitem & Cancel Workitem | PUT {s}/workitems/{instance}/state & POST {s}/workitems/{instance}{?transaction} & POST {s}/workitems/{instance}/cancelrequest |
 | N-GET<sub>MPPS</sub> | Retrieve Workitem | GET {s}/workitems/{instance} |
-| N-EVENT-REPORT<sub>MPPS</sub> | Subscribe Transaction | POST {s}/workitems/{instance}/subscribers/{aetitle} |
+| N-EVENT-REPORT<sub>MPPS</sub> | Subscribe Transaction & Delete subscription & Suspend subscription  | POST {s}/workitems/{instance}/subscribers/{aetitle} & DELETE {s}/workitems/{instance}/subscribers/{AETitle} & POST	{s}/workitems/1.2.840.10008.5.1.4.34.5/ |
 
 ## Happy Flow
 
