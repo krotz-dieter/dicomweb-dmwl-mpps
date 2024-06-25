@@ -1,0 +1,51 @@
+@startuml Overview
+!pragma teoz true
+skinparam style strictuml
+
+hide footbox
+
+participant "**Acquisition**\n**Modality<sub>1</sub>**" as SCU1
+participant "**Acquisition**\n**Modality<sub>2</sub>**" as SCU2
+participant "**Acquisition**\n**Modality<sub>3</sub>**" as SCU3
+participant "**Worklist**\n**Provider**" as SCP
+participant "**Dashboard**" as db
+
+activate db
+SCP <- db: subscribe to\nnotifications
+activate SCP
+deactivate SCP
+deactivate db
+
+loop for a while
+  opt
+    activate SCU1
+    SCU1 -> SCP: update a workitem
+    activate SCP
+    deactivate SCU1
+    SCP --\ db: update of a workitem
+    activate db
+    deactivate SCP
+    db -> db: adapt view
+    deactivate db
+  else
+    activate SCU2
+    SCU2 -> SCP: update a workitem
+    activate SCP
+    deactivate SCU2
+    SCP --\ db: update of a workitem
+    activate db
+    deactivate SCP
+    db -> db: adapt view
+    deactivate db
+  else
+    activate SCU3
+    SCU3 -> SCP: update a workitem
+    activate SCP
+    deactivate SCU3
+    SCP --\ db: update of a workitem
+    activate db
+    deactivate SCP
+    db -> db: adapt view
+    deactivate db
+  end 
+end

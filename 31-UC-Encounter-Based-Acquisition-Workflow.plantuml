@@ -1,0 +1,21 @@
+@startuml Overview
+!pragma teoz true
+skinparam style strictuml
+
+hide footbox
+
+participant "**Acquisition**\n**Modality**" as SCU
+participant "**Worklist**\n**Provider**" as SCP
+
+activate SCU
+loop while not done
+  SCU -> SCU: acquire series of images
+end
+
+SCU -> SCP: create appropriate Workitem
+activate SCP
+SCU -> SCP: update created Workitem with\nacquisition and series information
+SCU -> SCP: mark created Workitem as done
+
+deactivate SCP
+deactivate SCU

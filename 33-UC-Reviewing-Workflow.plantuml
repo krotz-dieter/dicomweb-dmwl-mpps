@@ -1,0 +1,29 @@
+@startuml Overview
+!pragma teoz true
+skinparam style strictuml
+
+hide footbox
+
+participant "**Acquisition**\n**Modality**" as SCU
+participant "**Worklist**\n**Provider**" as SCP
+participant "**PACS**" as PACS
+
+activate PACS
+SCP <- PACS: subscribe to\nnotifications
+activate SCP
+deactivate SCP
+deactivate PACS
+
+loop for a while
+  activate SCU
+  SCU -> SCU: acquire series of images
+  SCU -> PACS: store series of images
+  SCU -> SCP: update apprpriate Workitem with\nacquisition and series information
+  activate SCP
+  deactivate SCU
+  SCP --\ PACS: update of a workitem
+  activate PACS
+  deactivate SCP
+  PACS -> PACS: update series of images
+  deactivate PACS
+end

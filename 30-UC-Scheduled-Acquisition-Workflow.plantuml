@@ -1,0 +1,34 @@
+@startuml Overview
+!pragma teoz true
+skinparam style strictuml
+
+hide footbox
+
+participant "**Acquisition**\n**Modality**" as SCU
+participant "**Worklist**\n**Provider**" as SCP
+
+activate SCU
+SCU -> SCP: search for Workitems
+activate SCP
+break Failure
+  SCU <-- SCP: : no Workitems | connection error
+end
+SCU <-- SCP: list of Workitems
+
+' Select the correct workitem from the list (calls himself again)'
+SCU -> SCU: select appropriate Workitem
+
+' Start the acquisition of the images by creating a MPPS '
+SCU -> SCP: starting acquisition for selected Workitem
+
+' Start the aqcuisition of the images '
+loop until done
+  SCU -> SCU: acquire series of images
+  SCU -> SCP: update selected Workitem with\nacquisition and series information
+end
+
+' Complete the aqcuisition of the images '
+SCU -> SCP: mark selected Workitem as done
+
+deactivate SCP
+deactivate SCU
