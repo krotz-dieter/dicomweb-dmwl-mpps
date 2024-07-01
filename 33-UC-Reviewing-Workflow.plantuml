@@ -18,7 +18,7 @@ loop for a while
   activate SCU
   SCU -> SCU: acquire series of images
   SCU -> PACS: store series of images
-  SCU -> SCP: update apprpriate Workitem with\nacquisition and series information
+  SCU -> SCP: update appropriate Workitem with\nacquisition and series information
   activate SCP
   deactivate SCU
   SCP --\ PACS: update of a workitem
