@@ -1,0 +1,92 @@
+@startuml SCP-UA Proxy
+!pragma teoz true
+skinparam style strictuml
+hide footbox
+
+participant "User Agent" as UA
+box Origin Server / SCU proxy
+  participant "**Origin Server**" as OS
+  participant "**SCU**" as SCU
+end box
+participant "SCP" as SCP
+
+== Get Applicable //Workitems// ==
+activate UA
+UA -> OS: HTTP GET /workitems?{&match}...
+activate OS
+note left: [PS3.18, 11.9]\nSearch
+OS -> SCU: perform Query using\nDICOMweb parameters
+activate SCU
+SCU -> SCU: convert DICOMweb\nparameters to\nDIMSE
+SCU -> SCP: A-ASSOCIATE-RQ( 1.2.840.1008.5.1.4.31 )
+activate SCP
+SCU <-- SCP: A-ASSOCIATE-AC
+SCU ->SCU: empty //Workitems//
+SCU -> SCP: C-FIND-RQ( 1.2.840.10008.5.1.4.31, ... )
+note left: [PS3.4, K.4.1]\n<color:red>Query
+loop until done
+  SCU <-- SCP: C-FIND-RSP: FF00H (Pending), //Workitem//
+  SCU -> SCU: add //Workitem// to //Workitems//
+end
+SCU <-- SCP: C-FIND-RSP: 0000H (Success)
+SCU -> SCP: A-RELEASE-RQ
+SCU <-- SCP: A-RELEASE-RSP
+SCU -> SCU: convert //Workitems//\nto DICOMweb
+OS <-- SCU: ready: //Workitems//
+UA <-- OS: 200 (OK), //Workitems//
+...
+
+== Claim and Prepare //Workitem// ==
+UA -> OS: HTTP PUT /workitems///Workitem///state\nTransactionUID, "IN PROGRESS"
+note left: [PS3.18, 11.7]\nChange Workitem\nState
+OS -> OS: get applicable information\nof //Workitem//
+note right: <color:red>or query MWL server?!
+OS -> SCU: create MPPS with\n//Workitem// information
+SCU -> SCU: convert DICOMweb\ninformation to\nDIMSE
+SCU -> SCP: A-ASSOCIATE-RQ( 1.2.840.10008.3.1.2.3.3 )
+SCU <-- SCP: A-ASSOCIATE-AC
+SCU -> SCP: N-CREATE-RQ( 1.2.840.10008.3.1.2.3.3, \nMPPSInstanceUID, ... )
+note left: [PS3.4, F.7.2.1]\nCreate
+SCU <-- SCP: N-CREATE-RSP: 0000H (Success)
+opt when not reusing the association
+  SCU -> SCP: A-RELEASE-RQ
+  SCU <-- SCP: A-RELEASE-RSP
+end
+OS <-- SCU: ready: OK
+UA <-- OS: 200 (OK)
+
+UA -> OS: HTTP POST /workitems///Workitem//?TransactionUID\n//Payload//
+note left: [PS3.18, 11.6]\nUpdate Workitem
+OS -> SCU: set information using\nDICOMweb //Payload//
+SCU -> SCU: convert //Payload// to\nDIMSE parameters
+opt when not reusing the association
+  SCU -> SCP: A-ASSOCIATE-RQ( 1.2.840.10008.3.1.2.3.3 )
+  SCU <-- SCP: A-ASSOCIATE-AC
+end
+SCU -> SCP: N-SET-RQ( MPPSInstanceUID, ... )
+note left: [PS3.4, F.7.2.2]\nSet Information
+SCU <-- SCP: N-SET-RSP: 0000H (Success)
+opt when not reusing the association
+  SCU -> SCP: A-RELEASE-RQ
+  SCU <-- SCP: A-RELEASE-RSP
+end
+OS <-- SCU: ready: OK
+UA <-- OS: 200 (OK)
+...
+== Cancel //Workitem// State<sub>Cancelled</sub> ==
+UA -> OS: HTTP POST /workitems///Workitem///cancelrequest, "CANCELLED"
+note left: [PS3.18 11.7]\nCancel Workitem
+OS -> OS: get applicable information\nof //Workitem//
+OS -> SCU: set //Workitem// state\nto CANCELLED
+opt when not reusing the association
+  SCU -> SCP: A-ASSOCIATE-RQ( 1.2.840.10008.3.1.2.3.3 )
+  SCU <-- SCP: A-ASSOCIATE-AC
+end
+SCU -> SCP: N-SET-RQ( 1.2.840.10008.3.1.2.3.3, MPPSInstanceUID, Discontinued )
+note left: [PS3.4, F.7.2.2]\nDiscontinue\n<color:red>MPPS Instance is marked as discontinued
+SCU <-- SCP: N-SET-RSP: 0000H (Success)
+SCU -> SCP: A-RELEASE-RQ
+SCU <-- SCP: A-RELEASE-RSP
+OS <-- SCU: ready: OK
+UA <-- OS: 202 (Success)
+...
