@@ -16,9 +16,9 @@ SCU <-- SCP: [PS3.18:11.9.3] **Search Transaction Response**: OK, //Workitems//
 ' SCU -> SCU: select //Workitem//
 ...
 == Claim and Prepare //Workitem// [≡ Create<sub>MPPS</sub> = N-CREATE<sub>MPPS</sub>] ==
-SCU -> SCP: [PS3.18:11.7.1] **Change Workitem State <color #999999>Transaction</color> Request**( //Workitem//, TransactionUID, "IN PROGRESS" )
+SCU -> SCP: [PS3.18:11.7.1] **Change Workitem State Transaction Request**( //Workitem//, TransactionUID, "IN PROGRESS" )
 note right: ≡ Change State<sub>UPS</sub>( In Progress )\n<U+003D> N-ACTION<sub>UPS</sub>( In Progress )
-SCU <-- SCP: [PS3.18:11.7.3] **Change Workitem State <color #999999>Transaction</color> Response**: OK
+SCU <-- SCP: [PS3.18:11.7.3] **Change Workitem State Transaction Response**: OK
 opt [PS3.4, F.7.2.1] set known attribute values
   SCU -> SCP: [PS3.18:11.6.1] **Update Workitem Transaction Request**( //Workitem//, TransactionUID, //dataset// )
   note right: ≡ Set Information<sub>UPS</sub>\n<U+003D> N-SET<sub>UPS</sub>
@@ -34,9 +34,9 @@ loop until done, typically once
 end
 ...
 == Change //Workitem// State( Completed ) [≡ Set Information<sub>MPPS</sub>( Completed ) = N-SET<sub>MPPS</sub>( Completed )] ==
-SCU -> SCP: [PS3.18:11.7.1] **Change Workitem State <color #999999>Transaction</color> Request**( //Workitem//, TransactionUID, "COMPLETED" )
+SCU -> SCP: [PS3.18:11.7.1] **Change Workitem State Transaction Request**( //Workitem//, TransactionUID, "COMPLETED" )
 note right: ≡ Change State<sub>UPS</sub>( Completed )\n<U+003D> N-ACTION<sub>UPS</sub>( Completed )
-SCU <-- SCP: [PS3.18:11.7.3] **Change Workitem State <color #999999>Transaction</color> Response**: OK
+SCU <-- SCP: [PS3.18:11.7.3] **Change Workitem State Transaction Response**: OK
 
 deactivate SCP
 deactivate SCU
