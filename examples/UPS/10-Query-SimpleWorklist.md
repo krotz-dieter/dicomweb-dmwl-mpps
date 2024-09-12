@@ -4,7 +4,7 @@
 #### Scheduled Procedure Step Start Date and Time (0040,4005) DT
 #### Station Name Code Sequence (0040,4025) SQ
 ```http
-GET /radiology/workitems?00080060=CT&00404005=20240105000000&00404025.0040A040=TEXT&00404025.0040A043.00400010.0040A160=CTSCANNER&=&limit=20&offset=0&includefield=all HTTP/1.1
+GET /radiology/workitems?00080060=CT&00404005=20240105000000&00404025.0040A040=TEXT&00404025.0040A043.00400010.0040A160=CTSCANNER&limit=20&offset=0&includefield=all HTTP/1.1
 Host: www.hospital-stmarco
 Accept: application/dicom+json
 ```
