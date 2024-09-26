@@ -1,0 +1,326 @@
+@startuml
+<style>
+title {
+  HorizontalAlignment center
+  Fontsize 26
+}
+</style>
+
+hide empty members
+hide circle
+left to right direction
+title
+  PS3.4, K.6.1
+  Modality Worklist SOP Class
+end title
+
+  class "<b>Modality Worklist Attributes (K.6-1)" as mwa {
+  <#transparent,#transparent>| <b>Description / Module | <b>Tag | <b>Matching\n <b>Key Type | <b>Return\n <b>Key Type |
+  }
+
+  class "<b>Scheduled Procedure Step" as sps {
+  <#transparent,#transparent>| Scheduled Procedure Step <u>Sequence</u> | (0040,0100) | R | 1 |
+  | Scheduled Specimen <u>Sequence</u> | (0040,0500) | O | 3 |
+  | Barcode Value                      | (2200,0005) | O | 3 |
+  }
+
+  class "Scheduled Procedure Step" as sps2 {
+  <#transparent,#transparent>| Scheduled Station AE Title | (0040,0001) | R | 1 |
+  | Scheduled Procedure Step Start Date           | (0040,0002) | R | 1  |
+  | Scheduled Procedure Step Start Time           | (0040,0003) | R | 1  |
+  | Modality                                      | (0008,0060) | R | 1  |
+  | Scheduled Performing Physician's Name         | (0040,0006) | R | 2  |
+  | Scheduled Procedure Step Description          | (0040,0007) | O | 1C |
+  | Scheduled Station Name                        | (0040,0010) | O | 2  |
+  | Scheduled Procedure Step Location             | (0040,0011) | O | 2  |
+  | Referenced Defined Protocol <u>Sequence</u>   | (0018,990C) | O | 3  |
+  | Referenced Performed Protocol <u>Sequence</u> | (0018,990D) | O | 3  |
+  | Scheduled Protocol Code <u>Sequence</u>       | (0040,0008) | O | 1C |
+  | Pre-Medication                                | (0040,0012) | O | 2C |
+  | Scheduled Procedure Step ID                   | (0040,0009) | O | 1  |
+  | Requested Contrast Agent                      | (0032,1070) | O | 2C |
+  | Scheduled Procedure Step Status               | (0040,0020) | O | 3  |
+  | <i>All other attributes of the\n <i>Scheduled Procedure Step Sequence | | O | 3  |
+  }
+  
+  class "Referenced Defined Protocol" as rdp {
+  <#transparent,#transparent>| Referenced SOP Class UID | (0008,1150) | O | 1 |
+  | Referenced SOP Instance UID | (0008,1155) | O | 1 |
+  }
+  
+  class "Referenced Performed Protocol" as rpp {
+  <#transparent,#transparent>| Referenced SOP Class UID | (0008,1150) | O | 1 |
+  | Referenced SOP Instance UID | (0008,1155) | O | 1 |
+  }
+
+  class "Scheduled Protocol Code" as spc {
+  <#transparent,#transparent>| Protocol Context <u>Sequence</u> | (0040,0440) | - | 3 |
+  }
+
+  class "Protocol Context" as pc {
+  <#transparent,#transparent>| Value Type | (0040,A040) | - | 1 |
+  | Concept Name Code <u>Sequence</u>      | (0040,A043) | - | 1  |
+  | DateTime                               | (0040,A120) | - | 1C |
+  | Person Name                            | (0040,A123) | - | 1C |
+  | Text Value                             | (0040,A160) | - | 1C |
+  | Concept Code <u>Sequence</u>           | (0040,A168) | - | 1C |
+  | Numeric Value                          | (0040,A30A) | - | 1C |
+  | Measurement Units Code <u>Sequence</u> | (0040,08EA) | - | 1C |
+  | <i>All other attributes of the\n <i>Protocol Context Sequence | | - | 3  |
+  }
+
+  class "Concept Name Code" as cnc {
+  }
+
+  class "Concept Code" as cc {
+  }
+
+  class "Measurement Units Code" as muc {
+  }
+
+  class "Scheduled Specimen" as ss {
+  <#transparent,#transparent>| Container Identifier | (0040,0512) | O | 1 |
+  | Container Type Code <u>Sequence</u>  | (0040,0518) | - | 2 |
+  | Specimen Description <u>Sequence</u> | (0040,0560) | O | 1 |
+  | <i>All other attributes of the\n <i>Scheduled Specimen Sequence | | O | 3 |
+  }
+
+  class "Container Type Code" as ctc {
+  }
+
+  class "Specimen Description" as sd {
+  <#transparent,#transparent>| Specimen Identifier | (0040,0551) | O | 1 |
+  | Specimen UID | (0040,0554) | O | 1 |
+  | <i>All other attributes of the\n <i>Specimen Description Sequence | | O | 3 |
+  }
+
+  class "<b>Requested Procedure" as rp {
+  <#transparent,#transparent>| Requested Procedure ID | (0040,1001) | O | 1 |
+  | Requested Procedure Description           | (0032,1060) | O | 1C |
+  | Requested Procedure Code <u>Sequence</u>  | (0032,1064) | O | 1C |
+  | Requested Laterality Code <u>Sequence</u> | (0032,1065) | O | 3  |
+  | Study Instance UID                        | (0020,000D) | O | 1  |
+  | Study Date                                | (0008,0020) | O | 3  |
+  | Study Time                                | (0008,0030) | O | 3  |
+  | Referenced Study <u>Sequence</u>          | (0008,1110) | O | 2  |
+  | Requested Procedure Priority              | (0040,1003) | O | 2  |
+  | Patient Transport Arrangements            | (0040,1004) | O | 2  |
+  | <i>All other attributes of the\n <i>Requested Procedure Module | | O | 3  |
+  }
+
+  class "Requested Procedure Code" as rpc {
+  }
+
+  class "Requested Laterality Code" as rlc {
+  }
+
+  class "Referenced Study" as rs {
+  <#transparent,#transparent>| Referenced SOP Class UID | (0008,1150) | O | 1 |
+  | Referenced SOP Instance UID | (0008,1155) | O | 1 |
+  }
+
+  class "<b>Imaging Service Request" as isr {
+  <#transparent,#transparent>| Accession Number | (0008,0050) | O | 2 |
+  | Issuer of Accession Number <u>Sequence</u> | (0008,0051) | O | 3 |
+  | Requesting Physician                       | (0032,1032) | O | 2 |
+  | Referring Physician's Name                 | (0008,0090) | O | 2 |
+  | <i>All other attributes of the\n <i>Imaging Service Request Module | | O | 3 |
+  }
+
+  class "<b>Visit Identification" as vi {
+  <#transparent,#transparent>| Admission ID | (0038,0010) | O | 2 |
+  | Issuer of Admission ID Sequence | (0038,0014) | O | 3 |
+  | <i>All other Attributes of the\n <i>Visit Identification Module |             | O | 3 |
+  }
+
+  class "<b>Visit Status" as vs {
+  <#transparent,#transparent>| Current Patient Location | (0038,0300) | O | 2 |
+  | <i>All other Attributes of the\n <i>Visit Status Module  |             | O | 3 |
+  }
+
+  class "<b>Visit Relationship" as vr {
+  <#transparent,#transparent>| Referenced Patient <u>Sequence</u> | (0008,1120) | O | 2 |
+  | <i>All other Attributes of the\n <i>Visit Relationship Module | | O | 3 |
+  }
+
+  class "Referenced Patient" as rp2 {
+  <#transparent,#transparent>| Referenced SOP Class UID | (0008,1150) | O | 1 |
+  | Referenced SOP Instance UID | (0008,1155) | O | 1 |
+  }
+
+  class "<b>Visit Admission" as va {
+  <#transparent,#transparent>| <i>All other Attributes of the\n <i>Visit Admission Module | | O | 3 |
+  }
+
+  class "<b>Patient Relationship" as pr {
+  <#transparent,#transparent>| <i>All other Attributes of the\n <i>Patient Relationship Module | | O | 3 |
+  }
+
+  class "<b>Patient Identification" as pi {
+  <#transparent,#transparent>| Patient's Name | (0010,0010) | R | 1 |
+  | Patient ID                               | (0010,0020) | R | 1 |
+  | Issuer of Patient ID                     | (0010,0021) | O | 3 |
+  | Issuer of Patient ID Qualifiers Sequence | (0010,0024) | O | 3 |
+  | Other Patient IDs Sequence               | (0010,1002) | O | 3 |
+  | <i>All other Attributes of the\n <i>Patient Identification Module  |             | O | 3 |
+  }
+
+  class "<b>Patient Demographic" as pd {
+  <#transparent,#transparent>| Patient's Birth Date | (0010,0030) | O | 2 |
+  | Patient's Sex                                   | (0010,0040) | O | 2 |
+  | Patient's Primary Language Code <u>Sequence</u> | (0010,0101) | O | 3 |
+  | Patient's Weight                                | (0010,1030) | O | 2 |
+  | Patient's Size                                  | (0010,1020) | O | 3 |
+  | Confidentiality constraint on patient data      | (0040,3001) | O | 2 |
+  | <i>All other Attributes of the\n <i>Patient Demographic Module |             | O | 3 |
+  }
+
+  class "Patient's Primary Language Code" as pplc {
+  <#transparent,#transparent>| Patient's Primary Language Modifier Code <u>Sequence</u> | (0010,0102) | O | 3 |
+  }
+
+  class "Patient's Primary Language Modifier Code" as pplmc {
+  }
+
+  class "<b>Patient Medical" as pm {
+  <#transparent,#transparent>| Patient State | (0038,0500) | O | 2 |
+  | Pregnancy Status                    | (0010,21C0) | O | 2 |
+  | Medical Alerts                      | (0010,2000) | O | 2 |
+  | Allergies                           | (0010,2110) | O | 2 |
+  | Special Needs                       | (0038,0050) | O | 2 |
+  | Pertinent Documents <u>Sequence</u> | (0038,0100) | O | 3 |
+  | <i>All other Attributes of the\n <i>Patient Medical Module |             | O | 3 |
+  }
+
+  class "Pertinent Documents" as pd2 {
+  <#transparent,#transparent>| Referenced SOP Class UID | (0008,1150) | - | 1 |
+  | Referenced SOP Instance UID               | (0008,1155) | - | 1 |
+  | Purpose of Reference Code <u>Sequence</u> | (0040,A170) | - | 2 |
+  | Document Title                            | (0042,0010) | - | 2 |
+  }
+
+  class "Purpose of Reference Code" as prc {
+  }
+
+' =====================
+
+  class "Enhanced Coded Entry Macro with Optional Matching\nKey Support and Optional Meaning (8-2a)" as 2a {
+  <#transparent,#transparent>| Equivalent Code <u>Sequence</u> | (0008,0121) | O | 3 |
+  }
+  
+  class "Equivalent Code" as ec2 {
+  }
+
+  class "Basic Coded Entry Macro with Optional Matching\nKey Support and Optional Meaning (8-2b)" as 2b {
+  <#transparent,#transparent>| Code Value | (0008,0100) | O | 1C |
+  | Coding Scheme Designator            | (0008,0102) | O  | 1C |
+  | Coding Scheme Version               | (0008,0103) | OC | 3  |
+  | Code Meaning                        | (0008,0104) | O  | 3  |
+  | Long Code Value                     | (0008,0119) | O  | 1C |
+  | URN Code Value                      | (0008,0120) | O  | 1C |
+  | Mapping Resource                    | (0008,0105) | O  | 3  |
+  | Mapping Resource UID                | (0008,0118) | O  | 3  |
+  | Context Group Version               | (0008,0106) | O  | 3  |
+  | Context Group Extension Flag        | (0008,010B) | O  | 3  |
+  | Context Group Local Version         | (0008,0107) | O  | 3  |
+  | Context Group Extension Creator UID | (0008,010D) | O  | 3  |
+  }
+
+  class "Enhanced SCU/SCP Coded Entry Macro with no SCU Support\nand no Matching Key Support (8-3a)" as 3a {
+  <#transparent,#transparent>| Equivalent Code <u>Sequence</u> | (0008,0121) | -/3 | - | |
+  }
+  
+  class "Equivalent Code" as ec3 {
+  }
+
+  class "Basic SCU/SCP Coded Entry Macro with no SCU Support\nand no Matching Key Support (8-3b)" as 3b {
+  <#transparent,#transparent>| Code Value | (0008,0100) | -/1C | - | 1C |
+  | Coding Scheme Designator            | (0008,0102) | -/1C | - | 1C |
+  | Coding Scheme Version               | (0008,0103) | -/1C | - | 1C |
+  | Code Meaning                        | (0008,0104) | -/1  | - | 1  |
+  | Long Code Value                     | (0008,0119) | -/1C | - | 1C |
+  | URN Code Value                      | (0008,0120) | -/1C | - | 1C |
+  | Mapping Resource                    | (0008,0105) | -/3  | - | 3  |
+  | Mapping Resource UID                | (0008,0118) | -/3  | - | 3  |
+  | Context Group Version               | (0008,0106) | -/3  | - | 3  |
+  | Context Group Extension Flag        | (0008,010B) | -/3  | - | 3  |
+  | Context Group Local Version         | (0008,0107) | -/3  | - | 3  |
+  | Context Group Extension Creator UID | (0008,010D) | -/3  | - | 3  |
+  }
+
+  class "Enhanced Coded Entry Macro with Optional Matching\nKey Support and Mandatory Meaning (8-4a)" as 4a {
+  <#transparent,#transparent>| Equivalent Code <u>Sequence</u> | (0008,0121) | O | 3 |
+  }
+  
+  class "Equivalent Code" as ec4 {
+  }
+
+  class "Basic Coded Entry Macro with Optional Matching\nKey Support and Mandatory Meaning (8-4b)" as 4b {
+  <#transparent,#transparent>| Code Value | (0008,0100) | O | 1C |
+  | Coding Scheme Designator            | (0008,0102) | O  | 1C |
+  | Coding Scheme Version               | (0008,0103) | RC | 1C  |
+  | Code Meaning                        | (0008,0104) | O  | 1  |
+  | Long Code Value                     | (0008,0119) | O  | 1C |
+  | URN Code Value                      | (0008,0120) | O  | 1C |
+  | Mapping Resource                    | (0008,0105) | O  | 3  |
+  | Mapping Resource UID                | (0008,0118) | O  | 3  |
+  | Context Group Version               | (0008,0106) | O  | 3  |
+  | Context Group Extension Flag        | (0008,010B) | O  | 3  |
+  | Context Group Local Version         | (0008,0107) | O  | 3  |
+  | Context Group Extension Creator UID | (0008,010D) | O  | 3  |
+  }
+
+' =====================
+
+  mwa   *-- "1" sps
+  mwa   *-- "1" rp
+  mwa   *-- "1" isr
+  mwa   *-- "1" vi
+  mwa   *-- "1" vs
+  mwa   *-- "1" vr
+  mwa   *-- "1" va
+  mwa   *-- "1" pr
+  mwa   *-- "1" pi
+  mwa   *-- "1" pd
+  mwa   *-- "1" pm
+  sps   *-- "*" sps2
+  sps   *-- "*" ss
+  sps2  *-- "*" rdp
+  sps2  *-- "*" rpp
+  sps2  *-- "*" spc
+  spc   *-- "1" 2a
+  spc   *-- "*" pc
+  pc    *-- "*" cnc
+  pc    *-- "*" cc
+  pc    *-- "*" muc
+  cnc   *-- "1" 3a
+  cc    *-- "1" 3a
+  muc   *-- "1" 3a
+  ss    *-- "*" ctc
+  ss    *-- "*" sd
+  ctc   *-- "1" 3a
+  rp    *-- "*" rpc
+  rp    *-- "*" rlc
+  rp    *-- "*" rs
+  rpc   *-- "1" 2a
+  rlc   *-- "1" 2b
+  vr    *-- "*" rp2
+  pd    *-- "*" pplc
+  pplc  *-- "1" 4a
+  pplc  *-- "*" pplmc
+  pplmc *-- "1" 4a
+  pm    *-- "*" pd2
+  pd2   *-- "*" prc
+  prc   *-- "1" 3a
+
+  2a   *-- "1" 2b
+  2a   *-- "*" ec2
+  ec2  *-- "*" 2b
+  3a   *-- "1" 3b
+  3a   *-- "*" ec3
+  ec3  *-- "*" 3b
+  4a   *-- "1" 4b
+  4a   *-- "*" ec4
+  ec4  *-- "*" 4b
+
+@enduml

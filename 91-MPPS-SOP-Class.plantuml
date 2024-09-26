@@ -1,0 +1,293 @@
+@startuml
+<style>
+title {
+  HorizontalAlignment center
+  Fontsize 26
+}
+</style>
+
+hide empty members
+hide circle
+left to right direction
+title
+  PS3.4, F.7
+  Modality Performed Procedure Step SOP Class
+end title
+
+  class "<b>MPPS SOP Class Attributes (F.7.2-1)" as mppsa {
+  <#transparent,#transparent>| <b>Attribute name | <b>Tag | <b>Req. Type\n <b>N-CREATE\n <b>(SCU/SCP) | <b>Req. Type\n <b>N-SET\n <b>(SCU/SCP) | <b>Req. Type\n <b>Final State |
+  | Specific Character Set | (0008,0005) | 1C/1C | 1C/1C | |
+  }
+
+  class "<b>Performed Procedure Step Relationship" as ppsr {
+  <#transparent,#transparent>| Scheduled Step Attributes <u>Sequence</u> | (0040,0270) | 1/1 | NA | |
+  | Patient's Name                                  | (0010,0010) | 2/2 | NA | |
+  | Patient ID                                      | (0010,0020) | 2/2 | NA | |
+  | Issuer of Patient ID                            | (0010,0021) | 3/3 | NA | |
+  | Issuer of Patient ID Qualifiers <u>Sequence</u> | (0010,0024) | 3/3 | NA | |
+  | Other Patient IDs <u>Sequence</u>               | (0010,1002) | 3/3 | NA | |
+  | Patient Birth Date                              | (0010,0030) | 2/2 | NA | |
+  | Patient's Sex                                   | (0010,0040) | 2/2 | NA | |
+  | Referenced Patient <u>Sequence</u>              | (0008,1120) | 2/2 | NA | |
+  | Admission ID                                    | (0038,0010) | 3/3 | NA | |
+  | Issuer of Admission ID <u>Sequence</u>          | (0038,0014) | 3/3 | NA | |
+  | Service Episode ID                              | (0038,0060) | 3/3 | NA | |
+  | Issuer of Service Episode ID <u>Sequence</u>    | (0038,0064) | 3/3 | NA | |
+  | Service Episode Description                     | (0038,0062) | 3/3 | NA | |
+  }
+
+  class "Scheduled Step Attributes" as ssa {
+  <#transparent,#transparent>| Study Instance UID | (0020,000D) | 1/1 | NA | |
+  | Referenced Study <u>Sequence</u>            | (0008,1110) | 2/2 | NA | |
+  | Accession Number                            | (0008,0050) | 2/2 | NA | |
+  | Issuer of Accession Number <u>Sequence</u>  | (0008,0051) | 3/3 | NA | |
+  | Placer Order Number/Imaging Service Request | (0040,2016) | 3/3 | NA | |
+  | Order Placer Identifier <u>Sequence</u>     | (0040,0026) | 3/3 | NA | |
+  | Filler Order Number/Imaging Service Request | (0040,2017) | 3/3 | NA | |
+  | Order Filler Identifier <u>Sequence</u>     | (0040,0027) | 3/3 | NA | |
+  | Requested Procedure ID                      | (0040,1001) | 2/2 | NA | |
+  | Requested Procedure Code <u>Sequence</u>    | (0032,1064) | 3/3 | NA | |
+  | Requested Procedure Description             | (0032,1060) | 2/2 | NA | |
+  | Scheduled Procedure Step ID                 | (0040,0009) | 2/2 | NA | |
+  | Scheduled Procedure Step Description        | (0040,0007) | 2/2 | NA | |
+  | Scheduled Protocol Code <u>Sequence</u>     | (0040,0008) | 2/2 | NA | |
+  }
+
+  class "Referenced Study" as rs {
+  <#transparent,#transparent>| Referenced SOP Class UID | (0008,1150) | 1/1 | NA | |
+  | Referenced SOP Instance UID | (0008,1155) | 1/1 | NA | |
+  }
+
+  class "Issuer of Accession Number" as ioan {
+  <#transparent,#transparent>| Local Namespace Entity ID | (0040,0031) | 1C/1C | NA | |
+  | Universal Entity ID      | (0040,0032) | 1C/1C | NA | |
+  | Universal Entity ID Type | (0040,0033) | 1C/1C | NA | |
+  }
+
+  class "Order Placer Identifier" as opi {
+  <#transparent,#transparent>| Local Namespace Entity ID | (0040,0031) | 1C/1C | NA | |
+  | Universal Entity ID      | (0040,0032) | 1C/1C | NA | |
+  | Universal Entity ID Type | (0040,0033) | 1C/1C | NA | |
+  }
+
+  class "Order Filler Identifier" as ofi {
+  <#transparent,#transparent>| Local Namespace Entity ID | (0040,0031) | 1C/1C | NA | |
+  | Universal Entity ID      | (0040,0032) | 1C/1C | NA | |
+  | Universal Entity ID Type | (0040,0033) | 1C/1C | NA | |
+  }
+
+  class "Requested Procedure Code" as rpc {
+  }
+  
+  class "Scheduled Protocol Code" as spc {
+  }
+
+  class "Issuer of Patient ID Qualifiers" as iopiq {
+  <#transparent,#transparent>| Universal Entity ID | (0040,0032) | 3/3 | NA | |
+  | Universal Entity ID Type | (0040,0033) | 1C/1C | NA | |
+  | <i>All other Attributes of the Issuer of\n <i>Patient ID Qualifiers Sequence |             | 3/3   | NA | |
+  }
+
+  class "Other Patient ID" as opi2 {
+  <#transparent,#transparent>| Patient ID           | (0010,0020) | 3/3 | NA | |
+  | Issuer of Patient ID                            | (0010,0021) | 3/3 | NA | |
+  | Issuer of Patient ID Qualifiers <u>Sequence</u> | (0010,0024) | 3/3 | NA | |
+  | Type of Patient ID                              | (0010,0022) | 3/3 | NA | |
+  }
+
+  class "Referenced Patient" as rp {
+  <#transparent,#transparent>| Referenced SOP Class UID | (0008,1150) | 1/1 | NA | |
+  | Referenced SOP Instance UID | (0008,1155) | 1/1 | NA | |
+  }
+
+  class "Issuer of Admission ID" as ioai {
+  <#transparent,#transparent>| Local Namespace Entity ID | (0040,0031) | 1C/1C | NA | |
+  | Universal Entity ID       | (0040,0032) | 1C/1C | NA | |
+  | Universal Entity ID Type  | (0040,0033) | 1C/1C | NA | |
+  }
+
+  class "Issuer of Service Episode ID" as iosei {
+  <#transparent,#transparent>| Local Namespace Entity ID | (0040,0031) | 1C/1C | NA | |
+  | Universal Entity ID       | (0040,0032) | 1C/1C | NA | |
+  | Universal Entity ID Type  | (0040,0033) | 1C/1C | NA | |
+  }
+
+  class "<b>Performed Procedure Step Information" as ppsi {
+  <#transparent,#transparent>| Performed Procedure Step ID               | (0040,0253) | 1/1 | NA  |   |
+  | Performed Station AE Title                                           | (0040,0241) | 1/1 | NA  |   |
+  | Performed Station Name                                               | (0040,0242) | 2/2 | NA  |   |
+  | Performed Location                                                   | (0040,0243) | 2/2 | NA  |   |
+  | Performed Procedure Step Start Date                                  | (0040,0244) | 1/1 | NA  |   |
+  | Performed Procedure Step Start Time                                  | (0040,0245) | 1/1 | NA  |   |
+  | Performed Procedure Step Status                                      | (0040,0252) | 1/1 | 3/1 |   |
+  | Performed Procedure Step Description                                 | (0040,0254) | 2/2 | 3/2 |   |
+  | Performed Procedure Type Description                                 | (0040,0255) | 2/2 | 3/2 |   |
+  | Procedure Code <u>Sequence</u>                                       | (0008,1032) | 2/2 | 3/2 |   |
+  | Reason For Performed Procedure Code <u>Sequence</u>                  | (0040,1012) | 3/3 | 3/3 |   |
+  | Performed Procedure Step End Date                                    | (0040,0250) | 2/2 | 3/1 | 1 |
+  | Performed Procedure Step End Time                                    | (0040,0251) | 2/2 | 3/1 | 1 |
+  | Comments on the Performed Procedure Step                             | (0040,0280) | 3/3 | 3/3 |   |
+  | Performed Procedure Step Discontinuation Reason Code <u>Sequence</u> | (0040,0281) | 3/3 | 3/3 |   |
+  }
+
+  class "Procedure Code" as pc {
+  }
+
+  class "Reason For Performed Procedure Code" as rfppc {
+  }
+
+  class "Performed Procedure Step Discontinuation Reason Code" as ppsdrc {
+  }
+
+  class "<b>Image Acquisition Results" as iar {
+  <#transparent,#transparent>| Modality     | (0008,0060) | 1/1 | NA  |   |
+  | Study ID                                | (0020,0010) | 2/2 | NA  |   |
+  | Performed Protocol Code <u>Sequence</u> | (0040,0260) | 2/2 | 3/2 |   |
+  | Performed Series <u>Sequence</u>        | (0040,0340) | 2/2 | 3/1 | 1 |
+  | <i>All other Attributes of the Billing and\n <i>Material Management Code Module |             | 3/3 | 3/3 |   |
+  }
+
+  class "Performed Protocol Code" as ppc {
+  }
+
+  class "Performed Series" as ps {
+  <#transparent,#transparent>| Performing Physician's Name      | (0008,1050) | 2/2 | 2/2 | 2 |
+  | Protocol Name                                               | (0018,1030) | 1/1 | 1/1 | 1 |
+  | Operators' Name                                             | (0008,1070) | 2/2 | 2/2 | 2 |
+  | Series Instance UID                                         | (0020,000E) | 1/1 | 1/1 | 1 |
+  | Series Description                                          | (0008,103E) | 2/2 | 2/2 | 2 |
+  | Retrieve AE Title                                           | (0008,0054) | 2/2 | 2/2 | 2 |
+  | Archive Requested                                           | (0040,A494) | 3/3 | 3/3 |   |
+  | Referenced Image <u>Sequence</u>                            | (0008,1140) | 2/2 | 2/2 |   |
+  | Referenced Non-Image Composite SOP Instance <u>Sequence</u> | (0008,1140) | 2/2 | 2/2 |   |
+  | <i>All other Attributes of the Performed Series Sequence    | | 3/3 | 3/3 |   |
+  }
+  
+  class "Referenced Image" as ri {
+  <#transparent,#transparent>| Referenced SOP Class UID | (0008,1150) | 1/1 | 1/1 | |
+  | Referenced SOP Instance UID          | (0008,1155) | 1/1 | 1/1 | |
+  | Container Identifier                 | (0040,0512) | 3/3 | 3/3 | |
+  | Specimen Description <u>Sequence</u> | (0040,0560) | 3/3 | 3/3 | |
+  }
+
+  class "Specimen Description" as sd {
+  <#transparent,#transparent>| Specimen Identifier | (0040,0551) | 1/1 | 1/1 | |
+  | Specimen UID | (0040,0554) | 1/1 | 1/1 | |
+  }
+
+  class "Referenced Non-Image Composite SOP Instance" as rnicsi {
+  <#transparent,#transparent>| Referenced SOP Class UID | (0008,1150) | 1/1 | 1/1 | |
+  | Referenced SOP Instance UID | (0008,1155) | 1/1 | 1/1 | |
+  }
+
+  class "MPPS Enhanced Code Value Macro with no N-SET (F.7.2-1a)" as a {
+  <#transparent,#transparent>| Equivalent Code <u>Sequence</u> | (0008,0121) | 3/3 | NA | |
+  }
+
+' ===============================
+
+  class "Equivalent Code" as ec {
+  }
+  
+  class "MPPS Simple Code Value Macro with no N-SET (F.7.2-1b)" as b {
+  <#transparent,#transparent>| Code Value | (0008,0100) | 1C/1C | NA | |
+  | Coding Scheme Designator            | (0008,0102) | 1C/1C | NA | |
+  | Coding Scheme Version               | (0008,0103) | 1C/1C | NA | |
+  | Code Meaning                        | (0008,0104) | 1/1   | NA | |
+  | Long Code Value                     | (0008,0119) | 1C/1C | NA | |
+  | URN Code Value                      | (0008,0120) | 1C/1C | NA | |
+  | Mapping Resource                    | (0008,0105) | 3/3   | NA | |
+  | Mapping Resource UID                | (0008,0118) | 3/3   | NA | |
+  | Context Group Version               | (0008,0106) | 3/3   | NA | |
+  | Context Group Extension Flag        | (0008,010B) | 3/3   | NA | |
+  | Context Group Local Version         | (0008,0107) | 3/3   | NA | |
+  | Context Group Extension Creator UID | (0008,010D) | 3/3   | NA | |
+  }
+
+  class "MPPS Enhanced Code Value Macro with N-SET, Mandatory Meaning (F.7.2-1c)" as c {
+  <#transparent,#transparent>| Equivalent Code <u>Sequence</u> | (0008,0121) | 3/3 | 3/3 | |
+  }
+
+  class "Equivalent Code" as ec2 {
+  }
+
+  class "MPPS Simple Code Value Macro with N-SET, Mandatory Meaning (F.7.2-1d)" as d {
+  <#transparent,#transparent>| Code Value | (0008,0100) | 1C/1C | 3/1C  | |
+  | Coding Scheme Designator              | (0008,0102) | 1C/1C | 1C/1C | |
+  | Coding Scheme Version                 | (0008,0103) | 1C/1C | 1C/1C | |
+  | Code Meaning                          | (0008,0104) | 1/1   | 1/1   | |
+  | Long Code Value                       | (0008,0119) | 1C/1C | 3/1C  | |
+  | URN Code Value                        | (0008,0120) | 1C/1C | 3/1C  | |
+  | Mapping Resource                      | (0008,0105) | 3/3   | 3/3   | |
+  | Mapping Resource UID                  | (0008,0118) | 3/3   | 3/3   | |
+  | Context Group Version                 | (0008,0106) | 3/3   | 3/3   | |
+  | Context Group Extension Flag          | (0008,010B) | 3/3   | 3/3   | |
+  | Context Group Local Version           | (0008,0107) | 3/3   | 3/3   | |
+  | Context Group Extension Creator UID   | (0008,010D) | 3/3   | 3/3   | |
+  }
+
+  class "MPPS Enhanced Code Value Macro with N-SET, Optional Meaning (F.7.2-1e)" as e {
+  <#transparent,#transparent>| Equivalent Code <u>Sequence</u> | (0008,0121) | 3/3 | 3/3 | |
+  }
+
+  class "Equivalent Code" as ec3 {
+  }
+
+  class "MPPS Simple Code Value Macro with N-SET, Optional Meaning (F.7.2-1f)" as f {
+  <#transparent,#transparent>| Code Value | (0008,0100) | 1C/1C | 3/1C  | |
+  | Coding Scheme Designator              | (0008,0102) | 1C/1C | 1C/1C | |
+  | Coding Scheme Version                 | (0008,0103) | 1C/1C | 1C/1C | |
+  | Code Meaning                          | (0008,0104) | 3/3   | 3/3   | |
+  | Long Code Value                       | (0008,0119) | 1C/1C | 3/1C  | |
+  | URN Code Value                        | (0008,0120) | 1C/1C | 3/1C  | |
+  | Mapping Resource                      | (0008,0105) | 3/3   | 3/3   | |
+  | Mapping Resource UID                  | (0008,0118) | 3/3   | 3/3   | |
+  | Context Group Version                 | (0008,0106) | 3/3   | 3/3   | |
+  | Context Group Extension Flag          | (0008,010B) | 3/3   | 3/3   | |
+  | Context Group Local Version           | (0008,0107) | 3/3   | 3/3   | |
+  | Context Group Extension Creator UID   | (0008,010D) | 3/3   | 3/3   | |
+  }
+
+' =====================
+
+  mppsa  *-- "1" ppsr
+  mppsa  *-- "1" ppsi
+  mppsa  *-- "1" iar
+  ppsr   *-- "1..*" ssa
+  ppsr   *-- "*" iopiq
+  ppsr   *-- "*" opi2
+  ppsr   *-- "*" rp
+  ppsr   *-- "*" ioai
+  ppsr   *-- "*" iosei
+  ssa    *-- "*" rs
+  ssa    *-- "*" ioan
+  ssa    *-- "*" opi
+  ssa    *-- "*" ofi
+  ssa    *-- "*" rpc
+  ssa    *-- "*" spc
+  rpc    *-- "1" a
+  spc    *-- "1" a
+  a      *-- "1" b
+  a      *-- "*" ec
+  ec     *-- "1" b
+  opi2   *-- "*" iopiq
+  ppsi   *-- "*" pc
+  ppsi   *-- "*" rfppc
+  ppsi   *-- "*" ppsdrc
+  iar    *-- "*" ppc
+  iar    *-- "*" ps
+  ps     *-- "*" ri
+  ps     *-- "*" rnicsi
+  ri     *-- "*" sd
+  rfppc  *-- "1" c
+  c      *-- "1" d
+  c      *-- "*" ec2
+  ec2    *-- "1" d
+  ppsdrc *-- "1" c
+  ppc    *-- "1" e
+  pc     *-- "1" e
+  e      *-- "1" f
+  e      *-- "*" ec3
+  ec3    *-- "1" f
+
+@enduml
