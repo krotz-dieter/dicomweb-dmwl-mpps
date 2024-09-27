@@ -1,0 +1,378 @@
+@startuml
+<style>
+title {
+  HorizontalAlignment center
+  Fontsize 26
+}
+</style>
+
+hide empty members
+hide circle
+left to right direction
+title
+  PS3.4, CC.2.5.1.3
+  UPS SOP Class Attributes
+end title
+
+  class "<b>UPS SOP Class Attributes (CC.2.5-3)" as usca {
+  <#transparent,#transparent>| <b>Attribute name | <b>Tag | <b>Req. Type\n <b>N-CREATE\n <b>(SCU/SCP) | <b>Req. Type\n <b>N-SET\n <b>(SCU/SCP) | <b>Final State | <b>Req. Type\n <b>N-GET\n <b>(SCU/SCP) | Matching\n Key Type | Return\n Key Type |
+  | Transaction UID | (0008,1195) | 2/2 | CC.2.6.3 | O | NA | - | - |
+  }
+
+  class "<b>SOP Common Module" as scm {
+  <#transparent,#transparent>| Specific Character Set | (0008,0005) | 1C/1C | 1C/1C | RC | 3/1 | - | 1C |
+  | SOP Class UID    | (0008,0016) | CC.2.5.1.3.1 | NA | R | NA | O | 1 |
+  | SOP Instance UID | (0008,0018) | NA           | NA | R | NA | U | 1 |
+  | <i>All other Attributes of the\n <i>SOP Common Module | | 3/3 | 3/3 | O | 3/3 | - | - |
+  }
+
+  class "<b>Unified Procedure Step Scheduled Procedure Information Module" as upsspim {
+  <#transparent,#transparent>| Scheduled Procedure Step Priority | (0074,1200) | 1/1 | 3/1 | R | 3/1 | R | 1 |
+  | Scheduled Procedure Step Modification DateTime             | (0040,4010) | -/1   | =/1 | R | 3/1 | O | 3 |
+  | Procedure Step Label                                       | (0074,1204) | 1/1   | 3/1 | O | 3/1 | R | 1 |
+  | Worklist Label                                             | (0074,1202) | 2/1   | 3/1 | O | 3/1 | R | 1 |
+  | Scheduled Processing Parameters <u>Sequence</u>            | (0074,1210) | 2/2   | 3/2 | O | 3/2 | - | 2 |
+  | Scheduled Station Name Code <u>Sequence</u>                | (0074,1210) | 2/2   | 3/2 | O | 3/2 | R | 2 |
+  | Scheduled Station Geographic Location Code <u>Sequence</u> | (0040,4027) | 2/2   | 3/2 | O | 3/2 | R | 2 |
+  | Scheduled Human Performers <u>Sequence</u>                 | (0040,4034) | 2C/2C | 3/2 | O | 3/2 | R | 2 |
+  | Scheduled Procedure Step Start DateTime                    | (0040,4005) | 1/1   | 3/1 | R | 3/1 | R | 1 |
+  | Expected Completion DateTime                               | (0040,4011) | 3/1   | 3/1 | O | 3/1 | R | 3 |
+  | Scheduled Procedure Step Expiration DateTime               | (0040,4008) | 3/3   | 3/3 | O | 3/3 | O | 3 |
+  | Scheduled Workitem Code <u>Sequence</u>                    | (0040,4018) | 2/2   | 3/1 | O | 3/1 | R | 2 |
+  | Comments on the Scheduled Procedure Step                   | (0040,0400) | 2/2   | 3/1 | O | 3/1 | O | 3 |
+  | Input Readiness State                                      | (0040,4041) | 1/1   | 3/1 | R | 3/1 | R | 1 |
+  | Input Information <u>Sequence</u>                          | (0040,4021) | 2/2   | 3/2 | O | 3/2 | O | 2 |
+  | Study Instance UID                                         | (0020,000D) | 1C/2  | 3/2 | O | 3/2 | O | 2 |
+  | Output Destination <u>Sequence</u>                         | (0040,4070) | 3/3   | 3/3 | O | 3/3 | O | 3 |
+  | <i>All other Attributes of the Unified Procedure\n <i>Step Scheduled Procedure Information Module | | 3/3 | 3/3 | O | 3/3 | - | - |
+  }
+
+  class "Scheduled Processing Parameters" as spp {
+  <#transparent,#transparent>| <i>UPS Content Item |
+  }
+
+  class "Scheduled Station Name Code" as ssnc {
+  <#transparent,#transparent>| <i>UPS Code Sequence |
+  }
+
+  class "Scheduled Station Geographic Location Code" as ssglc {
+  <#transparent,#transparent>| <i>UPS Code Sequence |
+  }
+
+  class "Scheduled Human Performer" as shp {
+  <#transparent,#transparent>| Human Performer Code <u>Sequence</u> | (0040,4009) | 1/1 | 1/1 | O | -/1 | R | 1 |
+  | Human Performer's Name         | (0040,4037) | 1/1 | 1/1 | O | -/1 | O | 3 |
+  | Human Performer's Organization | (0040,4036) | 1/1 | 1/1 | O | -/1 | O | 3 |
+  }
+
+  class "Scheduled Workitem Code" as swc {
+  <#transparent,#transparent>| <i>UPS Code Sequence |
+  }
+
+  class "Input Information" as ii {
+  <#transparent,#transparent>| <i>Referenced Instances and Access |
+  }
+
+  class "Output Destination" as od {
+  <#transparent,#transparent>| <i>Storage |
+  }
+
+  class "<b>Unified Procedure Step Relationship Module" as upsrm {
+  <#transparent,#transparent>| Patient's Name | (0010,0010) | 2/2  | NA  | O | 3/2 | R | 2 |
+  | Patient ID                                | (0010,0020) | 1C/2  | NA  | O | 3/2 | R | 2 |
+  | <i>Issuer of Patient ID                   |             |       |     |   |     |   |   |
+  | Other Patient IDs <u>Sequence</u>         | (0010,1002) | 2/2   | 3/3 | O | 3/2 | O | 2 |
+  | Patient's Birth Date                      | (0010,0030) | 2/2   | NA  | O | 3/2 | R | 2 |
+  | Patient's Sex                             | (0010,0040) | 2/2   | NA  | O | 3/2 | R | 2 |
+  | Referenced Patient Photo <u>Sequence</u>  | (0010,1100) | 3/3   | 3/3 | O | 3/3 | - | 3 |
+  | Admision ID                               | (0038,0010) | 2/2   | NA  | O | 3/2 | R | 2 |
+  | Issuer of Admission ID <u>Sequence</u>    | (0038,0014) | 2/2   | NA  | O | 3/2 | R | 2 |
+  | Admitting Diagnoses Description           | (0008,1080) | 2/2   | NA  | O | 3/2 | O | 2 |
+  | Admitting Diagnoses Code <u>Sequence</u>  | (0008,1084) | 2/2   | NA  | O | 3/2 | O | 2 |
+  | Referenced Request <u>Sequence</u>        | (0040,A370) | 2/2   | NA  | O | 3/2 | R | 2 |
+  | Replaced Procedure Step <u>Sequence</u>   | (0074,1224) | 1C/1C | NA  | O | 3/2 | R | 3 |
+  | <i>All other Attributes of the Unified Procedure\n <i>Step Relationship Module | | 3/3 | 3/3 | O | 3/3 | - | - |
+  }
+
+  class "Other Patient ID" as opi2 {
+  <#transparent,#transparent>| Patient ID | (0010,0020) | 1/1 | 1/1 | O | -/1 | O | 1 |
+  | <i>Issuer of Patient ID |             |     |     |   |     |   |   |
+  | Type of Patient ID      | (0010,0022) | 3/3 | 3/3 | O | 3/3 | O | 3 |
+  }
+
+  class "Referenced Patient Photo" as rpp {
+  <#transparent,#transparent>| <i>Referenced Instances and Access |
+  }
+
+  class "Issuer of Admission ID" as ioai {
+  <#transparent,#transparent>| <i>HL7V2 Hierarchic Designator |
+  }
+
+  class "Admitting Diagnoses Code" as adc {
+  <#transparent,#transparent>| <i>UPS Code Sequence |
+  }
+
+  class "Referenced Request" as rr {
+  <#transparent,#transparent>| Study Instance UID       | (0020,000D) | 1/1 | NA  | O | -/1 | O | 1  |
+  | Accession Number                                    | (0008,0050) | 2/2 | NA  | O | -/2 | R | 2  |
+  | Issuer of Accession Number <u>Sequence</u>          | (0008,0051) | 2/2 | NA  | O | -/2 | R | 2  |
+  | Placer Order Number/Imaging Service Request         | (0040,2016) | 3/1 | NA  | O | -/1 | O | 1C |
+  | Order Placer Identifier <u>Sequence</u>             | (0040,0026) | 2/2 | NA  | O | -/2 | O | 2  |
+  | Filler Order Number/Imaging Service Request         | (0040,2017) | 3/1 | NA  | O | -/1 | O | 1C |
+  | Order Filler Identifier <u>Sequence</u>             | (0040,0027) | 2/2 | NA  | O | -/2 | O | 2  |
+  | Requested Procedure ID                              | (0040,1001) | 2/2 | NA  | O | -/2 | R | 2  |
+  | Requested Procedure Description                     | (0032,1060) | 2/2 | NA  | O | -/2 | O | 2  |
+  | Requested Procedure Code <u>Sequence</u>            | (0032,1064) | 2/2 | NA  | O | -/2 | O | 2  |
+  | Reason for the Requested Procedure                  | (0040,1002) | 3/3 | 3/3 | O | -/3 | O | 3  |
+  | Reason for Requested Procedure Code <u>Sequence</u> | (0040,100A) | 3/3 | 3/3 | O | -/3 | O | 3  |
+  | Requested Procedure Comments                        | (0040,1400) | 3/3 | 3/3 | O | -/3 | O | 1C |
+  | Confidentiality Code                                | (0040,1008) | 3/3 | 3/3 | O | -/3 | O | 3  |
+  | Names of Intended Recipients of Results             | (0040,1010) | 3/3 | 3/3 | O | -/3 | O | 3  |
+  | Imaging Service Request Comments                    | (0040,2400) | 3/3 | 3/3 | O | -/3 | O | 3  |
+  | Requesting Physician                                | (0032,1032) | 3/3 | 3/3 | O | -/3 | O | 3  |
+  | Requesting Service                                  | (0032,1033) | 3/3 | 3/1 | O | -/3 | R | 3  |
+  | Requesting Service Code <u>Sequence</u>             | (0032,1034) | 3/3 | 3/3 | O | -/3 | O | 3  |
+  | Issue Date of Imaging Service Request               | (0040,2004) | 3/3 | 3/3 | O | -/3 | O | 3  |
+  | Issue Time of Imaging Service Request               | (0040,2005) | 3/3 | 3/3 | O | -/3 | O | 3  |
+  | Referring Physician's Name                          | (0008,0090) | 3/3 | 3/3 | O | -/3 | O | 3  |
+  }
+
+  class "Issuer of Accession Number" as ioan {
+  <#transparent,#transparent>| <i>HL7V2 Hierarchic Designator |
+  }
+
+  class "Order Placer Identifier" as opi {
+  <#transparent,#transparent>| <i>HL7V2 Hierarchic Designator |
+  }
+
+  class "Order Filler Identifier" as ofi {
+  <#transparent,#transparent>| <i>HL7V2 Hierarchic Designator |
+  }
+
+  class "Requested Procedure Code" as rpc {
+  <#transparent,#transparent>| <i>UPS Code Sequence |
+  }
+
+  class "Reason for Requested Procedure Code" as rfrpc {
+  <#transparent,#transparent>| <i>UPS Code Sequence |
+  }
+
+  class "Requesting Service Code" as rsc {
+  <#transparent,#transparent>| <i>UPS Code Sequence |
+  }
+
+  class "Replaced Procedure Step" as rps {
+  <#transparent,#transparent>| <i>SOP Instance Reference |
+  }
+
+  class "<b>Patient Demographic Module" as pdm {
+  <#transparent,#transparent>| <i>All Attributes of the\n <i>Patient Demographic Module | | 3/3 | 3/3 | O | 3/3 | - | - |
+  }
+
+  class "<b>Patient Medical Module" as pmm {
+  <#transparent,#transparent>| Medical Alerts | (0010,2000) | 3/2 | 3/2 | O | 3/2 | O | 2C |
+  | Pregnancy Status | (0010,21C0) | 3/2 | 3/2 | O | 3/2 | O | 2C |
+  | Special Needs    | (0038,0050) | 3/2 | 3/2 | O | 3/2 | O | 2C |
+  | <i>All other Attributes of the\n <i>Patient Medical Module | | 3/3 | 3/3 | O | 3/3 | - | - |
+  }
+
+  class "<b>Visit Identification Module" as vim {
+  <#transparent,#transparent>| <i>All Attributes of the\n <i>Visit Identification Module | | 3/3 | 3/3 | O | 3/3 | - | - |
+  }
+
+  class "<b>Visit Status Module" as vsm {
+  <#transparent,#transparent>| <i>All Attributes of the\n <i>Visit Status Module | | 3/3 | 3/3 | O | 3/3 | - | - |
+  }
+
+  class "<b>Visit Admission Module" as vam {
+  <#transparent,#transparent>| <i>All Attributes of the\n <i>Visit Admission Module | | 3/3 | 3/3 | O | 3/3 | - | - |
+  }
+
+  class "<b>Unified Procedure Step Progress Information Module" as upspim {
+  <#transparent,#transparent>| Procedure Step State     | (0074,1000) | 1/1 | NA  | R | 3/1 | R | 1 |
+  | Procedure Step Progress Information <u>Sequence</u> | (0074,1002) | 2/2 | 3/2 | X | 3/2 |   | 2 |
+  }
+
+  class "Procedure Step Progress Information" as pspi {
+  <#transparent,#transparent>| Procedure Step Progress         | (0074,1004) | NA | 3/1 | O | -/1 | - | - |
+  | Procedure Step Progress Description                        | (0074,1006) | NA | 3/1 | O | -/1 | - | - |
+  | Procedure Step Progress Parameters <u>Sequence</u>         | (0074,1007) | NA | 3/3 | O | -/3 |   |   |
+  | Procedure Step Communications URI <u>Sequence</u>          | (0074,1008) | NA | 3/1 | O | -/1 | - | - |
+  | Procedure Step Cancellation DateTime                       | (0040,4052) | NA | 3/1 | X | -/1 | - | - |
+  | Reason For Cancellation                                    | (0074,1238) | NA | 3/1 | O | -/1 | - | - |
+  | Procedure Step Discontinuation Reason Code <u>Sequence</u> | (0074,100e) | NA | 3/1 | X | -/1 |   |   |
+  }
+
+  class "Procedure Step Progress Parameters" as pspp {
+  <#transparent,#transparent>| <i>UPS Content Item | | | | | | | |
+  | Content Item Modifier <u>Sequence</u> | (0040,0441) | NA | 3/3 | O | -/3 |   |   |
+  }
+
+  class "Content Item Modifier" as cim {
+  <#transparent,#transparent>| <i>UPS Content Item |
+  }
+
+  class "Procedure Step Communications URI" as pscu {
+  <#transparent,#transparent>| Contact URI | (0074,100a) | NA | 1/1 | O | -/1 | - | - |
+  | Contact Display Name | (0074,100c) | NA | 3/1 | O | -/1 | - | - |
+  }
+
+  class "Procedure Step Discontinuation Reason Code" as psdrc {
+  <#transparent,#transparent>| <i>UPS Code Sequence |
+  }
+
+  class "<b>Unified Procedure Step Performed Procedure Information Module" as upsppim {
+  <#transparent,#transparent>| Unified Procedure Step Performed Procedure <u>Sequence</u> | (0074,1216) | 2/2 | 3/2 | P | 3/2 | - | - |
+  }
+
+  class "Unified Procedure Step Performed Procedure" as upspp {
+  <#transparent,#transparent>| Actual Human Performers <u>Sequence</u> | (0040,4035) | NA | 3/1 | RC | -/1 | O | 1C |
+  | Performed Station Name Code <u>Sequence</u>                | (0040,4028) | NA | 3/2 | P | -/2 | O | 3  |
+  | Performed Station Class Code <u>Sequence</u>               | (0040,4029) | NA | 3/2 | O | -/2 | - | -  |
+  | Performed Station Geographic Location Code <u>Sequence</u> | (0040,4030) | NA | 3/2 | O | -/2 | - | -  |
+  | Performed Procedure Step Start DateTime                    | (0040,4050) | NA | 3/1 | P | -/1 | - | -  |
+  | Performed Procedure Step Description                       | (0040,0254) | NA | 3/1 | O | -/1 | - | -  |
+  | Comments on the Performed Procedure Step                   | (0040,0280) | NA | 3/1 | O | -/1 | - | -  |
+  | Performed Workitem Code <u>Sequence</u>                    | (0040,4019) | NA | 3/1 | P | -/1 | - | -  |
+  | Performed Processing Parameters <u>Sequence</u>            | (0074,1212) | NA | 3/1 | O | -/1 | - | -  |
+  | Performed Procedure Step End DateTime                      | (0040,4051) | NA | 3/1 | P | -/1 | O | 1C |
+  | Output Information <u>Sequence</u>                         | (0040,4033) | NA | 2/2 | P | -/2 | - | -  |
+  }
+
+  class "Actual Human Performer" as ahp {
+  <#transparent,#transparent>| Human Performer Code <u>Sequence</u> | (0040,4009) | NA | 3/1 | RC | -/1 | - | - |
+  | Human Performer's Name         | (0040,4037) | NA | 3/1 | RC | -/1 | - | - |
+  | Human Performer's Organization | (0040,4036) | NA | 3/1 | O  | -/1 | - | - |
+  }
+
+  class "Human Performer Code" as hpc {
+  <#transparent,#transparent>| <i>UPS Code Sequence |
+  }
+
+  class "Performed Station Name Code" as psnc {
+  <#transparent,#transparent>| <i>UPS Code Sequence |
+  }
+
+  class "Performed Station Class Code" as pscc {
+  <#transparent,#transparent>| <i>UPS Code Sequence |
+  }
+
+  class "Performed Station Geograpic Location Code" as psglc {
+  <#transparent,#transparent>| <i>UPS Code Sequence |
+  }
+
+  class "Performed Workitem Code" as pwc {
+  <#transparent,#transparent>| <i>UPS Code Sequence |
+  }
+
+  class "Performed Processing Parameters" as ppp {
+  <#transparent,#transparent>| <i>UPS Content Item |
+  }
+
+  class "Output Information" as oi {
+  <#transparent,#transparent>| <i>Referenced Instances and Access |
+  }
+
+' ==========================
+
+  class "UPS Code Sequence (CC.2.5-2a)" as 2a {
+  }
+
+  class "UPS Content Item (CC.2.5-2b)" as 2b {
+  }
+
+  class "Referenced Instances and Access (CC.2.5-2c)" as 2c {
+  }
+
+  class "HL7V2 Hierarchic Designator (CC.2.5-2d)" as 2d {
+  }
+
+  class "Issuer of Patient ID (CC.2.5-2e)" as 2e {
+  }
+
+  class "SOP Instance Reference (CC.2.5-2f)" as 2f {
+  }
+
+  class "Storage (CC.2.5-2c)" as 2g {
+  }
+
+' ==========================
+
+  usca *-- "1" scm
+  usca *-- "1" upsspim
+  usca *-- "1" upsrm
+  usca *-- "1" pdm
+  usca *-- "1" pmm
+  usca *-- "1" vim
+  usca *-- "1" vsm
+  usca *-- "1" vam
+  usca *-- "1" upspim
+  usca *-- "1" upsppim
+
+  upsspim *-- "*" spp
+  spp     *-- "1" 2b
+  upsspim *-- "*" ssnc
+  ssnc    *-- "1" 2a
+  upsspim *-- "*" ssglc
+  ssglc   *-- "1" 2a
+  upsspim *-- "*" shp
+  shp     *-- "*" hpc
+  upsspim *-- "*" swc
+  swc     *-- "1" 2a
+  upsspim *-- "*" ii
+  ii      *-- "1" 2c
+  upsspim *-- "*" od
+  od      *-- "1" 2g
+
+  upsrm *-- "1" 2e
+  upsrm *-- "*" opi2
+  opi2  *-- "1" 2e
+  upsrm *-- "*" rpp
+  rpp   *-- "1" 2c
+  upsrm *-- "*" ioai
+  ioai  *-- "1" 2d
+  upsrm *-- "*" adc
+  adc   *-- "1" 2a
+  upsrm *-- "*" rr
+  rr    *-- "*" ioan
+  ioan  *-- "1" 2d
+  rr    *-- "*" opi
+  opi   *-- "1" 2d
+  rr    *-- "*" ofi
+  ofi   *-- "1" 2d
+  rr    *-- "*" rpc
+  rpc   *-- "1" 2a
+  rr    *-- "*" rfrpc
+  rfrpc *-- "1" 2a
+  rr    *-- "*" rsc
+  rsc   *-- "1" 2a
+  upsrm *-- "*" rps
+  rps   *-- "1" 2f
+
+  upspim *-- "*" pspi
+  pspi   *-- "*" pspp
+  pspp   *-- "1" 2b
+  pspp   *-- "*" cim
+  cim    *-- "1" 2b
+  pspi   *-- "*" pscu
+  pspi   *-- "*" psdrc
+  psdrc  *-- "1" 2a
+
+  upsppim *-- "*" upspp
+  upsppim *-- "*" psnc
+  upsppim *-- "*" pscc
+  upsppim *-- "*" psglc
+  upsppim *-- "*" pwc
+  upsppim *-- "*" ppp
+  upsppim *-- "*" oi
+  upspp   *-- "*" ahp
+  ahp     *-- "*" hpc
+  hpc     *-- "1" 2a
+  psnc    *-- "1" 2a
+  pscc    *-- "1" 2a
+  psglc   *-- "1" 2a
+  pwc     *-- "1" 2a
+  ppp     *-- "1" 2b
+  oi      *-- "1" 2c
+
+@enduml
