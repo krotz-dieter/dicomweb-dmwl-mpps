@@ -54,7 +54,8 @@ end title
   }
 
   class "Scheduled Protocol Code" as spc {
-  <#transparent,#transparent>| Protocol Context <u>Sequence</u> | (0040,0440) | - | 3 |
+  <#transparent,#transparent>| <i>Enhanced Coded Entry with Optional Matching\n <i>Key Support and Optional Meaning | | | |
+  | Protocol Context <u>Sequence</u> | (0040,0440) | - | 3 |
   }
 
   class "Protocol Context" as pc {
@@ -70,12 +71,15 @@ end title
   }
 
   class "Concept Name Code" as cnc {
+  <#transparent,#transparent>| <i>Enhanced SCU/SCP Coded Entry with no SCU\n <i>Support and no Matching Key Support |
   }
 
   class "Concept Code" as cc {
+  <#transparent,#transparent>| <i>Enhanced SCU/SCP Coded Entry with no SCU\n <i>Support and no Matching Key Support |
   }
 
   class "Measurement Units Code" as muc {
+  <#transparent,#transparent>| <i>Enhanced SCU/SCP Coded Entry with no SCU\n <i>Support and no Matching Key Support |
   }
 
   class "Scheduled Specimen" as ss {
@@ -86,6 +90,7 @@ end title
   }
 
   class "Container Type Code" as ctc {
+  <#transparent,#transparent>| <i>Enhanced SCU/SCP Coded Entry with no SCU\n <i>Support and no Matching Key Support |
   }
 
   class "Specimen Description" as sd {
@@ -109,9 +114,11 @@ end title
   }
 
   class "Requested Procedure Code" as rpc {
+  <#transparent,#transparent>| <i>Enhanced Coded Entry with Optional Matching\n <i>Key Support and Optional Meaning |
   }
 
   class "Requested Laterality Code" as rlc {
+  <#transparent,#transparent>| <i>Basic Coded Entry with Optional Matching\n <i>Key Support and Optional Meaning |
   }
 
   class "Referenced Study" as rs {
@@ -162,7 +169,7 @@ end title
   | Issuer of Patient ID                     | (0010,0021) | O | 3 |
   | Issuer of Patient ID Qualifiers Sequence | (0010,0024) | O | 3 |
   | Other Patient IDs Sequence               | (0010,1002) | O | 3 |
-  | <i>All other Attributes of the\n <i>Patient Identification Module  |             | O | 3 |
+  | <i>All other Attributes of the\n <i>Patient Identification Module  | | O | 3 |
   }
 
   class "<b>Patient Demographic" as pd {
@@ -176,10 +183,12 @@ end title
   }
 
   class "Patient's Primary Language Code" as pplc {
-  <#transparent,#transparent>| Patient's Primary Language Modifier Code <u>Sequence</u> | (0010,0102) | O | 3 |
+  <#transparent,#transparent>| <i>Enhanced Coded Entry with Optional Matching\n <i>Key Support and Mandatory Meaning | | | |
+  | Patient's Primary Language Modifier Code <u>Sequence</u> | (0010,0102) | O | 3 |
   }
 
   class "Patient's Primary Language Modifier Code" as pplmc {
+  <#transparent,#transparent>| <i>Enhanced Coded Entry with Optional Matching\n <i>Key Support and Mandatory Meaning |
   }
 
   class "<b>Patient Medical" as pm {
@@ -189,7 +198,7 @@ end title
   | Allergies                           | (0010,2110) | O | 2 |
   | Special Needs                       | (0038,0050) | O | 2 |
   | Pertinent Documents <u>Sequence</u> | (0038,0100) | O | 3 |
-  | <i>All other Attributes of the\n <i>Patient Medical Module |             | O | 3 |
+  | <i>All other Attributes of the\n <i>Patient Medical Module | | O | 3 |
   }
 
   class "Pertinent Documents" as pd2 {
@@ -200,18 +209,21 @@ end title
   }
 
   class "Purpose of Reference Code" as prc {
+  <#transparent,#transparent>| <i>Enhanced SCU/SCP Coded Entry with no SCU\n <i>Support and no Matching Key Support |
   }
 
 ' =====================
 
-  class "Enhanced Coded Entry Macro with Optional Matching\nKey Support and Optional Meaning (8-2a)" as 2a {
-  <#transparent,#transparent>| Equivalent Code <u>Sequence</u> | (0008,0121) | O | 3 |
+  class "Enhanced Coded Entry with Optional Matching\nKey Support and Optional Meaning (8-2a)" as 2a {
+  <#transparent,#transparent>| <i>Basic Coded Entry with Optional Matching\n <i>Key Support and Optional Meaning | | | |
+  | Equivalent Code <u>Sequence</u> | (0008,0121) | O | 3 |
   }
   
   class "Equivalent Code" as ec2 {
+  <#transparent,#transparent>| <i>Basic Coded Entry with Optional Matching\n <i>Key Support and Optional Meaning |
   }
 
-  class "Basic Coded Entry Macro with Optional Matching\nKey Support and Optional Meaning (8-2b)" as 2b {
+  class "Basic Coded Entry with Optional Matching\nKey Support and Optional Meaning (8-2b)" as 2b {
   <#transparent,#transparent>| Code Value | (0008,0100) | O | 1C |
   | Coding Scheme Designator            | (0008,0102) | O  | 1C |
   | Coding Scheme Version               | (0008,0103) | OC | 3  |
@@ -226,14 +238,16 @@ end title
   | Context Group Extension Creator UID | (0008,010D) | O  | 3  |
   }
 
-  class "Enhanced SCU/SCP Coded Entry Macro with no SCU Support\nand no Matching Key Support (8-3a)" as 3a {
-  <#transparent,#transparent>| Equivalent Code <u>Sequence</u> | (0008,0121) | -/3 | - | |
+  class "Enhanced SCU/SCP Coded Entry with no SCU\n Support and no Matching Key Support (8-3a)" as 3a {
+  <#transparent,#transparent>| <i>Basic SCU/SCP Coded Entry with no SCU\n <i>Support and no Matching Key Support | | | |
+  | Equivalent Code <u>Sequence</u> | (0008,0121) | -/3 | - |
   }
   
   class "Equivalent Code" as ec3 {
+  <#transparent,#transparent>| <i>Basic SCU/SCP Coded Entry with no SCU\n <i>Support and no Matching Key Support |
   }
 
-  class "Basic SCU/SCP Coded Entry Macro with no SCU Support\nand no Matching Key Support (8-3b)" as 3b {
+  class "Basic SCU/SCP Coded Entry with no SCU\n Support and no Matching Key Support (8-3b)" as 3b {
   <#transparent,#transparent>| Code Value | (0008,0100) | -/1C | - | 1C |
   | Coding Scheme Designator            | (0008,0102) | -/1C | - | 1C |
   | Coding Scheme Version               | (0008,0103) | -/1C | - | 1C |
@@ -248,14 +262,16 @@ end title
   | Context Group Extension Creator UID | (0008,010D) | -/3  | - | 3  |
   }
 
-  class "Enhanced Coded Entry Macro with Optional Matching\nKey Support and Mandatory Meaning (8-4a)" as 4a {
-  <#transparent,#transparent>| Equivalent Code <u>Sequence</u> | (0008,0121) | O | 3 |
+  class "Enhanced Coded Entry with Optional Matching\nKey Support and Mandatory Meaning (8-4a)" as 4a {
+  <#transparent,#transparent>| <i>Basic Coded Entry with Optional Matching\n <i>Key Support and Mandatory Meaning | | | |
+  | Equivalent Code <u>Sequence</u> | (0008,0121) | O | 3 |
   }
   
   class "Equivalent Code" as ec4 {
+  <#transparent,#transparent>| <i>Basic Coded Entry with Optional Matching\n <i>Key Support and Mandatory Meaning | | | |
   }
 
-  class "Basic Coded Entry Macro with Optional Matching\nKey Support and Mandatory Meaning (8-4b)" as 4b {
+  class "Basic Coded Entry with Optional Matching\nKey Support and Mandatory Meaning (8-4b)" as 4b {
   <#transparent,#transparent>| Code Value | (0008,0100) | O | 1C |
   | Coding Scheme Designator            | (0008,0102) | O  | 1C |
   | Coding Scheme Version               | (0008,0103) | RC | 1C  |
@@ -315,12 +331,12 @@ end title
 
   2a   *-- "1" 2b
   2a   *-- "*" ec2
-  ec2  *-- "*" 2b
+  ec2  *-- "1" 2b
   3a   *-- "1" 3b
   3a   *-- "*" ec3
-  ec3  *-- "*" 3b
+  ec3  *-- "1" 3b
   4a   *-- "1" 4b
   4a   *-- "*" ec4
-  ec4  *-- "*" 4b
+  ec4  *-- "1" 4b
 
 @enduml
