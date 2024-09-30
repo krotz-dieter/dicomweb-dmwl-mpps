@@ -1,4 +1,4 @@
-@startuml
+@startuml Modality Worklist SOP Class
 <style>
 title {
   HorizontalAlignment center

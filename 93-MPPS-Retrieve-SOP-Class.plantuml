@@ -1,0 +1,296 @@
+@startuml Modality Performed Procedure Step Retrieve SOP Class
+<style>
+title {
+  HorizontalAlignment center
+  Fontsize 26
+}
+</style>
+skinparam legend {
+  backgroundColor #White
+  entrySeparator #White
+}
+
+hide empty members
+hide circle
+left to right direction
+title
+  PS3.4, F.8
+  Modality Performed Procedure Step Retrieve SOP Class
+end title
+
+  class "<b>MPPS SOP Class Attributes (F.7.2-1)" as mppsa {
+  <#transparent,#transparent>| <b>Attribute name | <b>Tag | <b>Req. Type\n <b>N-GET\n <b>(SCU/SCP) |
+  | Specific Character Set | (0008,0005) | 3/1C |
+  }
+
+  class "<b>Performed Procedure Step Relationship" as ppsr {
+  <#transparent,#transparent>| Scheduled Step Attributes <u>Sequence</u> | (0040,0270) | 1/1 |
+  | Patient's Name                                  | (0010,0010) | 3/2 |
+  | Patient ID                                      | (0010,0020) | 3/2 |
+  | Issuer of Patient ID                            | (0010,0021) | 3/3 |
+  | Issuer of Patient ID Qualifiers <u>Sequence</u> | (0010,0024) | 3/3 |
+' The next item is present in the MPPS SOP Class but absent here!
+  | <color:darkgrey>Other Patient IDs <u>Sequence</u></color> | <color:darkgrey>(0010,1002) | <color:darkgrey>3/3 |
+  | Patient Birth Date                              | (0010,0030) | 3/2 |
+  | Patient's Sex                                   | (0010,0040) | 3/2 |
+  | Referenced Patient <u>Sequence</u>              | (0008,1120) | 3/2 |
+  | Admission ID                                    | (0038,0010) | 3/3 |
+  | Issuer of Admission ID <u>Sequence</u>          | (0038,0014) | 3/3 |
+  | Service Episode ID                              | (0038,0060) | 3/3 |
+  | Issuer of Service Episode ID <u>Sequence</u>    | (0038,0064) | 3/3 |
+  | Service Episode Description                     | (0038,0062) | 3/3 |
+  }
+
+  class "Scheduled Step Attributes" as ssa {
+  <#transparent,#transparent>| Study Instance UID | (0020,000D) | -/1 |
+  | Referenced Study <u>Sequence</u>            | (0008,1110) | -/2 |
+  | Accession Number                            | (0008,0050) | -/2 |
+  | Issuer of Accession Number <u>Sequence</u>  | (0008,0051) | -/3 |
+  | Placer Order Number/Imaging Service Request | (0040,2016) | -/3 |
+  | Order Placer Identifier <u>Sequence</u>     | (0040,0026) | -/3 |
+  | Filler Order Number/Imaging Service Request | (0040,2017) | -/3 |
+  | Order Filler Identifier <u>Sequence</u>     | (0040,0027) | -/3 |
+  | Requested Procedure Code <u>Sequence</u>    | (0032,1064) | -/3 |
+  | Requested Procedure Description             | (0032,1060) | -/2 |
+' order of next item in this class is different than in MPPS SOP Class' Scheduled Step Attributes; why?
+  | <back:#ffff00>Requested Procedure ID</back> | (0040,1001) | -/2 |
+  | Scheduled Procedure Step ID                 | (0040,0009) | -/2 |
+  | Scheduled Procedure Step Description        | (0040,0007) | -/2 |
+  | Scheduled Protocol Code <u>Sequence</u>     | (0040,0008) | -/2 |
+  }
+
+  class "Referenced Study" as rs {
+  <#transparent,#transparent>| Referenced SOP Class UID | (0008,1150) | -/1 |
+  | Referenced SOP Instance UID | (0008,1155) | -/1 |
+  }
+
+  class "Issuer of Accession Number" as ioan {
+  <#transparent,#transparent>| Local Namespace Entity ID | (0040,0031) | -/3 |
+  | Universal Entity ID      | (0040,0032) | -/3 |
+  | Universal Entity ID Type | (0040,0033) | -/3 |
+  }
+
+  class "Order Placer Identifier" as opi {
+  <#transparent,#transparent>| Local Namespace Entity ID | (0040,0031) | -/3 |
+  | Universal Entity ID      | (0040,0032) | -/3 |
+  | Universal Entity ID Type | (0040,0033) | -/3 |
+  }
+
+  class "Order Filler Identifier" as ofi {
+  <#transparent,#transparent>| Local Namespace Entity ID | (0040,0031) | -/3 |
+  | Universal Entity ID      | (0040,0032) | -/3 |
+  | Universal Entity ID Type | (0040,0033) | -/3 |
+  }
+
+  class "Requested Procedure Code" as rpc {
+  <#transparent,#transparent>| <back:#00ffff><i>Enhanced SCU/SCP Coded Entry with no SCU\n <back:#00ffff><i>Support and no Matching Key Support |
+  }
+  
+  class "Scheduled Protocol Code" as spc {
+  <#transparent,#transparent>| <back:#00ffff><i>Enhanced SCU/SCP Coded Entry with no SCU\n <back:#00ffff><i>Support and Optional Meaning for SCP |
+  }
+
+  class "Issuer of Patient ID Qualifiers" as iopiq {
+  <#transparent,#transparent>| Universal Entity ID | (0040,0032) | 3/3 |
+  | Universal Entity ID Type | (0040,0033) | 1C/1C |
+  | <i>All other Attributes of the Issuer of\n <i>Patient ID Qualifiers Sequence | | 3/3 |
+  }
+
+  class "<color:darkgrey>Other Patient ID" as opi2 {
+  <#transparent,#transparent>| <color:darkgrey>Patient ID           | <color:darkgrey>(0010,0020) | <color:darkgrey>3/3 |
+  | <color:darkgrey>Issuer of Patient ID                            | <color:darkgrey>(0010,0021) | <color:darkgrey>3/3 |
+  | <color:darkgrey>Issuer of Patient ID Qualifiers <u>Sequence</u> | <color:darkgrey>(0010,0024) | <color:darkgrey>3/3 |
+  | <color:darkgrey>Type of Patient ID                              | <color:darkgrey>(0010,0022) | <color:darkgrey>3/3 |
+  }
+
+  class "Referenced Patient" as rp {
+  <#transparent,#transparent>| Referenced SOP Class UID | (0008,1150) | -/1 |
+  | Referenced SOP Instance UID | (0008,1155) | -/1 |
+  }
+
+  class "Issuer of Admission ID" as ioai {
+  <#transparent,#transparent>| Local Namespace Entity ID | (0040,0031) | -/3 |
+  | Universal Entity ID       | (0040,0032) | -/3 |
+  | Universal Entity ID Type  | (0040,0033) | -/3 |
+  }
+
+  class "Issuer of Service Episode ID" as iosei {
+  <#transparent,#transparent>| Local Namespace Entity ID | (0040,0031) | -/3 |
+  | Universal Entity ID       | (0040,0032) | -/3 |
+  | Universal Entity ID Type  | (0040,0033) | -/3 |
+  }
+
+  class "<b>Performed Procedure Step Information" as ppsi {
+  <#transparent,#transparent>| Performed Station AE Title                | (0040,0241) | 3/1 |
+  | Performed Station Name                                               | (0040,0242) | 3/2 |
+  | Performed Location                                                   | (0040,0243) | 3/1 |
+  | Performed Procedure Step Start Date                                  | (0040,0244) | 1/1 |
+  | Performed Procedure Step Start Time                                  | (0040,0245) | 1/1 |
+  | <back:#ffff00>Performed Procedure Step ID</back>                     | (0040,0253) | 3/1 |
+  | Performed Procedure Step Status                                      | (0040,0252) | 1/1 |
+  | <back:#00ff00>Performed Procedure Step End Date</back>               | (0040,0250) | 2/2 |
+  | <back:#00ff00>Performed Procedure Step End Time</back>               | (0040,0251) | 2/2 |
+  | Performed Procedure Step Description                                 | (0040,0254) | 2/2 |
+  | Performed Procedure Type Description                                 | (0040,0255) | 2/2 |
+  | Procedure Code <u>Sequence</u>                                       | (0008,1032) | 2/2 |
+  | <color:darkgrey>Reason For Performed Procedure Code <u>Sequence</u></color> | <color:darkgrey>(0040,1012) | <color:darkgrey>3/3 |
+  | Comments on the Performed Procedure Step                             | (0040,0280) | 3/3 |
+  | Performed Procedure Step Discontinuation Reason Code <u>Sequence</u> | (0040,0281) | 3/3 |
+  }
+
+  class "Procedure Code" as pc {
+  <#transparent,#transparent>| <back:#00ffff><i>Enhanced SCU/SCP Coded Entry with no SCU\n <back:#00ffff><i>Support and Optional Meaning for SCP |
+  }
+
+  class "<color:darkgrey>Reason For Performed Procedure Code" as rfppc {
+  <#transparent,#transparent>| <color:darkgrey><i>Enhanced SCU/SCP Coded Entry with no SCU\n <color:darkgrey><i>Support and Optional Meaning for SCP |
+  }
+
+  class "Performed Procedure Step Discontinuation Reason Code" as ppsdrc {
+  <#transparent,#transparent>| <back:#00ffff><i>Enhanced SCU/SCP Coded Entry with no SCU\n <back:#00ffff><i>Support and Optional Meaning for SCP |
+  }
+
+  class "<b>Image Acquisition Results" as iar {
+  <#transparent,#transparent>| <back:#00ff00>Performed Series <u>Sequence</u></back> | (0040,0340) | 3/2 |
+  | Modality                                | (0008,0060) | 1/1 | NA  |   |
+  | Study ID                                | (0020,0010) | 2/2 | NA  |   |
+  | Performed Protocol Code <u>Sequence</u> | (0040,0260) | 2/2 | 3/2 |   |
+  | <i>All other Attributes of the Billing and\n <i>Material Management Code Module | | 3/3 | 3/3 |   |
+  }
+
+  class "Performed Protocol Code" as ppc {
+  <#transparent,#transparent>| <back:#00ffff><i>Enhanced SCU/SCP Coded Entry with no SCU\n <back:#00ffff><i>Support and Optional Meaning for SCP |
+  }
+
+  class "Performed Series" as ps {
+  <#transparent,#transparent>| Performing Physician's Name      | (0008,1050) | -/2 |
+  | Protocol Name                                               | (0018,1030) | -/1 |
+  | Operators' Name                                             | (0008,1070) | -/2 |
+  | Series Instance UID                                         | (0020,000E) | -/1 |
+  | Series Description                                          | (0008,103E) | -/2 |
+  | Retrieve AE Title                                           | (0008,0054) | -/2 |
+  | <color:#darkgrey>Archive Requested</color>                  | <color:darkgrey>(0040,A494) | <color:darkgrey>-/3 |
+  | Referenced Image <u>Sequence</u>                            | (0008,1140) | -/2 |
+  | Referenced Non-Image Composite SOP Instance <u>Sequence</u> | (0008,1140) | -/2 |
+  | <i>All other Attributes of the Performed Series Sequence    |             | -/3 |
+  }
+  
+  class "Referenced Image" as ri {
+  <#transparent,#transparent>| Referenced SOP Class UID | (0008,1150) | -/1 |
+  | Referenced SOP Instance UID | (0008,1155) | -/1 |
+  | <color:#darkgrey>Container Identifier</color> | <color:#darkgrey>(0040,0512) | <color:#darkgrey>-/3 |
+  | <color:#darkgrey>Specimen Description <u>Sequence</u></color> | <color:#darkgrey>(0040,0560) | <color:#darkgrey>-/3 |
+  }
+
+  class "<color:#darkgrey>Specimen Description" as sd {
+  <#transparent,#transparent>| <color:#darkgrey>Specimen Identifier | <color:#darkgrey>(0040,0551) | <color:#darkgrey>-/1 |
+  | <color:#darkgrey>Specimen UID | <color:#darkgrey>(0040,0554) | <color:#darkgrey>-/1 |
+  }
+
+  class "Referenced Non-Image Composite SOP Instance" as rnicsi {
+  <#transparent,#transparent>| Referenced SOP Class UID | (0008,1150) | -/1 |
+  | Referenced SOP Instance UID | (0008,1155) | -/1 |
+  }
+
+' ===============================
+
+  class "Enhanced SCU/SCP Coded Entry with no SCU\n Support and no Matching Key Support (8-3a)" as 3a {
+  <#transparent,#transparent>| <i>Basic SCU/SCP Coded Entry with no SCU\n <i>Support and no Matching Key Support | | | | |
+  | Equivalent Code <u>Sequence</u> | (0008,0121) | -/3 | - | |
+  }
+
+  class "Equivalent Code" as ec3a {
+  <#transparent,#transparent>| <i>Basic SCU/SCP Coded Entry with no SCU\n <i>Support and no Matching Key Support |
+  }
+  
+  class "Basic SCU/SCP Coded Entry with no SCU\n Support and no Matching Key Support (8-3b)" as 3b {
+  <#transparent,#transparent>| Code Value | (0008,0100) | -/1C | - | 1C |
+  | Coding Scheme Designator            | (0008,0102) | -/1C | - | 1C |
+  | Coding Scheme Version               | (0008,0103) | -/1C | - | 1C |
+  | Code Meaning                        | (0008,0104) | -/1  | - | 1  |
+  | Long Code Value                     | (0008,0119) | -/1C | - | 1C |
+  | URN Code Value                      | (0008,0120) | -/1C | - | 1C |
+  | Mapping Resource                    | (0008,0105) | -/3  | - | 3  |
+  | Mapping Resource UID                | (0008,0118) | -/3  | - | 3  |
+  | Context Group Version               | (0008,0106) | -/3  | - | 3  |
+  | Context Group Extension Flag        | (0008,010B) | -/3  | - | 3  |
+  | Context Group Local Version         | (0008,0107) | -/3  | - | 3  |
+  | Context Group Extension Creator UID | (0008,010D) | -/3  | - | 3  |
+  }
+
+  class "Enhanced SCU/SCP Coded Entry with no SCU\n Support and no Matching Key Support (8-5a)" as 5a {
+  <#transparent,#transparent>| <i>Basic SCU/SCP Coded Entry with no SCU\n <i>Support and Optional Meaning for SCP | | |
+  | Equivalent Code <u>Sequence</u> | (0008,0121) | -/3 |
+  }
+
+  class "Equivalent Code" as ec5a {
+  <#transparent,#transparent>| <i>Basic SCU/SCP Coded Entry with no SCU\n <i>Support and Optional Meaning for SCP |
+  }
+  
+  class "Basic SCU/SCP Coded Entry with no SCU\n Support and Optional Meaning for SCP (8-5b)" as 5b {
+  <#transparent,#transparent>| Code Value | (0008,0100) | -/1C |
+  | Coding Scheme Designator            | (0008,0102) | -/1C |
+  | Coding Scheme Version               | (0008,0103) | -/1C |
+  | Code Meaning                        | (0008,0104) | -/3  |
+  | Long Code Value                     | (0008,0119) | -/1C |
+  | URN Code Value                      | (0008,0120) | <back:salmon>1C</back>/1C |
+  | Mapping Resource                    | (0008,0105) | -/3  |
+  | Mapping Resource UID                | (0008,0118) | -/3  |
+  | Context Group Version               | (0008,0106) | -/3  |
+  | Context Group Extension Flag        | (0008,010B) | -/3  |
+  | Context Group Local Version         | (0008,0107) | -/3  |
+  | Context Group Extension Creator UID | (0008,010D) | -/3  |
+  }
+
+' =====================
+
+legend top left
+  <#White,#White>|           |= __Legend__ |
+  |<#darkgrey>   | Absent here, present in MPPS SOP Class       |
+  |<#ffff00>     | Moved down here compared to MPPS SOP Class   |
+  |<#00ff00>     | Moved up here compared to MPPS SOP Class     |
+  |<#00ffff>     | Replaced an 'equivalent' in MPPS SOP Class   |
+  |<#salmon>     | Error in specification                       |
+endlegend
+
+' =====================
+
+  mppsa  *-- "1" ppsr
+  mppsa  *-- "1" ppsi
+  mppsa  *-- "1" iar
+  ppsr   *-- "1..*" ssa
+  ppsr   *-- "*" iopiq
+  ppsr   *-- "<color:darkgrey>*" opi2 #line:darkgrey
+  ppsr   *-- "*" rp
+  ppsr   *-- "*" ioai
+  ppsr   *-- "*" iosei
+  ssa    *-- "*" rs
+  ssa    *-- "*" ioan
+  ssa    *-- "*" opi
+  ssa    *-- "*" ofi
+  ssa    *-- "*" rpc
+  ssa    *-- "*" spc
+  rpc    *-- "1" 3a
+  spc    *-- "1" 5a
+  opi2   *-- "<color:darkgrey>*" iopiq #line:darkgrey
+  ppsi   *-- "*" pc
+  ppsi   *-- "<color:darkgrey>*" rfppc #line:darkgrey
+  ppsi   *-- "*" ppsdrc
+  rfppc  *-- "<color:darkgrey>1" 5a #line:darkgrey
+  iar    *-- "*" ppc
+  iar    *-- "*" ps
+  ps     *-- "*" ri
+  ps     *-- "*" rnicsi
+  ri     *-- "<color:darkgrey>*" sd  #line:darkgrey
+  ppsdrc *-- "1" 5a
+  ppc    *-- "1" 5a
+  pc     *-- "1" 5a
+
+  3a     *-- "1" 3b
+  3a     *-- "*" ec3a
+  ec3a   *-- "1" 3b
+  5a     *-- "1" 5b
+  5a     *-- "*" ec5a
+  ec5a   *-- "1" 5b
+
+@enduml

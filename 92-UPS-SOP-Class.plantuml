@@ -1,4 +1,4 @@
-@startuml
+@startuml UPS SOP Class
 <style>
 title {
   HorizontalAlignment center
@@ -11,7 +11,7 @@ hide circle
 left to right direction
 title
   PS3.4, CC.2.5.1.3
-  UPS SOP Class Attributes
+  UPS SOP Class
 end title
 
   class "<b>UPS SOP Class Attributes (CC.2.5-3)" as usca {
