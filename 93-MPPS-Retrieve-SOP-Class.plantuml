@@ -18,7 +18,7 @@ title
   Modality Performed Procedure Step Retrieve SOP Class
 end title
 
-  class "<b>MPPS SOP Class Attributes (F.7.2-1)" as mppsa {
+  class "<b>MPPS Retrieve SOP Class Attributes (F.8.2-1)" as mppsra {
   <#transparent,#transparent>| <b>Attribute name | <b>Tag | <b>Req. Type\n <b>N-GET\n <b>(SCU/SCP) |
   | Specific Character Set | (0008,0005) | 3/1C |
   }
@@ -194,6 +194,30 @@ end title
 
 ' ===============================
 
+  class "Enhanced SCU/SCP Coded Entry Macro with SCU Support,\n Matching Key Support and Mandatory Meaning (8-1a)" as 1a {
+  <#transparent,#transparent>| <i>Basic SCU/SCP Coded Entry Macro with SCU Support,\n <i>Matching Key Support and Mandatory Meaning | | | | |
+  | Equivalent Code <u>Sequence</u> | (0008,0121) | 3/3 | - | |
+  }
+
+  class "Equivalent Code" as ec1a {
+  <#transparent,#transparent>| <i>Basic SCU/SCP Coded Entry with no SCU\n <i>Support and no Matching Key Support |
+  }
+  
+  class "Basic SCU/SCP Coded Entry Macro with SCU Support,\n Matching Key Support and Mandatory Meaning (8-1b)" as 1b {
+  <#transparent,#transparent>| Code Value | (0008,0100) | 1C/1C | - | 1C |
+  | Coding Scheme Designator            | (0008,0102) | 1C/1C | - | 1C |
+  | Coding Scheme Version               | (0008,0103) | 1C/1C | - | 1C |
+  | Code Meaning                        | (0008,0104) | 1/1   | - | 1  |
+  | Long Code Value                     | (0008,0119) | 1C/1C | - | 1C |
+  | URN Code Value                      | (0008,0120) | 1C/1C | - | 1C |
+  | Mapping Resource                    | (0008,0105) | 3/3   | - | 3  |
+  | Mapping Resource UID                | (0008,0118) | 3/3   | - | 3  |
+  | Context Group Version               | (0008,0106) | 3/3   | - | 3  |
+  | Context Group Extension Flag        | (0008,010B) | 3/3   | - | 3  |
+  | Context Group Local Version         | (0008,0107) | 3/3   | - | 3  |
+  | Context Group Extension Creator UID | (0008,010D) | 3/3   | - | 3  |
+  }
+
   class "Enhanced SCU/SCP Coded Entry with no SCU\n Support and no Matching Key Support (8-3a)" as 3a {
   <#transparent,#transparent>| <i>Basic SCU/SCP Coded Entry with no SCU\n <i>Support and no Matching Key Support | | | | |
   | Equivalent Code <u>Sequence</u> | (0008,0121) | -/3 | - | |
@@ -218,7 +242,7 @@ end title
   | Context Group Extension Creator UID | (0008,010D) | -/3  | - | 3  |
   }
 
-  class "Enhanced SCU/SCP Coded Entry with no SCU\n Support and no Matching Key Support (8-5a)" as 5a {
+  class "Enhanced SCU/SCP Coded Entry with no SCU\n Support and Optional Meaning for SCP (8-5a)" as 5a {
   <#transparent,#transparent>| <i>Basic SCU/SCP Coded Entry with no SCU\n <i>Support and Optional Meaning for SCP | | |
   | Equivalent Code <u>Sequence</u> | (0008,0121) | -/3 |
   }
@@ -255,9 +279,9 @@ endlegend
 
 ' =====================
 
-  mppsa  *-- "1" ppsr
-  mppsa  *-- "1" ppsi
-  mppsa  *-- "1" iar
+  mppsra *-- "1" ppsr
+  mppsra *-- "1" ppsi
+  mppsra *-- "1" iar
   ppsr   *-- "1..*" ssa
   ppsr   *-- "*" iopiq
   ppsr   *-- "<color:darkgrey>*" opi2 #line:darkgrey
@@ -276,7 +300,7 @@ endlegend
   ppsi   *-- "*" pc
   ppsi   *-- "<color:darkgrey>*" rfppc #line:darkgrey
   ppsi   *-- "*" ppsdrc
-  rfppc  *-- "<color:darkgrey>1" 5a #line:darkgrey
+  rfppc  *-- "<color:darkgrey>1" 1a #line:darkgrey
   iar    *-- "*" ppc
   iar    *-- "*" ps
   ps     *-- "*" ri
@@ -286,6 +310,9 @@ endlegend
   ppc    *-- "1" 5a
   pc     *-- "1" 5a
 
+  1a     *-- "1" 1b
+  1a     *-- "*" ec1a
+  ec1a   *-- "1" 1b
   3a     *-- "1" 3b
   3a     *-- "*" ec3a
   ec3a   *-- "1" 3b
