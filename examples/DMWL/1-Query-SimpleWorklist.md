@@ -11,7 +11,7 @@ Accept: application/dicom+json
 ```
 
 #### The response returns two scheduled procedure steps, one for head and the other one for the spine
-#### Attributes according to: https://dicom.nema.org/medical/dicom/current/output/html/part04.html#table_CC.2.5-3
+#### Attributes according to: https://dicom.nema.org/medical/dicom/current/output/chtml/part04/sect_K.6.html#table_K.6-1
 #### 00100010: Patient's Name, 0020000D: Study Instance UID, 00400100: Scheduled Procedure Step Sequence 
 ```http
 HTTP/1.1 200 OK
