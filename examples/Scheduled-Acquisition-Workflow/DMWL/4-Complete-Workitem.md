@@ -1,8 +1,8 @@
 ### Example: Complete the workitem by setting the state to COMPLETE (similar to N-SET with setting procedure step state to COMPLETED)
 
 #### Using DICOM tags and application/dicom+json media type:  
-Performed Procedure Step End Date (0040,0250)
-Performed Procedure Step End Time (0040,0251)
+Performed Procedure Step End Date (0040,0250)  
+Performed Procedure Step End Time (0040,0251)  
 Performed Procedure Step Status (0040,0252)  
 
 ```http
