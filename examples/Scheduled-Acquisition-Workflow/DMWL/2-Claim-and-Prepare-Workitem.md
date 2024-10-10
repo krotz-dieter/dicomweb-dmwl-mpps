@@ -14,11 +14,10 @@ Performed Procedure Step Status (0040,0252)
 POST /radiology/modalityperformedprocedure/1.2.12345678.987654 HTTP/1.1
 Host: www.hospital-stmarco
 Content-Type: application/dicom+json
-Accept: application/dicom+json
 …
 {
 …
- "0040,0270": { 
+ "00400270": { 
     "vr": "SQ",
     "Value": [
         {
@@ -42,15 +41,5 @@ Accept: application/dicom+json
 #### The response returns 200 based on the sucess status code.  
 ```http
 HTTP/1.1 200 OK
-Content-Length: 220
-Content-Type: application/dicom+json; charset=utf-8
-...
 
-{
- "00100010": { "vr": "PN", "Value": [{ "Alphabetic": "Doe^Sally" }] },
- "00400253": { "vr": "SH", "Value": ["1.2.12345678.987654"] },
- "00400242": { "vr": "SH", "Value": ["CTSCANNER"] },
-…
-},
-…
 ```
