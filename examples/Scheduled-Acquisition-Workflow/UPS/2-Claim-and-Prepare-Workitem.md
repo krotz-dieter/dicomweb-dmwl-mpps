@@ -1,4 +1,4 @@
-### Example: Notify RIS or PACS that the procedure has started, change the state of procdeure step to in progress
+### Example: Notify RIS or PACS that the procedure has started, change the state of procedure step to in progress
 
 #### Using DICOM tags and application/dicom+json media type:  
 Procedure Step State (0074, 1000)  
