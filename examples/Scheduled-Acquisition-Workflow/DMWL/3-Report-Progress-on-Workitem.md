@@ -2,13 +2,13 @@
 
 #### Using DICOM tags and application/dicom+json media type:  
 Performed Series Sequence (0040,0340) SQ  
--> Performing Physician's Name (0008,1050)
--> Protocol Name (0018,1030) 
--> Series Instance UID (0020,000E) 
--> Series Description (0008,103E)
--> Referenced Image Sequence (0008,1140)
-->-> Referenced SOP Class UID (0008,1150)
-->-> Referenced SOP Instance UID (0008,1155)
+-> Performing Physician's Name (0008,1050)  
+-> Protocol Name (0018,1030)  
+-> Series Instance UID (0020,000E)   
+-> Series Description (0008,103E)  
+-> Referenced Image Sequence (0008,1140)  
+->-> Referenced SOP Class UID (0008,1150)  
+->-> Referenced SOP Instance UID (0008,1155)  
 
 ```http
 PUT /radiology/modalityperformedprocedure/1.2.12345678.987654 HTTP/1.1

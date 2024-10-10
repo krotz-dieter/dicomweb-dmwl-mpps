@@ -5,10 +5,10 @@ Scheduled Step Attributes Sequence (0040,0270) SQ
 -> Study Instance UID (0020,000D)  
 -> Accession Number (0008,0050)  
 -> Scheduled Procedure Step Description (0040,0007)  
--> Requested Procedure ID (0040,1001)
--> Scheduled Procedure Step ID (0040,0009)  
+-> Requested Procedure ID (0040,1001)  
+-> Scheduled Procedure Step ID (0040,0009)    
 Patient's Name (0010,0010)  
-Performed Procedure Step ID (0040,0253)  
+Performed Procedure Step ID (0040,0253)   
 Performed Station Name (0040,0242)  
 Performed Procedure Step Status (0040,0252)  
 
@@ -18,6 +18,11 @@ Host: www.hospital-stmarco
 Content-Type: application/dicom+json
 …
 {
+…
+ "00100010": { "vr": "PN", "Value": [{ "Alphabetic": "Doe^Sally" }] },
+ "00400253": { "vr": "SH", "Value": ["1.2.12345678.987654"] },
+ "00400242": { "vr": "SH", "Value": ["CTSCANNER"] },
+ "00400252": { "vr": "CS", "Value": ["IN PROGRESS"] },
 …
  "00400270": { 
     "vr": "SQ",
@@ -33,11 +38,6 @@ Content-Type: application/dicom+json
         …
     ]
     }
-…
- "00100010": { "vr": "PN", "Value": [{ "Alphabetic": "Doe^Sally" }] },
- "00400253": { "vr": "SH", "Value": ["1.2.12345678.987654"] },
- "00400242": { "vr": "SH", "Value": ["CTSCANNER"] },
- "00400252": { "vr": "CS", "Value": ["IN PROGRESS"] },
 …
 }
 …
