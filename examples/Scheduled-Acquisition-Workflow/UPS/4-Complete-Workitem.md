@@ -1,7 +1,7 @@
 ### Example: Update workitem with content produced in the acquisition
 
 #### Using DICOM tags and application/dicom+json media type:  
-Procedure Step State (0074, 1000)  
+Procedure Step State (0074, 1000)   
 Transaction UID (0008,1195)  
 
 ```http

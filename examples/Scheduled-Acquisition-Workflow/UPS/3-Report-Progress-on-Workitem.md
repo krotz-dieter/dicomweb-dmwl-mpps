@@ -1,13 +1,13 @@
 ### Example: Update workitem with content produced in the acquisition, maps to an update of the workitem with updated information containing the series and image produced
 
 #### Using DICOM tags and application/dicom+json media type:
-Requested SOP Instance UID (0000,1001)
-Unified Procedure Step Performed Procedure Sequence (0074,1216) SQ
--> Type of Instances (0040,E020)
--> Series Instance UID (0020,000E)
--> Referenced SOP Sequence (0008,1199) SQ
-->-> Referenced SOP Class UID (0008,1150)
-->-> Referenced SOP Instance UID (0008,1155)
+Requested SOP Instance UID (0000,1001)  
+Unified Procedure Step Performed Procedure Sequence (0074,1216) SQ  
+-> Type of Instances (0040,E020)  
+-> Series Instance UID (0020,000E)  
+-> Referenced SOP Sequence (0008,1199) SQ  
+->-> Referenced SOP Class UID (0008,1150)  
+->-> Referenced SOP Instance UID (0008,1155)  
 
 ```http
 # update workitem state

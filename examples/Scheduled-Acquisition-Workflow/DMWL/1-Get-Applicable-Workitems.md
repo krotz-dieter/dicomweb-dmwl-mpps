@@ -15,7 +15,7 @@ Patient's Name (0010,0010)
 Study Instance UID (0020,000D)  
 Requested Procedure ID (0040,1001)  
 Scheduled Procedure Step Sequence (0040,0100) SQ   
--> Scheduled Procedure Step Description (0040,0007) 
+-> Scheduled Procedure Step Description (0040,0007)  
 -> Scheduled Station Name (0040,0010)  
 -> Scheduled Procedure Step Start Date (0040,0002)   
 -> Scheduled Procedure Step ID (0040,0009)  
