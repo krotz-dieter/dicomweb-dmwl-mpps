@@ -1,4 +1,4 @@
-### Example: Notify RIS or PACS that the procedure has started, create the Modality Performed Procedure Step
+### Example: Notify RIS or PACS that the procedure has started, create the Modality Performed Procedure Step (similar to N-CREATE of MPPS)
 
 #### Using DICOM tags and application/dicom+json media type:
 #### Scheduled Step Attributes Sequence (0040,0270) SQ
@@ -13,6 +13,7 @@
 ```http
 POST /radiology/modalityperformedprocedure/1.2.12345678.987654 HTTP/1.1
 Host: www.hospital-stmarco
+Content-Type: application/dicom+json
 Accept: application/dicom+json
 …
 {
@@ -34,7 +35,7 @@ Accept: application/dicom+json
  "00400242": { "vr": "SH", "Value": ["CTSCANNER"] },
  "00400252": { "vr": "CS", "Value": ["IN PROGRESS"] },
 …
-},
+}
 …
 ```
 
