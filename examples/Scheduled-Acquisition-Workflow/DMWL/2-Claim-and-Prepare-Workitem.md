@@ -4,7 +4,9 @@
 Scheduled Step Attributes Sequence (0040,0270) SQ  
 -> Study Instance UID (0020,000D)  
 -> Accession Number (0008,0050)  
--> Scheduled Procedure Step Description (0040,0007)    
+-> Scheduled Procedure Step Description (0040,0007)  
+-> Requested Procedure ID (0040,1001)
+-> Scheduled Procedure Step ID (0040,0009)  
 Patient's Name (0010,0010)  
 Performed Procedure Step ID (0040,0253)  
 Performed Station Name (0040,0242)  
@@ -23,7 +25,10 @@ Content-Type: application/dicom+json
         {
             "0020000D": { "vr": "UI", "Value": ["1.3.12.2.1107.5.99.3.30000008090412501082300000004"] },
             "00080050": { "vr": "SH", "Value": ["1"] },
-            "00400007": { "vr": "LO", "Value": ["Specials^04a_HeadCTA"] },            
+            "00400007": { "vr": "LO", "Value": ["Specials^04a_HeadCTA"] },  
+            "00401001": { "vr": "SH", "Value": ["P-ID-22"] },
+            "00400009": { "vr": "SH", "Value": ["PS-ID-23"] },
+            …          
         },
         …
     ]

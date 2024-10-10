@@ -34,7 +34,7 @@ Content-Type: application/dicom+json; charset=utf-8
 …
  "00100010": { "vr": "PN", "Value": [{ "Alphabetic": "Doe^Sally" }] },
  "0020000D": { "vr": "UI", "Value": ["1.3.12.2.1107.5.99.3.30000008090412501082300000004"] },
- "0020000D": { "vr": "SH", "Value": ["P-ID-22"] },
+ "00401001": { "vr": "SH", "Value": ["P-ID-22"] },
 …
  "00400100": { 
     "vr": "SQ",
