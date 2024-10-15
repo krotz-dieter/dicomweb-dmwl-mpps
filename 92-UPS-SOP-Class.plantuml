@@ -8,14 +8,14 @@ title {
 
 hide empty members
 hide circle
-left to right direction
+' left to right direction
 title
   PS3.4, CC.2.5.1.3
   UPS SOP Class
 end title
 
   class "<b>UPS SOP Class Attributes (CC.2.5-3)" as usca {
-  <#transparent,#transparent>| <b>Attribute name | <b>Tag | <b>Req. Type\n <b>N-CREATE\n <b>(SCU/SCP) | <b>Req. Type\n <b>N-SET\n <b>(SCU/SCP) | <b>Final State | <b>Req. Type\n <b>N-GET\n <b>(SCU/SCP) | Matching\n Key Type | Return\n Key Type |
+  <#transparent,#transparent>| <b>Attribute name | <b>Tag | <b>Req. Type\n <b>N-CREATE\n <b>(SCU/SCP) | <b>Req. Type\n <b>N-SET\n <b>(SCU/SCP) | <b>Final State | <b>Req. Type\n <b>N-GET\n <b>(SCU/SCP) | <b>Matching\n <b>Key Type | <b>Return\n <b>Key Type |
   | Transaction UID | (0008,1195) | 2/2 | CC.2.6.3 | O | NA | - | - |
   }
 
@@ -23,28 +23,61 @@ end title
   <#transparent,#transparent>| Specific Character Set | (0008,0005) | 1C/1C | 1C/1C | RC | 3/1 | - | 1C |
   | SOP Class UID    | (0008,0016) | CC.2.5.1.3.1 | NA | R | NA | O | 1 |
   | SOP Instance UID | (0008,0018) | NA           | NA | R | NA | U | 1 |
-  | <i>All other Attributes of the\n <i>SOP Common Module | | 3/3 | 3/3 | O | 3/3 | - | - |
+  | <i>All other Attributes of the SOP Common Module | | 3/3 | 3/3 | O | 3/3 | - | - |
+  | – Instance Creation Date                               | (0008,0012) |
+  | – Instance Creation Time                               | (0008,0013) |
+  | – Instance Coercion DateTime                           | (0008,0015) |
+  | – Instance Creator UID                                 | (0008,0014) |
+  | – Related General SOP Class UID                        | (0008,001A) |
+  | – Original Specialized SOP Class UID                   | (0008,001B) |
+  | – Synthetic Data                                       | (0008,001C) |
+  | – Coding Scheme Identification <u>Sequence</u>         | (0008,0110) |
+  | – Context Group Identification <u>Sequence</u>         | (0008,0123) |
+  | – Mapping Resource Identification <u>Sequence</u>      | (0008,0124) |
+  | – Timezone Offset From UTC                             | (0008,0201) |
+  | – Contributing Equipment <u>Sequence</u>               | (0018,A001) |
+  | – Instance Number                                      | (0020,0013) |
+  | – SOP Instance Status                                  | (0100,0410) |
+  | – SOP Authorization DateTime                           | (0100,0420) |
+  | – SOP Authorization Comment                            | (0100,0424) |
+  | – Authorization Equipment Certification Number         | (0100,0426) |
+  | – MAC Parameters <u>Sequence</u>                       | (4FFE,0001) |
+  | – Digital Signatures <u>Sequence</u>                   | (FFFA,FFFA) |
+  | – Encrypted Attributes <u>Sequence</u>                 | (0400,0500) |
+  | – Original Attributes <u>Sequence</u>                  | (0400,0561) |
+  | – HL7 Structured Document Reference <u>Sequence</u>    | (0040,A390) |
+  | – Longitudinal Temporal Information Modified           | (0028,0303) |
+  | – Query/Retrieve View                                  | (0008,0053) |
+  | – Conversion Source Attributes <u>Sequence</u>         | (0020,9172) |
+  | – Content Qualification                                | (0018,9004) |
+  | – Private Data Element Characteristics <u>Sequence</u> | (0008,0300) |
+  | – Instance Origin Status                               | (0400,0600) |
+  <#PowderBlue>| – Barcode Value                                        | (2200,0005) |
+  <#PowderBlue>| – Referenced Defined Protocol <u>Sequence</u>          | (0018,990C) |
+  <#PowderBlue>| – Referenced Performed Protocol <u>Sequence</u>        | (0018,990D) |
   }
 
   class "<b>Unified Procedure Step Scheduled Procedure Information Module" as upsspim {
   <#transparent,#transparent>| Scheduled Procedure Step Priority | (0074,1200) | 1/1 | 3/1 | R | 3/1 | R | 1 |
-  | Scheduled Procedure Step Modification DateTime             | (0040,4010) | -/1   | =/1 | R | 3/1 | O | 3 |
-  | Procedure Step Label                                       | (0074,1204) | 1/1   | 3/1 | O | 3/1 | R | 1 |
+  | Scheduled Procedure Step Modification DateTime             | (0040,4010) | -/1   | -/1 | R | 3/1 | O | 3 |
+  <#Plum>| Procedure Step Label                                       | (0074,1204) | 1/1   | 3/1 | O | 3/1 | R | 1 |
   | Worklist Label                                             | (0074,1202) | 2/1   | 3/1 | O | 3/1 | R | 1 |
   | Scheduled Processing Parameters <u>Sequence</u>            | (0074,1210) | 2/2   | 3/2 | O | 3/2 | - | 2 |
-  | Scheduled Station Name Code <u>Sequence</u>                | (0074,1210) | 2/2   | 3/2 | O | 3/2 | R | 2 |
-  | Scheduled Station Geographic Location Code <u>Sequence</u> | (0040,4027) | 2/2   | 3/2 | O | 3/2 | R | 2 |
+  <#Plum>| Scheduled Station Name Code <u>Sequence</u>                | (0040,4025) | 2/2   | 3/2 | O | 3/2 | R | 2 |
+  <#Plum>| Scheduled Station Geographic Location Code <u>Sequence</u> | (0040,4027) | 2/2   | 3/2 | O | 3/2 | R | 2 |
   | Scheduled Human Performers <u>Sequence</u>                 | (0040,4034) | 2C/2C | 3/2 | O | 3/2 | R | 2 |
-  | Scheduled Procedure Step Start DateTime                    | (0040,4005) | 1/1   | 3/1 | R | 3/1 | R | 1 |
+  <#Plum>| Scheduled Procedure Step Start DateTime                    | (0040,4005) | 1/1   | 3/1 | R | 3/1 | R | 1 |
   | Expected Completion DateTime                               | (0040,4011) | 3/1   | 3/1 | O | 3/1 | R | 3 |
   | Scheduled Procedure Step Expiration DateTime               | (0040,4008) | 3/3   | 3/3 | O | 3/3 | O | 3 |
-  | Scheduled Workitem Code <u>Sequence</u>                    | (0040,4018) | 2/2   | 3/1 | O | 3/1 | R | 2 |
-  | Comments on the Scheduled Procedure Step                   | (0040,0400) | 2/2   | 3/1 | O | 3/1 | O | 3 |
+  <#Plum>| Scheduled Workitem Code <u>Sequence</u>                    | (0040,4018) | 2/2   | 3/1 | O | 3/1 | R | 2 |
+  <#PowderBlue>| Comments on the Scheduled Procedure Step                   | (0040,0400) | 2/2   | 3/1 | O | 3/1 | O | 3 |
   | Input Readiness State                                      | (0040,4041) | 1/1   | 3/1 | R | 3/1 | R | 1 |
   | Input Information <u>Sequence</u>                          | (0040,4021) | 2/2   | 3/2 | O | 3/2 | O | 2 |
-  | Study Instance UID                                         | (0020,000D) | 1C/2  | 3/2 | O | 3/2 | O | 2 |
+  <#PowderBlue>| Study Instance UID                                         | (0020,000D) | 1C/2  | 3/2 | O | 3/2 | O | 2 |
   | Output Destination <u>Sequence</u>                         | (0040,4070) | 3/3   | 3/3 | O | 3/3 | O | 3 |
-  | <i>All other Attributes of the Unified Procedure\n <i>Step Scheduled Procedure Information Module | | 3/3 | 3/3 | O | 3/3 | - | - |
+  | <i>All other Attributes of the Unified Procedure\n <i>Step Scheduled Procedure Information Module\n <i>[See PS3.3, Table C.30.2-1. Unified Procedure Step\n <i>Scheduled Procedure Information Module Attributes] | | 3/3 | 3/3 | O | 3/3 | - | - |
+  <#Plum>| – Scheduled Station Class Code <u>Sequence</u> | (0040,4026) |
+  <#PowderBlue>| – Treatment Session UID                        | (300A,0700) |
   }
 
   class "Scheduled Processing Parameters" as spp {
@@ -61,7 +94,7 @@ end title
 
   class "Scheduled Human Performer" as shp {
   <#transparent,#transparent>| Human Performer Code <u>Sequence</u> | (0040,4009) | 1/1 | 1/1 | O | -/1 | R | 1 |
-  | Human Performer's Name         | (0040,4037) | 1/1 | 1/1 | O | -/1 | O | 3 |
+  <#Plum>| Human Performer's Name         | (0040,4037) | 1/1 | 1/1 | O | -/1 | O | 3 |
   | Human Performer's Organization | (0040,4036) | 1/1 | 1/1 | O | -/1 | O | 3 |
   }
 
@@ -78,23 +111,29 @@ end title
   }
 
   class "<b>Unified Procedure Step Relationship Module" as upsrm {
-  <#transparent,#transparent>| Patient's Name | (0010,0010) | 2/2  | NA  | O | 3/2 | R | 2 |
-  | Patient ID                                | (0010,0020) | 1C/2  | NA  | O | 3/2 | R | 2 |
-  | <i>Issuer of Patient ID                   |             |       |     |   |     |   |   |
-  | Other Patient IDs <u>Sequence</u>         | (0010,1002) | 2/2   | 3/3 | O | 3/2 | O | 2 |
-  | Patient's Birth Date                      | (0010,0030) | 2/2   | NA  | O | 3/2 | R | 2 |
-  | Patient's Sex                             | (0010,0040) | 2/2   | NA  | O | 3/2 | R | 2 |
+  <#PowderBlue,#transparent>| Patient's Name | (0010,0010) | 2/2  | NA  | O | 3/2 | R | 2 |
+  <#PowderBlue>| Patient ID                                | (0010,0020) | 1C/2  | NA  | O | 3/2 | R | 2 |
+  <#PowderBlue>| <i>Issuer of Patient ID                   |             |       |     |   |     |   |   |
+  <#PowderBlue>| Other Patient IDs <u>Sequence</u>         | (0010,1002) | 2/2   | 3/3 | O | 3/2 | O | 2 |
+  <#PowderBlue>| Patient's Birth Date                      | (0010,0030) | 2/2   | NA  | O | 3/2 | R | 2 |
+  <#PowderBlue>| Patient's Sex                             | (0010,0040) | 2/2   | NA  | O | 3/2 | R | 2 |
   | Referenced Patient Photo <u>Sequence</u>  | (0010,1100) | 3/3   | 3/3 | O | 3/3 | - | 3 |
-  | Admision ID                               | (0038,0010) | 2/2   | NA  | O | 3/2 | R | 2 |
-  | Issuer of Admission ID <u>Sequence</u>    | (0038,0014) | 2/2   | NA  | O | 3/2 | R | 2 |
+  <#PowderBlue>| Admission ID                              | (0038,0010) | 2/2   | NA  | O | 3/2 | R | 2 |
+  <#PowderBlue>| Issuer of Admission ID <u>Sequence</u>    | (0038,0014) | 2/2   | NA  | O | 3/2 | R | 2 |
   | Admitting Diagnoses Description           | (0008,1080) | 2/2   | NA  | O | 3/2 | O | 2 |
   | Admitting Diagnoses Code <u>Sequence</u>  | (0008,1084) | 2/2   | NA  | O | 3/2 | O | 2 |
   | Referenced Request <u>Sequence</u>        | (0040,A370) | 2/2   | NA  | O | 3/2 | R | 2 |
   | Replaced Procedure Step <u>Sequence</u>   | (0074,1224) | 1C/1C | NA  | O | 3/2 | R | 3 |
-  | <i>All other Attributes of the Unified Procedure\n <i>Step Relationship Module | | 3/3 | 3/3 | O | 3/3 | - | - |
+  | <i>All other Attributes of the Unified Procedure\n <i>Step Relationship Module\n <i>[See PS3.3, Table C.30.4-1. Unified Procedure Step\n <i>Relationship Module Attributes] | | 3/3 | 3/3 | O | 3/3 | - | - |
+  | – Type of Patient ID | (0010,0022) |
+  | – Patient's Birth Date in Alternative Calendar | (0010,0033) |
+  | – Patient's Death Date in Alternative Calendar | (0010,0034) |
+  | – Patient's Alternative Calendar               | (0010,0035) |
+  <#PowderBlue>| – Reason for Visit                             | (0032,1066) |
+  | – Reason for Visit Code <u>Sequence</u>        | (0032,1067) |
   }
 
-  class "Other Patient ID" as opi2 {
+  class "Other Patient ID" as opi2 #PowderBlue {
   <#transparent,#transparent>| Patient ID | (0010,0020) | 1/1 | 1/1 | O | -/1 | O | 1 |
   | <i>Issuer of Patient ID |             |     |     |   |     |   |   |
   | Type of Patient ID      | (0010,0022) | 3/3 | 3/3 | O | 3/3 | O | 3 |
@@ -114,27 +153,27 @@ end title
 
   class "Referenced Request" as rr {
   <#transparent,#transparent>| Study Instance UID       | (0020,000D) | 1/1 | NA  | O | -/1 | O | 1  |
-  | Accession Number                                    | (0008,0050) | 2/2 | NA  | O | -/2 | R | 2  |
-  | Issuer of Accession Number <u>Sequence</u>          | (0008,0051) | 2/2 | NA  | O | -/2 | R | 2  |
-  | Placer Order Number/Imaging Service Request         | (0040,2016) | 3/1 | NA  | O | -/1 | O | 1C |
-  | Order Placer Identifier <u>Sequence</u>             | (0040,0026) | 2/2 | NA  | O | -/2 | O | 2  |
-  | Filler Order Number/Imaging Service Request         | (0040,2017) | 3/1 | NA  | O | -/1 | O | 1C |
-  | Order Filler Identifier <u>Sequence</u>             | (0040,0027) | 2/2 | NA  | O | -/2 | O | 2  |
-  | Requested Procedure ID                              | (0040,1001) | 2/2 | NA  | O | -/2 | R | 2  |
-  | Requested Procedure Description                     | (0032,1060) | 2/2 | NA  | O | -/2 | O | 2  |
-  | Requested Procedure Code <u>Sequence</u>            | (0032,1064) | 2/2 | NA  | O | -/2 | O | 2  |
-  | Reason for the Requested Procedure                  | (0040,1002) | 3/3 | 3/3 | O | -/3 | O | 3  |
-  | Reason for Requested Procedure Code <u>Sequence</u> | (0040,100A) | 3/3 | 3/3 | O | -/3 | O | 3  |
-  | Requested Procedure Comments                        | (0040,1400) | 3/3 | 3/3 | O | -/3 | O | 1C |
-  | Confidentiality Code                                | (0040,1008) | 3/3 | 3/3 | O | -/3 | O | 3  |
-  | Names of Intended Recipients of Results             | (0040,1010) | 3/3 | 3/3 | O | -/3 | O | 3  |
-  | Imaging Service Request Comments                    | (0040,2400) | 3/3 | 3/3 | O | -/3 | O | 3  |
-  | Requesting Physician                                | (0032,1032) | 3/3 | 3/3 | O | -/3 | O | 3  |
-  | Requesting Service                                  | (0032,1033) | 3/3 | 3/1 | O | -/3 | R | 3  |
-  | Requesting Service Code <u>Sequence</u>             | (0032,1034) | 3/3 | 3/3 | O | -/3 | O | 3  |
-  | Issue Date of Imaging Service Request               | (0040,2004) | 3/3 | 3/3 | O | -/3 | O | 3  |
-  | Issue Time of Imaging Service Request               | (0040,2005) | 3/3 | 3/3 | O | -/3 | O | 3  |
-  | Referring Physician's Name                          | (0008,0090) | 3/3 | 3/3 | O | -/3 | O | 3  |
+  <#PowderBlue>| Accession Number                                    | (0008,0050) | 2/2 | NA  | O | -/2 | R | 2  |
+  <#PowderBlue>| Issuer of Accession Number <u>Sequence</u>          | (0008,0051) | 2/2 | NA  | O | -/2 | R | 2  |
+  <#PowderBlue>| Placer Order Number/Imaging Service Request         | (0040,2016) | 3/1 | NA  | O | -/1 | O | 1C |
+  <#PowderBlue>| Order Placer Identifier <u>Sequence</u>             | (0040,0026) | 2/2 | NA  | O | -/2 | O | 2  |
+  <#PowderBlue>| Filler Order Number/Imaging Service Request         | (0040,2017) | 3/1 | NA  | O | -/1 | O | 1C |
+  <#PowderBlue>| Order Filler Identifier <u>Sequence</u>             | (0040,0027) | 2/2 | NA  | O | -/2 | O | 2  |
+  <#PowderBlue>| Requested Procedure ID                              | (0040,1001) | 2/2 | NA  | O | -/2 | R | 2  |
+  <#PowderBlue>| Requested Procedure Description                     | (0032,1060) | 2/2 | NA  | O | -/2 | O | 2  |
+  <#PowderBlue>| Requested Procedure Code <u>Sequence</u>            | (0032,1064) | 2/2 | NA  | O | -/2 | O | 2  |
+  <#PowderBlue>| Reason for the Requested Procedure                  | (0040,1002) | 3/3 | 3/3 | O | -/3 | O | 3  |
+  <#PowderBlue>| Reason for Requested Procedure Code <u>Sequence</u> | (0040,100A) | 3/3 | 3/3 | O | -/3 | O | 3  |
+  <#PowderBlue>| Requested Procedure Comments                        | (0040,1400) | 3/3 | 3/3 | O | -/3 | O | 1C |
+  <#PowderBlue>| Confidentiality Code                                | (0040,1008) | 3/3 | 3/3 | O | -/3 | O | 3  |
+  <#PowderBlue>| Names of Intended Recipients of Results             | (0040,1010) | 3/3 | 3/3 | O | -/3 | O | 3  |
+  <#PowderBlue>| Imaging Service Request Comments                    | (0040,2400) | 3/3 | 3/3 | O | -/3 | O | 3  |
+  <#PowderBlue>| Requesting Physician                                | (0032,1032) | 3/3 | 3/3 | O | -/3 | O | 3  |
+  <#PowderBlue>| Requesting Service                                  | (0032,1033) | 3/3 | 3/1 | O | -/3 | R | 3  |
+  <#PowderBlue>| Requesting Service Code <u>Sequence</u>             | (0032,1034) | 3/3 | 3/3 | O | -/3 | O | 3  |
+  <#PowderBlue>| Issue Date of Imaging Service Request               | (0040,2004) | 3/3 | 3/3 | O | -/3 | O | 3  |
+  <#PowderBlue>| Issue Time of Imaging Service Request               | (0040,2005) | 3/3 | 3/3 | O | -/3 | O | 3  |
+  <#PowderBlue>| Referring Physician's Name                          | (0008,0090) | 3/3 | 3/3 | O | -/3 | O | 3  |
   }
 
   class "Issuer of Accession Number" as ioan {
@@ -165,27 +204,103 @@ end title
   <#transparent,#transparent>| <i>SOP Instance Reference |
   }
 
-  class "<b>Patient Demographic Module" as pdm {
-  <#transparent,#transparent>| <i>All Attributes of the\n <i>Patient Demographic Module | | 3/3 | 3/3 | O | 3/3 | - | - |
+  class "<b>Patient Demographic Module" as pdm #PowderBlue {
+  <#transparent,#transparent>| <i>All Attributes of the Patient Demographic Module | | 3/3 | 3/3 | O | 3/3 | - | - |
+  | – Patient's Birth Date                                   | (0010,0030) | | | | | <b><color:DarkCyan>O | <b><color:DarkCyan>2 |
+  | – Patient's Sex                                          | (0010,0040) | | | | | <b><color:DarkCyan>O | <b><color:DarkCyan>2 |
+  | – Patient's Primary Language Code <u>Sequence</u>        | (0010,0101) | | | | | <b><color:DarkCyan>O | <b><color:DarkCyan>3 |
+  | – Patient's Weight                                       | (0010,1030) | | | | | <b><color:DarkCyan>O | <b><color:DarkCyan>2 |
+  | – Patient's Size                                         | (0010,1020) | | | | | <b><color:DarkCyan>O | <b><color:DarkCyan>3 |
+  | – Confidentiality Constraint on Patient Data Description | (0040,3001) | | | | | <b><color:DarkCyan>O | <b><color:DarkCyan>2 |
+  | – Patient's Age                                 | (0010,1010) | | | | | <color:DarkCyan>O | <color:DarkCyan>3 |
+  | – Occupation                                    | (0010,2180) | | | | | <color:DarkCyan>O | <color:DarkCyan>3 |
+  | – Patient's Birth Time                          | (0010,0032) | | | | | <color:DarkCyan>O | <color:DarkCyan>3 |
+  | – Quality Control Subject                       | (0010,0200) | | | | | <color:DarkCyan>O | <color:DarkCyan>3 |
+  | – Patient's Insurance Plan Code <u>Sequence</u> | (0010,0050) | | | | | <color:DarkCyan>O | <color:DarkCyan>3 |
+  | – Patient's Size Code <u>Sequence</u>           | (0010,1021) | | | | | <color:DarkCyan>O | <color:DarkCyan>3 |
+  | – Patient's Address                             | (0010,1040) | | | | | <color:DarkCyan>O | <color:DarkCyan>3 |
+  | – Military Rank                                 | (0010,1080) | | | | | <color:DarkCyan>O | <color:DarkCyan>3 |
+  | – Branch of Service                             | (0010,1081) | | | | | <color:DarkCyan>O | <color:DarkCyan>3 |
+  | – Country of Residence                          | (0010,2150) | | | | | <color:DarkCyan>O | <color:DarkCyan>3 |
+  | – Region of Residence                           | (0010,2152) | | | | | <color:DarkCyan>O | <color:DarkCyan>3 |
+  | – Patient's Telephone Numbers                   | (0010,2154) | | | | | <color:DarkCyan>O | <color:DarkCyan>3 |
+  | – Patient's Telecom Information                 | (0010,2155) | | | | | <color:DarkCyan>O | <color:DarkCyan>3 |
+  | – Ethnic Group                                  | (0010,2160) | | | | | <color:DarkCyan>O | <color:DarkCyan>3 |
+  | – Ethnic Group Code <u>Sequence</u>             | (0010,2161) | | | | | <color:DarkCyan>O | <color:DarkCyan>3 |
+  | – Patient's Religious Preference                | (0010,21F0) | | | | | <color:DarkCyan>O | <color:DarkCyan>3 |
+  | – Patient Comments                              | (0010,4000) | | | | | <color:DarkCyan>O | <color:DarkCyan>3 |
+  | – Responsible Person                            | (0010,2297) | | | | | <color:DarkCyan>O | <color:DarkCyan>3 |
+  | – Responsible Person Role                       | (0010,2298) | | | | | <color:DarkCyan>O | <color:DarkCyan>3 |
+  | – Responsible Organization                      | (0010,2299) | | | | | <color:DarkCyan>O | <color:DarkCyan>3 |
+  | – Patient Species Description                   | (0010,2201) | | | | | <color:DarkCyan>O | <color:DarkCyan>3 |
+  | – Patient Species Code <u>Sequence</u>          | (0010,2202) | | | | | <color:DarkCyan>O | <color:DarkCyan>3 |
+  | – Patient Breed Description                     | (0010,2292) | | | | | <color:DarkCyan>O | <color:DarkCyan>3 |
+  | – Patient Breed Code <u>Sequence</u)            | (0010,2293) | | | | | <color:DarkCyan>O | <color:DarkCyan>3 |
+  | – Breed Registration <u>Sequence</u>            | (0010,2294) | | | | | <color:DarkCyan>O | <color:DarkCyan>3 |
+  | – Strain Description                            | (0010,0212) | | | | | <color:DarkCyan>O | <color:DarkCyan>3 |
+  | – Strain Nomenclature                           | (0010,0213) | | | | | <color:DarkCyan>O | <color:DarkCyan>3 |
+  | – Strain Code <u>Sequence</u>                   | (0010,0219) | | | | | <color:DarkCyan>O | <color:DarkCyan>3 |
+  | – Strain Additional Information                 | (0010,0218) | | | | | <color:DarkCyan>O | <color:DarkCyan>3 |
+  | – Strain Stock <u>Sequence</u>                  | (0010,0216) | | | | | <color:DarkCyan>O | <color:DarkCyan>3 |
+  | – Genetic Modifications Sequence                | (0010,0221) | | | | | <color:DarkCyan>O | <color:DarkCyan>3 |
   }
 
-  class "<b>Patient Medical Module" as pmm {
-  <#transparent,#transparent>| Medical Alerts | (0010,2000) | 3/2 | 3/2 | O | 3/2 | O | 2C |
-  | Pregnancy Status | (0010,21C0) | 3/2 | 3/2 | O | 3/2 | O | 2C |
-  | Special Needs    | (0038,0050) | 3/2 | 3/2 | O | 3/2 | O | 2C |
-  | <i>All other Attributes of the\n <i>Patient Medical Module | | 3/3 | 3/3 | O | 3/3 | - | - |
+  class "<b>Patient Medical Module" as pmm #PowderBlue {
+  <#transparent,#transparent>| Medical Alerts | (0010,2000) | 3/2 | 3/2 | O | 3/2 | <b>O | <b>2<color:DarkCyan>C |
+  | Pregnancy Status | (0010,21C0) | 3/2 | 3/2 | O | 3/2 | <b>O | <b>2<color:DarkCyan>C |
+  | Special Needs    | (0038,0050) | 3/2 | 3/2 | O | 3/2 | <b>O | <b>2<color:DarkCyan>C |
+  | <i>All other Attributes of the Patient Medical Module | | 3/3 | 3/3 | O | 3/3 | O | 3 |
+  | – Patient State                                        | (0038,0500) | | | | | <b><color:DarkCyan>O | <b><color:DarkCyan>2 |
+  | – Allergies                                            | (0010,2110) | | | | | <b><color:DarkCyan>O | <b><color:DarkCyan>2 |
+  | – Pertinent Documents <u>Sequence</u>                  | (0038,0100) | | | | | <b><color:DarkCyan>O | <b><color:DarkCyan>3 |
+  | – Smoking Status                                       | (0010,21A0) | | | | | <color:DarkCyan>O | <color:DarkCyan>3 |
+  | – Additional Patient History                           | (0010,21B0) | | | | | <color:DarkCyan>O | <color:DarkCyan>3 |
+  | – Last Menstrual Date                                  | (0010,21D0) | | | | | <color:DarkCyan>O | <color:DarkCyan>3 |
+  | – Patient's Sex Neutered                               | (0010,2203) | | | | | <color:DarkCyan>O | <color:DarkCyan>3 |
+  | – Patient's Body Mass Index                            | (0010,1022) | | | | | <color:DarkCyan>O | <color:DarkCyan>3 |
+  | – Measured AP Dimension                                | (0010,1023) | | | | | <color:DarkCyan>O | <color:DarkCyan>3 |
+  | – Measured Lateral Dimension                           | (0010,1024) | | | | | <color:DarkCyan>O | <color:DarkCyan>3 |
+  | – Special Needs                                        | (0038,0050) | | | | | <color:DarkCyan>O | <color:DarkCyan>3 |
+  | – Pertinent Resources <u>Sequence</u>                  | (0038,0101) | | | | | <color:DarkCyan>O | <color:DarkCyan>3 |
+  | – Patient Clinical Trial Participation <u>Sequence</u> | (0038,0502) | | | | | <color:DarkCyan>O | <color:DarkCyan>3 |
   }
 
-  class "<b>Visit Identification Module" as vim {
-  <#transparent,#transparent>| <i>All Attributes of the\n <i>Visit Identification Module | | 3/3 | 3/3 | O | 3/3 | - | - |
+  class "<b>Visit Identification Module" as vim #PowderBlue {
+  <#transparent,#transparent>| <i>All Attributes of the Visit Identification Module | | 3/3 | 3/3 | O | 3/3 | - | - |
+  | – Admission ID                    | (0038,0010) | | | | | <b><color:DarkCyan>O | <b><color:DarkCyan>2 |
+  | – Issuer of Admission ID Sequence | (0038,0014) | | | | | <b><color:DarkCyan>O | <b><color:DarkCyan>3 |
+  | – Institution Name                                   | (0008,0080) | | | | | <color:DarkCyan>O | <color:DarkCyan>3 |
+  | – Institution Address                                | (0008,0081) | | | | | <color:DarkCyan>O | <color:DarkCyan>3 |
+  | – Institution Code <u>Sequence</u>                   | (0008,0082) | | | | | <color:DarkCyan>O | <color:DarkCyan>3 |
+  | – Institutional Department Name                      | (0008,1040) | | | | | <color:DarkCyan>O | <color:DarkCyan>3 |
+  | – Institutional Department Type Code <u>Sequence</u> | (0008,1041) | | | | | <color:DarkCyan>O | <color:DarkCyan>3 |
+  | – Reason for Visit                                   | (0032,1066) | | | | | <color:DarkCyan>O | <color:DarkCyan>3 |
+  | – Reason for Visit Code <u>Sequence</u>              | (0032,1067) | | | | | <color:DarkCyan>O | <color:DarkCyan>3 |
+  | – Service Episode ID                                 | (0038,0060) | | | | | <color:DarkCyan>O | <color:DarkCyan>3 |
+  | – Issuer of Service Episode ID <u>Sequence</u>       | (0038,0064) | | | | | <color:DarkCyan>O | <color:DarkCyan>3 |
+  | – Service Episode Description                        | (0038,0062) | | | | | <color:DarkCyan>O | <color:DarkCyan>3 |
   }
 
-  class "<b>Visit Status Module" as vsm {
-  <#transparent,#transparent>| <i>All Attributes of the\n <i>Visit Status Module | | 3/3 | 3/3 | O | 3/3 | - | - |
+  class "<b>Visit Status Module" as vsm #PowderBlue {
+  <#transparent,#transparent>| <i>All Attributes of the Visit Status Module | | 3/3 | 3/3 | O | 3/3 | - | - |
+  | – Visit Status ID                 | (0038,0008) | | | | | <color:DarkCyan>O | <color:DarkCyan>3 |
+  | – Patient's Institution Residence | (0038,0400) | | | | | <color:DarkCyan>O | <color:DarkCyan>3 |
+  | – Visit Comments                  | (0038,4000) | | | | | <color:DarkCyan>O | <color:DarkCyan>3 |
   }
 
-  class "<b>Visit Admission Module" as vam {
-  <#transparent,#transparent>| <i>All Attributes of the\n <i>Visit Admission Module | | 3/3 | 3/3 | O | 3/3 | - | - |
+  class "<b>Visit Admission Module" as vam #PowderBlue {
+  <#transparent,#transparent>| <i>All Attributes of the Visit Admission Module | | 3/3 | 3/3 | O | 3/3 | - | - |
+  | – Referring Physician's Name                          | (0008,0090) | | | | | <color:DarkCyan>O | <color:DarkCyan>3 |
+  | – Referring Physician's Address                       | (0008,0092) | | | | | <color:DarkCyan>O | <color:DarkCyan>3 |
+  | – Referring Physician's Telephone Numbers             | (0008,0094) | | | | | <color:DarkCyan>O | <color:DarkCyan>3 |
+  | – Referring Physician Identification <u>Sequence</u>  | (0008,0096) | | | | | <color:DarkCyan>O | <color:DarkCyan>3 |
+  | – Consulting Physician's Name                         | (0008,009C) | | | | | <color:DarkCyan>O | <color:DarkCyan>3 |
+  | – Consulting Physician Identification <u>Sequence</u> | (0008,009D) | | | | | <color:DarkCyan>O | <color:DarkCyan>3 |
+  | – Admitting Diagnoses Description                     | (0008,1080) | | | | | <color:DarkCyan>O | <color:DarkCyan>3 |
+  | – Admitting Diagnoses Code <u>Sequence</u>            | (0008,1084) | | | | | <color:DarkCyan>O | <color:DarkCyan>3 |
+  | – Route of Admissions                                 | (0038,0016) | | | | | <color:DarkCyan>O | <color:DarkCyan>3 |
+  | – Admitting Date                                      | (0038,0020) | | | | | <color:DarkCyan>O | <color:DarkCyan>3 |
+  | – Admitting Time                                      | (0038,0021) | | | | | <color:DarkCyan>O | <color:DarkCyan>3 |
   }
 
   class "<b>Unified Procedure Step Progress Information Module" as upspim {
@@ -276,25 +391,78 @@ end title
 ' ==========================
 
   class "UPS Code Sequence (CC.2.5-2a)" as 2a {
+  <#transparent,#transparent>| Code Value | (0008,0100) | 1C/1C | 1C/1C | | -/1C | * | 1C |
+  | Coding Scheme Designator            | (0008,0102) | 1C/1C | 1C/1C | | -/1C | * | 1C |
+  | Coding Scheme Version               | (0008,0103) | 1C/1C | 1C/1C | | -/1C | - | 1C |
+  | Code Meaning                        | (0008,0104) | 1/1   | 1/1   | | -/1  | - | 1  |
+  | Long Code Value                     | (0008,0119) | 1C/1C | 1C/1C | | -/1C | * | 1C |
+  | URN Code Value                      | (0008,0120) | 1C/1C | 1C/1C | | -/1C | * | 1C |
+  | Mapping Resource                    | (0008,0105) | 3/3   | 3/3   | | -/3  | - | 3  |
+  | Mapping Resource UID                | (0008,0118) | 3/3   | 3/3   | | -/3  | - | 3  |
+  | Context Group Version               | (0008,0106) | 3/3   | 3/3   | | -/3  | - | 3  |
+  | Context Group Extension Flag        | (0008,010B) | 3/3   | 3/3   | | -/3  | - | 3  |
+  | Context Group Local Version         | (0008,0107) | 3/3   | 3/3   | | -/3  | - | 3  |
+  | Context Group Extension Creator UID | (0008,010D) | 3/3   | 3/3   | | -/3  | - | 3  |
   }
 
   class "UPS Content Item (CC.2.5-2b)" as 2b {
+  <#transparent,#transparent>| Value Type | (0040,A040) | 1/1 | 1/1 | | -/1 | * | 1 |
+  | Concept Name Code <u>Sequence</u>      | (0040,A043) | 1/1   | 1/1 | | -/1  | * | 1  |
+  | DateTime                               | (0040,A120) | 1C/1C | 1/1 | | -/1C | * | 1C |
+  | Date                                   | (0040,A121) | 1C/1C | 1/1 | | -/1C | * | 1C |
+  | Time                                   | (0040,A122) | 1C/1C | 1/1 | | -/1C | * | 1C |
+  | Person Name                            | (0040,A123) | 1C/1C | 1/1 | | -/1C | * | 1C |
+  | UID                                    | (0040,A124) | 1C/1C | 1/1 | | -/1C | * | 1C |
+  | Text Value                             | (0040,A160) | 1C/1C | 1/1 | | -/1C | * | 1C |
+  | Concept Code <u>Sequence</u>           | (0040,A168) | 1C/1C | 1/1 | | -/1C | * | 1C |
+  | Numeric Value                          | (0040,A30A) | 1C/1C | 1/1 | | -/1C | * | 1C |
+  | Measurement Units Code <u>Sequence</u> | (0040,08EA) | 1C/1C | 1/1 | | -/1C | * | 1C |
   }
 
   class "Referenced Instances and Access (CC.2.5-2c)" as 2c {
   }
 
   class "HL7V2 Hierarchic Designator (CC.2.5-2d)" as 2d {
+  <#transparent,#transparent>| Local Namespace Entity ID | (0040,0031) | 1C/1 | NA | | -/1 | * | 1C |
+  | Universal Entity ID      | (0040,0032) | 1C/1 | NA | | -/1 | * | 1C |
+  | Universal Entity ID Type | (0040,0033) | 1C/1 | NA | | -/1 | * | 1C |
   }
 
   class "Issuer of Patient ID (CC.2.5-2e)" as 2e {
+  <#PowderBlue,#transparent>| Issuer of Patient ID | (0010,0021) | 2/2 | NA | O | 3/2 | R | 2 |
+  <#PowderBlue>| Issuer of Patient ID Qualifier <u>Sequence</u> | (0010,0024) | 2/2 | NA | O | 3/2 | R | 2 |
+  }
+
+  class "Issuer of Patient ID Qualifier" as iopiq #PowderBlue {
+  <#transparent,#transparent>| Universal Entity ID      | (0040,0032) | 2/2  | NA | O | 3/2 | O | 2  |
+  | Universal Entity ID Type                            | (0040,0033) | 1C/1 | NA | O | 3/2 | O | 1C |
+  | Identifier Type Code                                | (0040,0035) | 2/2  | NA | O | 3/2 | O | 2  |
+  | Assigning Facility <u>Sequence</u>                  | (0040,0036) | 2/2  | NA | O | 3/2 | O | 2  |
+  | Assigning Jurisdiction Code <u>Sequence</u>         | (0040,0039) | 2/2  | NA | O | 3/2 | O | 2  |
+  | Assigning Agency or Department Code <u>Sequence</u> | (0040,003A) | 2/2  | NA | O | 3/2 | O | 2  |
   }
 
   class "SOP Instance Reference (CC.2.5-2f)" as 2f {
+  <#transparent,#transparent>| Referenced SOP Class UID | (0008,1150) | 1/1 | 1/1 | | -/1 | * | 1 |
+  | Referenced SOP Instance UID | (0008,1155) | 1/1 | 1/1 | | -/1 | * | 1 |
   }
 
-  class "Storage (CC.2.5-2c)" as 2g {
+  class "Storage (CC.2.5-2g)" as 2g {
   }
+
+  2b *-- "*" 2a
+  2b *-- "*" 2a
+  2b *-- "*" 2a : CID 82
+  2e *-- "*" iopiq
+
+' =====================
+
+legend top left
+  <#transparent,#transparent>|            |= __Legend__ |
+  |<#PowderBlue> | 1:1 mapping from MWL |
+  |<#DarkCyan>   | keys are different in MWL; differences are <color:DarkCyan>colored</color>, while explicit presence in MWL is marked <b>bold</b> |
+  |<#Plum>       | Requires specific mapping from MWL (see EBIW) |
+endlegend
 
 ' ==========================
 
@@ -359,13 +527,13 @@ end title
   psdrc  *-- "1" 2a
 
   upsppim *-- "*" upspp
-  upsppim *-- "*" psnc
-  upsppim *-- "*" pscc
-  upsppim *-- "*" psglc
-  upsppim *-- "*" pwc
-  upsppim *-- "*" ppp
-  upsppim *-- "*" oi
   upspp   *-- "*" ahp
+  upspp   *-- "*" psnc
+  upspp   *-- "*" pscc
+  upspp   *-- "*" psglc
+  upspp   *-- "*" pwc
+  upspp   *-- "*" ppp
+  upspp   *-- "*" oi
   ahp     *-- "*" hpc
   hpc     *-- "1" 2a
   psnc    *-- "1" 2a

@@ -87,7 +87,11 @@ end title
   class "Issuer of Patient ID Qualifiers" as iopiq {
   <#transparent,#transparent>| Universal Entity ID | (0040,0032) | 3/3 | NA | |
   | Universal Entity ID Type | (0040,0033) | 1C/1C | NA | |
-  | <i>All other Attributes of the Issuer of\n <i>Patient ID Qualifiers Sequence | | 3/3 | NA | |
+  | <i>All other Attributes of the Issuer of\n <i>Patient ID Qualifiers Sequence\n <i>[In Issuer of Patient ID Macro (PS3.3, Table 10-18)] | | 3/3 | NA | |
+  | – Identifier Type Code                                | (0040,0035) |
+  | – Assigning Facility <u>Sequence</u>                  | (0040,0036) |
+  | – Assigning Jurisdiction Code <u>Sequence</u>         | (0040,0039) |
+  | – Assigning Agency Or Department Code <u>Sequence</u> | (0040,003A) |
   }
 
   class "Other Patient ID" as opi2 {
@@ -149,7 +153,12 @@ end title
   | Study ID                                | (0020,0010) | 2/2 | NA  |   |
   | Performed Protocol Code <u>Sequence</u> | (0040,0260) | 2/2 | 3/2 |   |
   | Performed Series <u>Sequence</u>        | (0040,0340) | 2/2 | 3/1 | 1 |
-  | <i>All other Attributes of the Billing and\n <i>Material Management Code Module | | 3/3 | 3/3 |   |
+  | <i>All other Attributes of the Image\n <i>Acquisition Results Module\n <i>[See PS3.3, Table C.4-15. Image\n <i>Acquisition Results Module Attributes] | | 3/3 | 3/3 | |
+  | – <i>None | |
+  | <i>All Attributes of the Billing and Material\n <i>Management Code Module\n <i>[See PS3.3, Table C.4-17. Billing and\n <i>Material Management Module Attributes | | 3/3 | 3/3 | |
+  | – Billing Procedure Step <u>Sequence</u>       | (0040,0320) |
+  | – Film Consumption <u>Sequence</u>             | (0040,0321) |
+  | – Billing Supplies and Devices <u>Sequence</u> | (0040,0324) |
   }
 
   class "Performed Protocol Code" as ppc {
@@ -166,7 +175,10 @@ end title
   | Archive Requested                                           | (0040,A494) | 3/3 | 3/3 |   |
   | Referenced Image <u>Sequence</u>                            | (0008,1140) | 2/2 | 2/2 |   |
   | Referenced Non-Image Composite SOP Instance <u>Sequence</u> | (0008,1140) | 2/2 | 2/2 |   |
-  | <i>All other Attributes of the Performed Series Sequence    |             | 3/3 | 3/3 |   |
+  | <i>All other Attributes of the Performed Series Sequence\n <i>[See PS3.3, Table C.4-15. Image Acquisition Results\n <i>Module Attributes] | | 3/3 | 3/3 | |
+  | – Performing Physician Identification <u>Sequence</u> | (0008,1052) |
+  | – Operator Identification <u>Sequence</u>             | (0008,1072) |
+  | – Series Description Code <u>Sequence</u>             | (0008,103F) |
   }
   
   class "Referenced Image" as ri {
