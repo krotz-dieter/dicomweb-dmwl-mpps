@@ -1,6 +1,7 @@
 ### Example: Get all workitems for a scheduled station (CTSCANNER), start date (20240105) and modality (CT), only the first 20 and return all attributes
 
 #### Using DICOM tags and application/dicom+json media type:
+Modality (0008,0060)
 Scheduled Procedure Step Start Date and Time (0040,4005) DT  
 Scheduled Station Name Code Sequence (0040,4025) SQ  
 Scheduled Station Class Code Sequence (0040,4027) SQ  
@@ -13,11 +14,11 @@ Accept: application/dicom+json
 
 #### The response returns two unified procedure steps, one for head and the other one for the spine
 Attributes according to: https://dicom.nema.org/medical/dicom/current/output/html/part04.html#table_CC.2.5-3  
-0080018: SOP Instance UID  
-00100010: Patient's Name   
-0020000D: Study Instance UID  
-00741204: Procedure Step Label  
-00404025: Scheduled Station Name Code Sequence  
+SOP Instance UID (0008,0018)
+Patient's Name  (0010,0010) 
+Study Instance UID (0020,000D)
+Procedure Step Label (0074,1204)
+Scheduled Station Name Code Sequence (0040,4025)
 
 ```http
 HTTP/1.1 200 OK
