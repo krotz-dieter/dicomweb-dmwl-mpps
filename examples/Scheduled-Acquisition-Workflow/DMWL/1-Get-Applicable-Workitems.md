@@ -3,10 +3,11 @@
 #### Using DICOM tags and application/dicom+json media type:
 Scheduled Procedure Step Sequence (0040,0100) SQ  
 -> Scheduled Station AE Title (0040,0001) AE  
--> Scheduled Procedure Step Start Date (0040,0002)  DA  
+-> Scheduled Procedure Step Start Date (0040,0002) DA  
+-> Modality (0008,0060) CS  
 
 ```http
-GET /radiology/modalityworklist?00080060=CT&00400100.00400002=20240105&00400100.0040001=CTSCANNER&limit=20&offset=0&includefield=all HTTP/1.1
+GET /radiology/modalityworklist?&00400100.00080060=CT&00400100.00400002=20240105&00400100.00400001=CTSCANNER&limit=20&offset=0&includefield=all HTTP/1.1
 Host: www.hospital-stmarco
 Accept: application/dicom+json
 ```

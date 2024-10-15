@@ -2,7 +2,8 @@
 
 #### Using DICOM tags and application/dicom+json media type:
 Scheduled Procedure Step Start Date and Time (0040,4005) DT  
-Station Name Code Sequence (0040,4025) SQ  
+Scheduled Station Name Code Sequence (0040,4025) SQ  
+Scheduled Station Class Code Sequence (0040,4027) SQ  
 
 ```http
 GET /radiology/workitems?00080060=CT&00404005=20240105000000&00404025.0040A040=TEXT&00404025.0040A043.00400010.0040A160=CTSCANNER&limit=20&offset=0&includefield=all HTTP/1.1
