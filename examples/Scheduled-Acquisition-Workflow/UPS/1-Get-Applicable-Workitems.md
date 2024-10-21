@@ -1,13 +1,12 @@
 ### Example: Get all workitems for a scheduled station (CTSCANNER), start date (20240105) and modality (CT), only the first 20 and return all attributes
 
 #### Using DICOM tags and application/dicom+json media type:
-Modality (0008,0060)
 Scheduled Procedure Step Start Date and Time (0040,4005) DT  
 Scheduled Station Name Code Sequence (0040,4025) SQ  
 Scheduled Station Class Code Sequence (0040,4027) SQ  
 
 ```http
-GET /radiology/workitems?00080060=CT&00404005=20240105000000&00404025.0040A040=TEXT&00404025.0040A043.00400010.0040A160=CTSCANNER&limit=20&offset=0&includefield=all HTTP/1.1
+GET /radiology/workitems?00404005=20240105000000&00404025.0040A040=TEXT&00404025.0040A043.00400010.0040A160=CTSCANNER&limit=20&offset=0&includefield=all HTTP/1.1
 Host: www.hospital-stmarco
 Accept: application/dicom+json
 ```
