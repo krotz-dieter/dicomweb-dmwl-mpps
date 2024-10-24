@@ -6,7 +6,7 @@ Performed Procedure Step End Time (0040,0251)
 Performed Procedure Step Status (0040,0252)  
 
 ```http
-PUT /radiology/modalityperformedprocedure/1.2.12345678.987654 HTTP/1.1
+PATCH /radiology/modalityperformedprocedure/1.2.12345678.987654 HTTP/1.1
 Host: www.hospital-stmarco
 Content-Type: application/dicom+json
 …

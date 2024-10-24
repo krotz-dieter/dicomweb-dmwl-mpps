@@ -11,7 +11,7 @@ Performed Series Sequence (0040,0340) SQ
 ->-> Referenced SOP Instance UID (0008,1155)  
 
 ```http
-PUT /radiology/modalityperformedprocedure/1.2.12345678.987654 HTTP/1.1
+PATCH /radiology/modalityperformedprocedure/1.2.12345678.987654 HTTP/1.1
 Host: www.hospital-stmarco
 Content-Type: application/dicom+json
 …
