@@ -38,13 +38,8 @@ Content-Type: application/dicom+json; charset=utf-8
  "00404025": { 
     "vr": "SQ",
     "Value": [
-        "0040A040": { "vr": "CS", "Value": ["TEXT"] },
-        "0040A043": { 
-                "vr": "SQ",
-                "Value": [ 
-                    "0040A160": { "vr": "UT", "Value": ["CTSCANNER"] }
-                 ]
-        }
+        "00080100": { "vr": "SH", "Value": ["CTSCANNER"] },
+        … 
     ]
  }
 …
@@ -61,13 +56,8 @@ Content-Type: application/dicom+json; charset=utf-8
  "00404025": { 
     "vr": "SQ",
     "Value": [
-        "0040A040": { "vr": "CS", "Value": ["TEXT"] },
-        "0040A043": { 
-                "vr": "SQ",
-                "Value": [ 
-                    "0040A160": { "vr": "UT", "Value": ["CTSCANNER"] }
-                 ]
-        }
+        "00080100": { "vr": "SH", "Value": ["CTSCANNER"] },
+        … 
     ]
  }
  },
