@@ -1,0 +1,55 @@
+@startuml Explanation of Class Diagrams
+<style>
+title {
+  HorizontalAlignment center
+  Fontsize 26
+}
+</style>
+
+hide empty members
+hide circle
+' left to right direction
+title
+  PS3.4, K.6.1
+  Modality Worklist SOP Class
+end title
+
+  class "<b>Modality Worklist Attributes (K.6-1)" as mwa {
+  <#transparent,#transparent>| <b>Description / Module | <b>Tag | <b>Matching\n <b>Key Type | <b>Return\n <b>Key Type |
+  }
+
+  class "<b>Scheduled Procedure Step" as sps {
+  <#transparent,#transparent>| Scheduled Procedure Step <u>Sequence</u> | (0040,0100) | R | 1 |
+  | Scheduled Specimen <u>Sequence</u> | (0040,0500) | O | 3 |
+  | Barcode Value                      | (2200,0005) | O | 3 |
+  }
+
+  class "Scheduled Procedure Step" as sps2 {
+  <#transparent,#transparent>| Scheduled Station AE Title | (0040,0001) | R | 1 |
+  | Scheduled Procedure Step Start Date           | (0040,0002) | R | 1  |
+  | ... |
+  }
+
+  class "Scheduled Specimen" as ss {
+  <#transparent,#transparent>| Container Identifier | (0040,0512) | O | 1 |
+  | Container Type Code <u>Sequence</u>  | (0040,0518) | - | 2 |
+  | ... |
+  }
+
+  class "<b>Requested Procedure" as rp {
+  <#transparent,#transparent>| Requested Procedure ID | (0040,1001) | O | 1 |
+  | Requested Procedure Description           | (0032,1060) | O | 1C |
+  | ... |
+  }
+
+  class "<b>Imaging Service Request" as isr {
+  <#transparent,#transparent>| Accession Number | (0008,0050) | O | 2 |
+  | Issuer of Accession Number <u>Sequence</u> | (0008,0051) | O | 3 |
+  | ... |
+  }
+
+  mwa   *-- "1" sps
+  mwa   *-- "1" rp
+  mwa   *-- "1" isr
+  sps   *-- "1<sub><i>limited by constraint</sub>" sps2
+  sps   *-- "1..*<sub><i>limited by constraint</sub>" ss

@@ -1,4 +1,4 @@
-@startuml Modality Worklist SOP Class
+@startuml Attributes for the Modality Worklist Information Model
 <style>
 title {
   HorizontalAlignment center
@@ -9,10 +9,10 @@ title {
 hide empty members
 hide circle
 ' left to right direction
-title
-  PS3.4, K.6.1
-  Modality Worklist SOP Class
-end title
+' title
+'   PS3.4, Table K.6-1
+'   Attributes for the Modality Worklist Information Model
+' end title
 
   class "<b>Modality Worklist Attributes (K.6-1)" as mwa {
   <#transparent,#transparent>| <b>Description / Module | <b>Tag | <b>Matching\n <b>Key Type | <b>Return\n <b>Key Type |
@@ -31,21 +31,21 @@ end title
   <#Plum>| Modality                                      | (0008,0060) | R | 1  |
   <#Plum>| Scheduled Performing Physician's Name         | (0040,0006) | R | 2  |
   <#Plum>| Scheduled Procedure Step Description          | (0040,0007) | O | 1C |
-  | Scheduled Station Name                        | (0040,0010) | O | 2  |
+  <#LightCoral>| Scheduled Station Name                        | (0040,0010) | O | 2  |
   <#Plum>| Scheduled Procedure Step Location             | (0040,0011) | O | 2  |
   <#PowderBlue>| Referenced Defined Protocol <u>Sequence</u>   | (0018,990C) | O | 3  |
   <#PowderBlue>| Referenced Performed Protocol <u>Sequence</u> | (0018,990D) | O | 3  |
   <#Plum>| Scheduled Protocol Code <u>Sequence</u>       | (0040,0008) | O | 1C |
-  | Pre-Medication                                | (0040,0012) | O | 2C |
-  | Scheduled Procedure Step ID                   | (0040,0009) | O | 1  |
-  | Requested Contrast Agent                      | (0032,1070) | O | 2C |
+  <#LightCoral>| Pre-Medication                                | (0040,0012) | O | 2C |
+  <#LightCoral>| Scheduled Procedure Step ID                   | (0040,0009) | O | 1  |
+  <#LightCoral>| Requested Contrast Agent                      | (0032,1070) | O | 2C |
   | Scheduled Procedure Step Status               | (0040,0020) | O | 3  |
   | <i>All other attributes of the Scheduled\n <i>Procedure Step Sequence\n <i>[See PS3.4, Table C.4-10. Scheduled\n <i>Procedure Step Module Attributes] | | O | 3  |
   | – Scheduled Procedure Step End Date                             | (0040,0004) |
   | – Scheduled Procedure Step End Time                             | (0040,0005) |
-  | – Scheduled Performing Physician Identification <u>Sequence</u> | (0040,000B) |
+  <#LightCoral>| – Scheduled Performing Physician Identification <u>Sequence</u> | (0040,000B) |
   <#PowderBlue>| – Comments on the Scheduled Procedure Step                      | (0040,0400) |
-  | – Anatomical Orientation Type                                   | (0010,2210) |
+  <#LightCoral>| – Anatomical Orientation Type                                   | (0010,2210) |
   <#PowderBlue>| – Treatment Session UID                                         | (300A,0700) |
   }
   
@@ -60,11 +60,11 @@ end title
   }
 
   class "Scheduled Protocol Code" as spc {
-  <#transparent,#transparent>| <i>Enhanced Coded Entry with Optional Matching\n <i>Key Support and Optional Meaning | | | |
-  | Protocol Context <u>Sequence</u> | (0040,0440) | - | 3 |
+  <#Plum,#transparent>| <i>Enhanced Coded Entry with Optional Matching\n <i>Key Support and Optional Meaning | | | |
+  <#LightCoral>| Protocol Context <u>Sequence</u> | (0040,0440) | - | 3 |
   }
 
-  class "Protocol Context" as pc {
+  class "Protocol Context" as pc #LightCoral {
   <#transparent,#transparent>| Value Type | (0040,A040) | - | 1 |
   | Concept Name Code <u>Sequence</u>      | (0040,A043) | - | 1  |
   | DateTime                               | (0040,A120) | - | 1C |
@@ -130,22 +130,22 @@ end title
   <#PowderBlue,#transparent>| Requested Procedure ID | (0040,1001) | O | 1 |
   <#PowderBlue>| Requested Procedure Description           | (0032,1060) | O | 1C |
   <#PowderBlue>| Requested Procedure Code <u>Sequence</u>  | (0032,1064) | O | 1C |
-  | Requested Laterality Code <u>Sequence</u> | (0032,1065) | O | 3  |
+  <#LightCoral>| Requested Laterality Code <u>Sequence</u> | (0032,1065) | O | 3  |
   <#PowderBlue>| Study Instance UID                        | (0020,000D) | O | 1  |
   | Study Date                                | (0008,0020) | O | 3  |
   | Study Time                                | (0008,0030) | O | 3  |
   | Referenced Study <u>Sequence</u>          | (0008,1110) | O | 2  |
-  | Requested Procedure Priority              | (0040,1003) | O | 2  |
-  | Patient Transport Arrangements            | (0040,1004) | O | 2  |
+  <#LightCoral>| Requested Procedure Priority              | (0040,1003) | O | 2  |
+  <#LightCoral>| Patient Transport Arrangements            | (0040,1004) | O | 2  |
   | <i>All other Attributes of the\n <i>Requested Procedure Module\n <i>[See PS3.3, Table C.4-11. Requested\n <i>Procedure Module Attributes] | | O | 3 |
   <#PowderBlue>| – Reason for the Requested Procedure                            | (0040,1002) |
   <#PowderBlue>| – Requested Procedure Comments                                  | (0040,1400) |
   <#PowderBlue>| – Reason for Requested Procedure Code <u>Sequence</u>           | (0040,100A) |
-  | – Requested Procedure Location                                  | (0040,1005) |
+  <#LightCoral>| – Requested Procedure Location                                  | (0040,1005) |
   <#PowderBlue>| – Confidentiality Code                                          | (0040,1008) |
-  | – Reporting Priority                                            | (0040,1009) |
+  <#LightCoral>| – Reporting Priority                                            | (0040,1009) |
   <#PowderBlue>| – Names of Intended Recipients of Results                       | (0040,1010) |
-  | – Intended Recipients of Results Identification <u>Sequence</u> | (0040,1011) |
+  <#LightCoral>| – Intended Recipients of Results Identification <u>Sequence</u> | (0040,1011) |
   }
 
   class "Requested Procedure Code" as rpc {
@@ -168,7 +168,7 @@ end title
   <#PowderBlue>| Referring Physician's Name                 | (0008,0090) | O | 2 |
   | <i>All other attributes of the\n <i>Imaging Service Request Module\n <i>[See PS3.3, Table C.4-12. Imaging\n <i>Service Request Module Attributes] | | O | 3 |
   <#PowderBlue>| – Imaging Service Request Comments                    | (0040,2400) |
-  | – Requesting Physician Identification <u>Sequence</u> | (0032,1031) |
+  <#LightCoral>| – Requesting Physician Identification <u>Sequence</u> | (0032,1031) |
   <#PowderBlue>| – Referring Physician Identification <u>Sequence</u>  | (0008,0096) |
   <#PowderBlue>| – Requesting Service                                  | (0032,1033) |
   <#PowderBlue>| – Requesting Service Code <u>Sequence</u>             | (0032,1034) |
@@ -178,14 +178,14 @@ end title
   <#PowderBlue>| – Order Placer Identifier <u>Sequence</u>             | (0040,0026) |
   <#PowderBlue>| – Filler Order Number / Imaging Service Request       | (0040,2017) |
   <#PowderBlue>| – Order Filler Identifier <u>Sequence</u>             | (0040,0027) |
-  | – Order Entered By                                    | (0040,2008) |
-  | – Order Enterer's Location                            | (0040,2009) |
-  | – Order Callback Phone Number                         | (0040,2010) |
-  | – Order Callback Telecom Information                  | (0040,2011) |
+  <#LightCoral>| – Order Entered By                                    | (0040,2008) |
+  <#LightCoral>| – Order Enterer's Location                            | (0040,2009) |
+  <#LightCoral>| – Order Callback Phone Number                         | (0040,2010) |
+  <#LightCoral>| – Order Callback Telecom Information                  | (0040,2011) |
   <#PowderBlue>| – Admission ID                                        | (0038,0010) |
   <#PowderBlue>| – Issuer of Admission ID <u>Sequence</u>              | (0038,0014) |
-  | – Reason for Visit                                    | (0032,1066) |
-  | – Reason for Visit Code <u>Sequence</u>               | (0032,1067) |
+  <#PowderBlue>| – Reason for Visit                                    | (0032,1066) |
+  <#PowderBlue>| – Reason for Visit Code <u>Sequence</u>               | (0032,1067) |
   }
 
   class "Issuer of Accession Number" as ioan #PowderBlue {
@@ -196,7 +196,7 @@ end title
 
   class "<b>Visit Identification" as vi #PowderBlue {
   <#transparent,#transparent>| Admission ID | (0038,0010) | O | 2 |
-  | Issuer of Admission ID Sequence | (0038,0014) | O | 3 |
+  | Issuer of Admission ID <u>Sequence</u> | (0038,0014) | O | 3 |
   | <i>All other Attributes of the\n <i>Visit Identification Module\n <i>[See PS3.3, Table C.3-2. Visit\n <i>Identification Module Attributes] | | O | 3 |
   | – Institution Name                                   | (0008,0080) |
   | – Institution Address                                | (0008,0081) |
@@ -210,6 +210,16 @@ end title
   | – Service Episode Description                        | (0038,0062) |
   }
 
+  class "Issuer of Admission ID" as ioai {
+  <#PowderBlue,#transparent>| <i>HL7v2 Hierarchic Designator |
+  }
+
+  class "HL7v2 Hierarchic Designator (PS3.3, 10.17)" as hhd {
+  <#PowderBlue,#transparent>| Local Namespace Entity ID | (0040,0031) | 1C |
+  <#PowderBlue>| Universal Entity ID      | (0040,0032) | 1C |
+  <#PowderBlue>| Universal Entity ID Type | (0040,0033) | 1C |
+  }
+
   class "<b>Visit Status" as vs #PowderBlue {
   <#transparent,#transparent>| Current Patient Location | (0038,0300) | O | 2 |
   | <i>All other Attributes of the\n <i>Visit Status Module\n <i>[See PS3.3, Table C.3-3. Visit\n <i>Status Module Attributes] | | O | 3 |
@@ -218,13 +228,13 @@ end title
   | – Visit Comments                  | (0038,4000) |
   }
 
-  class "<b>Visit Relationship" as vr {
+  class "<b>Visit Relationship" as vr #LightCoral {
   <#transparent,#transparent>| Referenced Patient <u>Sequence</u> | (0008,1120) | O | 2 |
   | <i>All other Attributes of the\n <i>Visit Relationship Module\n <i>[See PS3.3, Table C.3-1. Visit\n <i>Relationship Module Attributes] | | O | 3 |
   | – Referenced Study <u>Sequence</u> | (0008,1110) |
   }
 
-  class "Referenced Patient" as rp2 {
+  class "Referenced Patient" as rp2 #LightCoral {
   <#transparent,#transparent>| Referenced SOP Class UID | (0008,1150) | O | 1 |
   | Referenced SOP Instance UID | (0008,1155) | O | 1 |
   }
@@ -244,10 +254,10 @@ end title
   | – Admitting Time                                      | (0038,0021) |
   }
 
-  class "<b>Patient Relationship" as pr {
+  class "<b>Patient Relationship" as pr #LightCoral {
   <#transparent,#transparent>| <i>All other Attributes of the\n <i>[See PS3.3, Table C.2-1. Patient\n <i>Relationship Module Attributes] | | O | 3 |
-  | – Referenced Study Sequence | (0008,1110) |
-  | – Referenced Visit Sequence | (0008,1125) |
+  | – Referenced Study <u>Sequence</u> | (0008,1110) |
+  | – Referenced Visit <u>Sequence</u> | (0008,1125) |
   }
 
   class "<b>Patient Identification" as pi {
@@ -257,13 +267,13 @@ end title
   <#PowderBlue>| Issuer of Patient ID Qualifiers <u>Sequence</u> | (0010,0024) | O | 3 |
   <#PowderBlue>| Other Patient IDs <u>Sequence</u>               | (0010,1002) | O | 3 |
   | <i>All other Attributes of the\n <i>Patient Identification Module\n <i>[See PS3.3, Table C.2-2. Patient\n <i>Identification Module Attributes] | | O | 3 |
-  | – Type of Patient ID                                  | (0010,0022) |
-  | – Other Patient Names                                 | (0010,1001) |
+  <#PowderBlue>| – Type of Patient ID                                  | (0010,0022) |
+  <#LightCoral>| – Other Patient Names                                 | (0010,1001) |
   <#PowderBlue>| – Patient's Birth Name                                | (0010,1005) |
-  | – Patient's Mother's Birth Name                       | (0010,1060) |
-  | – Referenced Patient Photo <u>Sequence</u>            | (0010,1100) |
-  | – Source Patient Group Identification <u>Sequence</u> | (0010,0026) |
-  | – Group of Patients Identification <u>Sequence</u>    | (0010,0027) |
+  <#LightCoral>| – Patient's Mother's Birth Name                       | (0010,1060) |
+  <#PowderBlue>| – Referenced Patient Photo <u>Sequence</u>            | (0010,1100) |
+  <#LightCoral>| – Source Patient Group Identification <u>Sequence</u> | (0010,0026) |
+  <#LightCoral>| – Group of Patients Identification <u>Sequence</u>    | (0010,0027) |
   }
 
   class "Other Patient ID" as opi #PowderBlue {
@@ -321,7 +331,7 @@ end title
   | – Strain Code <u>Sequence</u>                   | (0010,0219) |
   | – Strain Additional Information                 | (0010,0218) |
   | – Strain Stock <u>Sequence</u>                  | (0010,0216) |
-  | – Genetic Modifications Sequence                | (0010,0221) |
+  | – Genetic Modifications <u>Sequence</u>         | (0010,0221) |
   }
 
   class "Patient's Primary Language Code" as pplc {
@@ -443,8 +453,8 @@ end title
 legend top left
   <#transparent,#transparent>|            |= __Legend__ |
   |<#PowderBlue> | Mapped to UPS |
+  |<#Plum>       | Requires specific mapping to UPS (taken from IHE Encounter-Based Imaging Workflow) |
   |<#LightCoral> | Lacking in UPS |
-  |<#Plum>       | Requires specific mapping to UPS (see EBIW) |
 endlegend
 
 ' ==========================
@@ -464,7 +474,7 @@ endlegend
   sps   *-- "1..*<sub><i>limited by constraint</sub>" ss
   sps2  *-- "*" rdp
   sps2  *-- "*" rpp
-  sps2  *-- "*" spc
+  sps2  *-- "1..*<sub><i>limited by constraint</sub>" spc
   spc   *-- "1" 2a
   spc   *-- "*" pc
   pc    *-- "*" cnc
@@ -473,18 +483,18 @@ endlegend
   cnc   *-- "1" 3a
   cc    *-- "1" 3a
   muc   *-- "1" 3a
-  ss    *-- "*" ctc
-  ss    *-- "*" sd
+  ss    *-- "0..1<sub><i>limited by constraint</sub>" ctc
+  ss    *-- "1..*<sub><i>limited by constraint</sub>" sd
   ctc   *-- "1" 3a
-  rp    *-- "*" rpc
-  rp    *-- "*" rlc
+  rp    *-- "1<sub><i>limited by constraint</sub>" rpc
+  rp    *-- "1<sub><i>limited by constraint</sub>" rlc
   rp    *-- "*" rs
   rpc   *-- "1" 2a
   rlc   *-- "1" 2b
   vr    *-- "*" rp2
-  pd    *-- "*" pplc
+  pd    *-- "1..*<sub><i>limited by constraint</sub>" pplc
   pplc  *-- "1" 4a
-  pplc  *-- "*" pplmc
+  pplc  *-- "1<sub><i>limited by constraint</sub>" pplmc
   pplmc *-- "1" 4a
   pm    *-- "*" pd2
   pd2   *-- "*" prc
@@ -493,6 +503,8 @@ endlegend
   pi    *-- "*" opi
   pi    *-- "*" iopiq
   opi   *-- "*" iopiq
+  vi    *-- "*" ioai
+  ioai  *-- "1" hhd
 
   2a   *-- "1" 2b
   2a   *-- "*" ec2

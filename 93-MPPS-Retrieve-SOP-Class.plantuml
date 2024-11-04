@@ -1,4 +1,4 @@
-@startuml Modality Performed Procedure Step Retrieve SOP Class
+@startuml Modality Performed Procedure Step Retrieve SOP Class N-GET Attributes
 <style>
 title {
   HorizontalAlignment center
@@ -12,11 +12,11 @@ skinparam legend {
 
 hide empty members
 hide circle
-left to right direction
-title
-  PS3.4, F.8
-  Modality Performed Procedure Step Retrieve SOP Class
-end title
+' left to right direction
+' title
+'   PS3.4, Table F.8.2-1
+'   Modality Performed Procedure Step Retrieve SOP Class N-GET Attributes
+' end title
 
   class "<b>MPPS Retrieve SOP Class Attributes (F.8.2-1)" as mppsra {
   <#transparent,#transparent>| <b>Attribute name | <b>Tag | <b>Req. Type\n <b>N-GET\n <b>(SCU/SCP) |
@@ -30,7 +30,7 @@ end title
   | Issuer of Patient ID                            | (0010,0021) | 3/3 |
   | Issuer of Patient ID Qualifiers <u>Sequence</u> | (0010,0024) | 3/3 |
 ' The next item is present in the MPPS SOP Class but absent here!
-  | <color:darkgrey>Other Patient IDs <u>Sequence</u></color> | <color:darkgrey>(0010,1002) | <color:darkgrey>3/3 |
+  <#lightgrey>| Other Patient IDs <u>Sequence</u> | (0010,1002) | 3/3 |
   | Patient Birth Date                              | (0010,0030) | 3/2 |
   | Patient's Sex                                   | (0010,0040) | 3/2 |
   | Referenced Patient <u>Sequence</u>              | (0008,1120) | 3/2 |
@@ -53,7 +53,7 @@ end title
   | Requested Procedure Code <u>Sequence</u>    | (0032,1064) | -/3 |
   | Requested Procedure Description             | (0032,1060) | -/2 |
 ' order of next item in this class is different than in MPPS SOP Class' Scheduled Step Attributes; why?
-  | <back:#ffffbb>Requested Procedure ID</back> | (0040,1001) | -/2 |
+  <#ffffbb>| Requested Procedure ID | (0040,1001) | -/2 |
   | Scheduled Procedure Step ID                 | (0040,0009) | -/2 |
   | Scheduled Procedure Step Description        | (0040,0007) | -/2 |
   | Scheduled Protocol Code <u>Sequence</u>     | (0040,0008) | -/2 |
@@ -82,12 +82,12 @@ end title
   | Universal Entity ID Type | (0040,0033) | -/3 |
   }
 
-  class "Requested Procedure Code" as rpc {
-  <#transparent,#transparent>| <back:#bbffff><i>Enhanced SCU/SCP Coded Entry with no SCU\n <back:#bbffff><i>Support and no Matching Key Support |
+  class "Requested Procedure Code" as rpc #bbffff {
+  <#transparent,#transparent>| <i>Enhanced SCU/SCP Coded Entry with no SCU\n <i>Support and no Matching Key Support |
   }
   
-  class "Scheduled Protocol Code" as spc {
-  <#transparent,#transparent>| <back:#bbffff><i>Enhanced SCU/SCP Coded Entry with no SCU\n <back:#bbffff><i>Support and Optional Meaning for SCP |
+  class "Scheduled Protocol Code" as spc #bbffff {
+  <#transparent,#transparent>| <i>Enhanced SCU/SCP Coded Entry with no SCU\n <i>Support and Optional Meaning for SCP |
   }
 
   class "Issuer of Patient ID Qualifiers" as iopiq {
@@ -100,11 +100,11 @@ end title
   | – Assigning Agency Or Department Code <u>Sequence</u> | (0040,003A) |
   }
 
-  class "<color:darkgrey>Other Patient ID" as opi2 {
-  <#transparent,#transparent>| <color:darkgrey>Patient ID           | <color:darkgrey>(0010,0020) | <color:darkgrey>3/3 |
-  | <color:darkgrey>Issuer of Patient ID                            | <color:darkgrey>(0010,0021) | <color:darkgrey>3/3 |
-  | <color:darkgrey>Issuer of Patient ID Qualifiers <u>Sequence</u> | <color:darkgrey>(0010,0024) | <color:darkgrey>3/3 |
-  | <color:darkgrey>Type of Patient ID                              | <color:darkgrey>(0010,0022) | <color:darkgrey>3/3 |
+  class "Other Patient ID" as opi2 #lightgrey {
+  <#transparent,#transparent>| Patient ID           | (0010,0020) | 3/3 |
+  | Issuer of Patient ID                            | (0010,0021) | 3/3 |
+  | Issuer of Patient ID Qualifiers <u>Sequence</u> | (0010,0024) | 3/3 |
+  | Type of Patient ID                              | (0010,0022) | 3/3 |
   }
 
   class "Referenced Patient" as rp {
@@ -130,32 +130,32 @@ end title
   | Performed Location                                                   | (0040,0243) | 3/1 |
   | Performed Procedure Step Start Date                                  | (0040,0244) | 1/1 |
   | Performed Procedure Step Start Time                                  | (0040,0245) | 1/1 |
-  | <back:#ffffbb>Performed Procedure Step ID</back>                     | (0040,0253) | 3/1 |
+  <#ffffbb>| Performed Procedure Step ID                                 | (0040,0253) | 3/1 |
   | Performed Procedure Step Status                                      | (0040,0252) | 1/1 |
-  | <back:#ffbbff>Performed Procedure Step End Date</back>               | (0040,0250) | 2/2 |
-  | <back:#ffbbff>Performed Procedure Step End Time</back>               | (0040,0251) | 2/2 |
+  <#ffbbff>| Performed Procedure Step End Date                           | (0040,0250) | 2/2 |
+  <#ffbbff>| Performed Procedure Step End Time                           | (0040,0251) | 2/2 |
   | Performed Procedure Step Description                                 | (0040,0254) | 2/2 |
   | Performed Procedure Type Description                                 | (0040,0255) | 2/2 |
   | Procedure Code <u>Sequence</u>                                       | (0008,1032) | 2/2 |
-  | <color:darkgrey>Reason For Performed Procedure Code <u>Sequence</u></color> | <color:darkgrey>(0040,1012) | <color:darkgrey>3/3 |
+  <#LightGrey>| Reason For Performed Procedure Code <u>Sequence</u>      | (0040,1012) | 3/3 |
   | Comments on the Performed Procedure Step                             | (0040,0280) | 3/3 |
   | Performed Procedure Step Discontinuation Reason Code <u>Sequence</u> | (0040,0281) | 3/3 |
   }
 
-  class "Procedure Code" as pc {
-  <#transparent,#transparent>| <back:#bbffff><i>Enhanced SCU/SCP Coded Entry with no SCU\n <back:#bbffff><i>Support and Optional Meaning for SCP |
+  class "Procedure Code" as pc #bbffff {
+  <#transparent,#transparent>| <i>Enhanced SCU/SCP Coded Entry with no SCU\n <i>Support and Optional Meaning for SCP |
   }
 
-  class "<color:darkgrey>Reason For Performed Procedure Code" as rfppc {
-  <#transparent,#transparent>| <color:darkgrey><i>Enhanced SCU/SCP Coded Entry with no SCU\n <color:darkgrey><i>Support and Optional Meaning for SCP |
+  class "Reason For Performed Procedure Code" as rfppc #lightgrey {
+  <#transparent,#transparent>| <i>Enhanced SCU/SCP Coded Entry with no SCU\n <i>Support and Optional Meaning for SCP |
   }
 
-  class "Performed Procedure Step Discontinuation Reason Code" as ppsdrc {
-  <#transparent,#transparent>| <back:#bbffff><i>Enhanced SCU/SCP Coded Entry with no SCU\n <back:#bbffff><i>Support and Optional Meaning for SCP |
+  class "Performed Procedure Step Discontinuation Reason Code" as ppsdrc #bbffff {
+  <#transparent,#transparent>| <i>Enhanced SCU/SCP Coded Entry with no SCU\n <i>Support and Optional Meaning for SCP |
   }
 
   class "<b>Image Acquisition Results" as iar {
-  <#transparent,#transparent>| <back:#ffbbff>Performed Series <u>Sequence</u></back> | (0040,0340) | 3/2 |
+  <#ffbbff,#transparent>| Performed Series <u>Sequence</u> | (0040,0340) | 3/2 |
   | Modality                                | (0008,0060) | 1/1 | NA  |   |
   | Study ID                                | (0020,0010) | 2/2 | NA  |   |
   | Performed Protocol Code <u>Sequence</u> | (0040,0260) | 2/2 | 3/2 |   |
@@ -167,8 +167,8 @@ end title
   | – Billing Supplies and Devices <u>Sequence</u> | (0040,0324) |
   }
 
-  class "Performed Protocol Code" as ppc {
-  <#transparent,#transparent>| <back:#bbffff><i>Enhanced SCU/SCP Coded Entry with no SCU\n <back:#bbffff><i>Support and Optional Meaning for SCP |
+  class "Performed Protocol Code" as ppc #bbffff {
+  <#transparent,#transparent>| <i>Enhanced SCU/SCP Coded Entry with no SCU\n <i>Support and Optional Meaning for SCP |
   }
 
   class "Performed Series" as ps {
@@ -282,7 +282,7 @@ end title
 
 legend top left
   <#White,#White>|           |= __Legend__ |
-  |<#darkgrey>   | Absent here, present in MPPS SOP Class       |
+  |<#lightgrey>  | Absent here, present in MPPS SOP Class       |
   |<#ffffbb>     | Moved down here compared to MPPS SOP Class   |
   |<#ffbbff>     | Moved up here compared to MPPS SOP Class     |
   |<#bbffff>     | Replaced an 'equivalent' in MPPS SOP Class   |
@@ -296,7 +296,7 @@ endlegend
   mppsra *-- "1" iar
   ppsr   *-- "1..*" ssa
   ppsr   *-- "*" iopiq
-  ppsr   *-- "<color:darkgrey>*" opi2 #line:darkgrey
+  ppsr   *-- "<color:lightgrey>*" opi2 #line:lightgrey
   ppsr   *-- "*" rp
   ppsr   *-- "*" ioai
   ppsr   *-- "*" iosei
@@ -308,16 +308,16 @@ endlegend
   ssa    *-- "*" spc
   rpc    *-- "1" 3a
   spc    *-- "1" 5a
-  opi2   *-- "<color:darkgrey>*" iopiq #line:darkgrey : <i><color:darkgrey>All attributes
+  opi2   *-- "<color:lightgrey>*" iopiq #line:lightgrey : <i><color:lightgrey>All attributes
   ppsi   *-- "*" pc
-  ppsi   *-- "<color:darkgrey>*" rfppc #line:darkgrey
+  ppsi   *-- "<color:lightgrey>*" rfppc #line:lightgrey
   ppsi   *-- "*" ppsdrc
-  rfppc  *-- "<color:darkgrey>1" 1a #line:darkgrey
+  rfppc  *-- "<color:lightgrey>1" 1a #line:lightgrey
   iar    *-- "*" ppc
   iar    *-- "*" ps
   ps     *-- "*" ri
   ps     *-- "*" rnicsi
-  ri     *-- "<color:darkgrey>*" sd  #line:darkgrey
+  ri     *-- "<color:lightgrey>*" sd  #line:lightgrey
   ppsdrc *-- "1" 5a
   ppc    *-- "1" 5a
   pc     *-- "1" 5a
