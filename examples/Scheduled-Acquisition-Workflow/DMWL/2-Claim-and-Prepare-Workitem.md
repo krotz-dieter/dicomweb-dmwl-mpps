@@ -4,16 +4,16 @@
 Patient's Name (0010,0010)  
 Performed Procedure Step ID (0040,0253)   
 Performed Station Name (0040,0242)  
-Performed Procedure Step Status (0040,0252)
+Performed Procedure Step Status (0040,0252)  
 Scheduled Step Attributes Sequence (0040,0270) SQ  
--> Study Instance UID (0020,000D)  
--> Accession Number (0008,0050)  
--> Scheduled Procedure Step Description (0040,0007)  
--> Requested Procedure ID (0040,1001)  
--> Scheduled Procedure Step ID (0040,0009)      
+-> Study Instance UID (0020,000D)   
+-> Accession Number (0008,0050)   
+-> Scheduled Procedure Step Description (0040,0007)   
+-> Requested Procedure ID (0040,1001)   
+-> Scheduled Procedure Step ID (0040,0009)       
 
 ```http
-POST /radiology/modalityperformedprocedure/1.2.12345678.987654 HTTP/1.1
+PUT /radiology/modalityperformedprocedure/1.2.12345678.987654 HTTP/1.1
 Host: www.hospital-stmarco
 Content-Type: application/dicom+json
 …
