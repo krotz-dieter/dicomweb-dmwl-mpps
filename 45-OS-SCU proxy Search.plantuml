@@ -1,0 +1,36 @@
+@startuml OS-SCU Proxy
+!pragma teoz true
+skinparam style strictuml
+hide footbox
+
+participant "User Agent" as UA
+box SCP / User Agent proxy
+  participant "**Origin Server**" as OS
+  participant "**SCU**" as SCU
+end box
+participant "SCP" as SCP
+
+activate UA
+UA -> OS: HTTP GET /modality-scheduled-\nprocedure-steps?{&match*}...
+activate OS
+note left: [PS3.18, Y.4]\nSearch
+OS -> OS: convert DICOMweb to DIMSE\nparameters and initialize //Modality//\n//Scheduled Procedure Steps// as {}
+OS -> SCU: perform Search request\nusing DIMSE parameters
+activate SCU
+SCU -> SCP: A-ASSOCIATE-RQ( 1.2.840.1008.5.1.4.31 )
+activate SCP
+SCU <-- SCP: A-ASSOCIATE-AC
+SCU -> SCP: C-FIND-RQ( 1.2.840.10008.5.1.4.31, ... )
+loop i: 1.. #//Modality Scheduled Procedure Steps//
+  SCU <-- SCP: C-FIND-RSP: FF00H (Pending),\n//Modality Scheduled Procedure Step//<sub>i</sub>
+  note left: [PS3.4, K.4.1]\nQuery
+  OS <-- SCU: convert //Modality Scheduled//\n//Procedure Step//<sub>i</sub> to DICOMweb\nand add to //Modality Scheduled//\n//Procedure Steps//
+end
+SCU <-- SCP: C-FIND-RSP: 0000H (Success)
+SCU -> SCP: A-RELEASE-RQ
+SCU <-- SCP: A-RELEASE-RSP
+deactivate SCP
+OS <-- SCU: ready
+deactivate SCU
+UA <-- OS: 200 (OK), //Modality Scheduled//\n//Procedure Steps//
+deactivate OS

@@ -1,0 +1,33 @@
+@startuml OS-SCU Proxy
+!pragma teoz true
+skinparam style strictuml
+hide footbox
+
+participant "User Agent" as UA
+box SCP / User Agent proxy
+  participant "**Origin Server**" as OS
+  participant "**SCU**" as SCU
+end box
+participant "SCP" as SCP
+
+activate UA
+UA -> OS: HTTP GET /modality-performed-\nprocedure-steps///MPPS-UID//?\n//includefield//
+activate OS
+note left: [PS3.18, X.6]\nRetrieve
+OS -> OS: convert DICOMweb to\nDIMSE parameters
+OS -> SCU: perform Create request\nwith DIMSE parameters
+activate SCU
+SCU -> SCP: A-ASSOCIATE-RQ( 1.2.840.10008.3.1.2.3.3 )
+activate SCP
+SCU <-- SCP: A-ASSOCIATE-AC
+SCU -> SCP: N-CREATE-RQ( 1.2.840.10008.3.1.2.3.3,\n//MPPS-UID//, ... )
+note left: [PS3.4, F.8.2.1]\nRetrieve
+SCU <-- SCP: N-CREATE-RSP: 0000H (Success): <i>dataset
+SCU -> SCP: A-RELEASE-RQ
+SCU <-- SCP: A-RELEASE-RSP
+deactivate SCP
+OS <-- SCU: OK: <i>dataset
+deactivate SCU
+OS -> OS: convert dataset to\nDICOMweb payload
+UA <-- OS: 200 (OK): <i>payload
+deactivate OS
