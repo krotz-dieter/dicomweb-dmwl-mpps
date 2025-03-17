@@ -5,7 +5,7 @@ Modality (0008,0060)
 Scheduled Procedure Step Sequence (0040,0100) SQ       
 
 ```http
-GET /radiology/modalityworklist?&00400100.00080060=CT&00400100.00400002=20240105&00400100.00400001=CTSCANNER&limit=20&offset=0&includefield=all HTTP/1.1
+GET /radiology/modality-scheduled-procedure-steps?&00400100.00080060=CT&00400100.00400002=20240105&00400100.00400001=CTSCANNER&limit=20&offset=0&includefield=all HTTP/1.1
 Host: www.hospital-stmarco
 Accept: application/dicom+json
 ```
