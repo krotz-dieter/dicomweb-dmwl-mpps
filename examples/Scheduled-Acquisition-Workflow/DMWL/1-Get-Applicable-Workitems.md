@@ -25,37 +25,31 @@ Scheduled Procedure Step Sequence (0040,0100) SQ
 HTTP/1.1 200 OK
 Content-Length: 1191
 Content-Type: application/dicom+json; charset=utf-8
-...
-
-[
-{
 …
- "00100010": { "vr": "PN", "Value": [{ "Alphabetic": "Doe^Sally" }] },
- "0020000D": { "vr": "UI", "Value": ["1.3.12.2.1107.5.99.3.30000008090412501082300000004"] },
- "00401001": { "vr": "SH", "Value": ["P-ID-22"] },
-…
- "00400100": { 
-    "vr": "SQ",
-    "Value": [
-        {
-            "00400002": { "vr": "DA", "Value": ["20200101"] },
-            "00400007": { "vr": "LO", "Value": ["Specials^04a_HeadCTA"] },
-            "00400009": { "vr": "SH", "Value": ["PS-ID-23"] },
-            "00400010": { "vr": "SH", "Value": ["CTSCANNER"] },
-            …
-        },
-        {
-            "00400002": { "vr": "DA", "Value": ["20200101"] },
-            "00400007": { "vr": "LO", "Value": ["Specials^04a_SpineCTA"] },
-            "00400009": { "vr": "SH", "Value": ["PS-ID-24"] },            
-            "00400010": { "vr": "SH", "Value": ["CTSCANNER"] },
-            …
-        },
-        …
-    ]
- }
-…
-},
-…
-] 
+[ {
+  , …
+  , "00100010": { "vr": "PN", "Value": [{ "Alphabetic": "Doe^Sally" }] }
+  , "0020000D": { "vr": "UI", "Value": ["1.3.12.2.1107.5.99.3.30000008090412501082300000004"] }
+  , "00401001": { "vr": "SH", "Value": ["P-ID-22"] }
+  , …
+  , "00400100": { "vr": "SQ", "Value":
+    [ { "00400002": { "vr": "DA", "Value": ["20250101"] }
+      , "00400007": { "vr": "LO", "Value": ["Specials^04a_HeadCTA"] }
+      , "00400009": { "vr": "SH", "Value": ["PS-ID-23"] }
+      , "00400010": { "vr": "SH", "Value": ["CTSCANNER"] }
+      , …
+      }
+    , { "00400002": { "vr": "DA", "Value": ["20250101"] }
+      , "00400007": { "vr": "LO", "Value": ["Specials^04a_SpineCTA"] }
+      , "00400009": { "vr": "SH", "Value": ["PS-ID-24"] }
+      , "00400010": { "vr": "SH", "Value": ["CTSCANNER"] }
+      , …
+      }
+    , …
+    ] }
+  , …
+  }
+, …
+]
+ 
 ```

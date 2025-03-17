@@ -13,32 +13,28 @@ Scheduled Step Attributes Sequence (0040,0270) SQ
 -> Scheduled Procedure Step ID (0040,0009)       
 
 ```http
-PUT /radiology/modalityperformedprocedure/1.2.12345678.987654 HTTP/1.1
+PUT /radiology/modality-performed-procedure-steps/1.2.12345678.987654 HTTP/1.1
 Host: www.hospital-stmarco
 Content-Type: application/dicom+json
 …
 {
 …
- "00100010": { "vr": "PN", "Value": [{ "Alphabetic": "Doe^Sally" }] },
- "00400253": { "vr": "SH", "Value": ["1.2.12345678.987654"] },
- "00400242": { "vr": "SH", "Value": ["CTSCANNER"] },
- "00400252": { "vr": "CS", "Value": ["IN PROGRESS"] },
-…
- "00400270": { 
-    "vr": "SQ",
-    "Value": [
-        {
-            "0020000D": { "vr": "UI", "Value": ["1.3.12.2.1107.5.99.3.30000008090412501082300000004"] },
-            "00080050": { "vr": "SH", "Value": ["1"] },
-            "00400007": { "vr": "LO", "Value": ["Specials^04a_HeadCTA"] },  
-            "00401001": { "vr": "SH", "Value": ["P-ID-22"] },
-            "00400009": { "vr": "SH", "Value": ["PS-ID-23"] },
-            …          
-        },
-        …
-    ]
+, "00100010": { "vr": "PN", "Value": [{ "Alphabetic": "Doe^Sally" }] }
+, "00400253": { "vr": "SH", "Value": ["1.2.12345678.987654"] }
+, "00400242": { "vr": "SH", "Value": ["CTSCANNER"] }
+, "00400252": { "vr": "CS", "Value": ["IN PROGRESS"] }
+, …
+, "00400270": { "vr": "SQ", "Value":
+  [ { "0020000D": { "vr": "UI", "Value": ["1.3.12.2.1107.5.99.3.30000008090412501082300000004"] }
+    , "00080050": { "vr": "SH", "Value": ["1"] }
+    , "00400007": { "vr": "LO", "Value": ["Specials^04a_HeadCTA"] }
+    , "00401001": { "vr": "SH", "Value": ["P-ID-22"] }
+    , "00400009": { "vr": "SH", "Value": ["PS-ID-23"] }
+    …
     }
-…
+  , …
+  ] }
+, …
 }
 …
 ```

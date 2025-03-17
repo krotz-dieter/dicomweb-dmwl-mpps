@@ -6,16 +6,15 @@ Performed Procedure Step End Time (0040,0251)
 Performed Procedure Step Status (0040,0252)  
 
 ```http
-PATCH /radiology/modalityperformedprocedure/1.2.12345678.987654 HTTP/1.1
+PATCH /radiology/modality-performed-procedure-steps/1.2.12345678.987654 HTTP/1.1
 Host: www.hospital-stmarco
 Content-Type: application/dicom+json
 …
-{
-…
- "00400250": { "vr": "DA", "Value": ["20200101"] },
- "00400251": { "vr": "TM", "Value": ["1300"] },
- "00400252": { "vr": "CS", "Value": ["COMPLETED"] },
-…
+{ …
+, "00400250": { "vr": "DA", "Value": ["20200101"] }
+, "00400251": { "vr": "TM", "Value": ["1300"] }
+, "00400252": { "vr": "CS", "Value": ["COMPLETED"] }
+, …
 }
 …
 ```
