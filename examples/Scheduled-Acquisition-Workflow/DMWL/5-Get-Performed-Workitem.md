@@ -72,7 +72,7 @@ Attributes according to: https://dicom.nema.org/dicom/2013/output/chtml/part04/s
 
 ```http
 HTTP/1.1 200 OK
-Content-Length: 2191
+Content-Length: 302
 Content-Type: application/dicom+json; charset=utf-8
 …
 [ {
