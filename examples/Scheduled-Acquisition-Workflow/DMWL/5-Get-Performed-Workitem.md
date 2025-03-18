@@ -1,4 +1,4 @@
-### Example: Get a specific performed workitem and return all attributes
+### Example 1: Get a specific performed workitem and return all attributes
       
 ```http
 GET /radiology/modality-performed-procedure-steps/1.2.12345678.987654?includefield=all HTTP/1.1
@@ -58,3 +58,26 @@ Content-Type: application/dicom+json; charset=utf-8
 ]
  
 ```
+
+### Example 2: Get a specific performed workitem and return only specific attributes
+      
+```http
+GET /radiology/modality-performed-procedure-steps/1.2.12345678.987654?includefield=00100010,00400242,00400252 HTTP/1.1
+Host: www.hospital-stmarco
+Accept: application/dicom+json
+```
+
+#### The response returns the requested performed procedure step
+Attributes according to: https://dicom.nema.org/dicom/2013/output/chtml/part04/sect_F.8.html 
+
+```http
+HTTP/1.1 200 OK
+Content-Length: 2191
+Content-Type: application/dicom+json; charset=utf-8
+…
+[ {
+  , "00100010": { "vr": "PN", "Value": [{ "Alphabetic": "Doe^Sally" }] }
+  , "00400242": { "vr": "SH", "Value": ["CTSCANNER"] }
+  , "00400252": { "vr": "CS", "Value": ["COMPLETED"] }
+}
+]
