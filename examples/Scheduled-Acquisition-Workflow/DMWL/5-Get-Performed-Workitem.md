@@ -7,7 +7,7 @@ Accept: application/dicom+json
 ```
 
 #### The response returns the requested performed procedure step
-Attributes according to: https://dicom.nema.org/dicom/2013/output/chtml/part04/sect_F.8.html 
+Attributes according to [Table F.8.2-1. Modality Performed Procedure Step Retrieve SOP Class N-GET Attributes](https://dicom.nema.org/medical/dicom/current/output/chtml/part04/sect_F.8.2.html#table_F.8.2-1)
 
 ```http
 HTTP/1.1 200 OK
@@ -68,16 +68,15 @@ Accept: application/dicom+json
 ```
 
 #### The response returns the requested performed procedure step
-Attributes according to: https://dicom.nema.org/dicom/2013/output/chtml/part04/sect_F.8.html 
+Attributes according to [Table F.8.2-1. Modality Performed Procedure Step Retrieve SOP Class N-GET Attributes](https://dicom.nema.org/medical/dicom/current/output/chtml/part04/sect_F.8.2.html#table_F.8.2-1)
 
 ```http
 HTTP/1.1 200 OK
-Content-Length: 302
+Content-Length: 289
 Content-Type: application/dicom+json; charset=utf-8
-…
+
 [ {
   , "00100010": { "vr": "PN", "Value": [{ "Alphabetic": "Doe^Sally" }] }
   , "00400242": { "vr": "SH", "Value": ["CTSCANNER"] }
   , "00400252": { "vr": "CS", "Value": ["COMPLETED"] }
-}
-]
+} ]
