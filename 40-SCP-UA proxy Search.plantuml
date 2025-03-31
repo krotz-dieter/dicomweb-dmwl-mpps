@@ -3,12 +3,12 @@
 skinparam style strictuml
 hide footbox
 
-participant "**SCU**" as SCU
-box SCP / User Agent proxy
-  participant "SCP" as SCP
-  participant "User Agent" as UA
+participant "**SCU**" as SCU #a2c777
+box SCP / User Agent proxy #d9e8c8
+  participant "SCP" as SCP #a2c777
+  participant "User Agent" as UA #a2c777
 end box
-participant "**Origin Server**" as OS
+participant "**Origin Server**" as OS #a2c777
 
 activate SCU
 
@@ -16,13 +16,13 @@ SCU -> SCP: A-ASSOCIATE-RQ( 1.2.840.1008.5.1.4.31 )
 activate SCP
 SCU <-- SCP: A-ASSOCIATE-AC
 SCU -> SCP: C-FIND-RQ( 1.2.840.10008.5.1.4.31, ... )
-note left: [PS3.4, K.4.1]\nQuery
+note left #ecf4e4: [PS3.4, K.4.1]\nQuery
 SCP -> SCP: convert DIMSE to\nDICOMweb parameters
 SCP -> UA: perform Search request\nusing DICOMweb parameters
 activate UA
 UA -> OS: HTTP GET /modality-scheduled-\nprocedure-steps?{&match*}...
 activate OS
-note left: [PS3.18, Y.4]\nSearch
+note left #ecf4e4: [PS3.18, Y.4]\nSearch
 UA <-- OS: 200 (OK), //Modality Scheduled//\n//Procedure Steps//
 deactivate OS
 SCP <-- UA: //Modality Scheduled//\n//Procedure Steps//

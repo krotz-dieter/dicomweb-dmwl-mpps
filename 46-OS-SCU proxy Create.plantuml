@@ -3,17 +3,17 @@
 skinparam style strictuml
 hide footbox
 
-participant "User Agent" as UA
-box SCP / User Agent proxy
-  participant "**Origin Server**" as OS
-  participant "**SCU**" as SCU
+participant "User Agent" as UA #a2c777
+box Origin Server / SCU proxy #d9e8c8
+  participant "**Origin Server**" as OS #a2c777
+  participant "**SCU**" as SCU #a2c777
 end box
-participant "SCP" as SCP
+participant "SCP" as SCP #a2c777
 
 activate UA
 UA -> OS: HTTP PUT /modality-performed-\nprocedure-steps///MPPS-UID//\n//payload//
 activate OS
-note left: [PS3.18, X.4]\nCreate
+note left #ecf4e4: [PS3.18, X.4]\nCreate
 OS -> OS: convert DICOMweb payload\nand parameters to DIMSE\nparameters
 OS -> SCU: perform Create request\nusing DIMSE parameters
 activate SCU
@@ -21,7 +21,7 @@ SCU -> SCP: A-ASSOCIATE-RQ( 1.2.840.10008.3.1.2.3.3 )
 activate SCP
 SCU <-- SCP: A-ASSOCIATE-AC
 SCU -> SCP: N-CREATE-RQ( 1.2.840.10008.3.1.2.3.3,\n//MPPS-UID//, ... )
-note left: [PS3.4, F.7.2.1]\nCreate
+note left #ecf4e4: [PS3.4, F.7.2.1]\nCreate
 SCU <-- SCP: N-CREATE-RSP: 0000H (Success)
 SCU -> SCP: A-RELEASE-RQ
 SCU <-- SCP: A-RELEASE-RSP
