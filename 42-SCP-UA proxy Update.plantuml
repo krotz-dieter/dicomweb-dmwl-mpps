@@ -20,7 +20,7 @@ note left #ecf4e4: [PS3.4, F.7.2.2]\nSet Information
 SCP -> SCP: convert DIMSE to\nDICOMweb parameters\nand payload
 SCP -> UA: perform Update request\nusing DIMSE parameters
 activate UA
-UA -> OS: HTTP PATCH /modality-performed-\nprocedure-steps///MPPS-UID//\n//payload//
+UA -> OS: HTTP POST /modality-performed-\nprocedure-steps///MPPS-UID///update\n//payload//
 activate OS
 note left #ecf4e4: [PS3.18, X.5]\nUpdate
 UA <-- OS: 200 (OK)

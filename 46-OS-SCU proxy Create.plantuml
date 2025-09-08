@@ -11,7 +11,7 @@ end box
 participant "SCP" as SCP #a2c777
 
 activate UA
-UA -> OS: HTTP PUT /modality-performed-\nprocedure-steps///MPPS-UID//\n//payload//
+UA -> OS: HTTP POST /modality-performed-\nprocedure-steps///MPPS-UID//\n//payload//
 activate OS
 note left #ecf4e4: [PS3.18, X.4]\nCreate
 OS -> OS: convert DICOMweb payload\nand parameters to DIMSE\nparameters

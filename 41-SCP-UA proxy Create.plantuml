@@ -19,7 +19,7 @@ note left #ecf4e4: [PS3.4, F.7.2.1]\nCreate
 SCP -> SCP: convert DIMSE to\nDICOMweb parameters\nand payload
 SCP -> UA: perform Create request\nwith DICOMweb parameters\nand payload
 activate UA
-UA -> OS: HTTP PUT /modality-performed-\nprocedure-steps///MPPS-UID//\n//payload//
+UA -> OS: HTTP POST /modality-performed-\nprocedure-steps///MPPS-UID//\n//payload//
 activate OS
 note left #ecf4e4: [PS3.18, X.4]\nCreate
 UA <-- OS: 200 (OK)
