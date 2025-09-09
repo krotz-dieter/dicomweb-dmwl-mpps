@@ -38,7 +38,7 @@ activate SCU
 SCU <-- serverl: A-ASSOCIATE-AC
 SCU -> serverl: N-CREATE-RQ( 1.2.840.10008.3.1.2.3.3,\n//MPPS-UID//, ... )
 note left #ecf4e4: [PS3.4, F.7.2.1]\nCreate
-& UA -> serverr: HTTP PUT /modality-performed-\nprocedure-steps///MPPS-UID//\n//payload//
+& UA -> serverr: HTTP POST /modality-performed-\nprocedure-steps///MPPS-UID//\n//payload//
 activate UA
 note right #ecf4e4: [PS3.18, X.4]\nCreate
 SCU <-- serverl: N-CREATE-RSP: 0000H (Success)
@@ -57,7 +57,7 @@ activate UA
 & UA -> UA : perform procedure step
 SCU -> serverl: N-SET-RQ( //MPPS-UID//, //Modality Performed//\n//Procedure Step Information// )
 note left #ecf4e4: [PS3.4, F.7.2.2]\nSet Information
-& UA -> serverr: HTTP PATCH /modality-performed-\nprocedure-steps///MPPS-UID//\n//payload//
+& UA -> serverr: HTTP POST /modality-performed-\nprocedure-steps///MPPS-UID///update\n//payload//
 note right #ecf4e4: [PS3.18, X.5]\nUpdate
 SCU <-- serverl: N-SET-RSP: 0000H (Success)
 & UA <-- serverr: 200 (OK)
